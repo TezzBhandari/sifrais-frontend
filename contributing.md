@@ -55,6 +55,7 @@ function add(a: number, b: number): number {
 - (Important point): Create a separate branch for each new feature or bug fix.
 - Branch names should be descriptive and follow a consistent naming convention.
 - (Important point) Naming Convention: new feature: feature/(feature-name), bug: bugfix/(bug-fix-description), refactoring: refactor/(refactoring-name)
+- always create a new feature branch out of sifari-development branch not main
 
 ### Pull Requests for Feature Completion
 
