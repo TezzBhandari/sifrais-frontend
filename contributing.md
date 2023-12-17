@@ -60,6 +60,7 @@ function add(a: number, b: number): number {
 
 - Make a pull request once the feature is completed.
 - Provide a detailed description of the changes made and the purpose of the pull request.
+- pull the main branch before making PR so that you won't have merge conflicts
 - Make PR (pull request) to the development branch not "main"
 
 ### Commit Messages
