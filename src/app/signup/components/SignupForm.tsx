@@ -6,6 +6,7 @@ import { set, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSignupSchema } from "../types";
 import { signUpUser } from "../actions";
+import { useRouter } from "next/navigation";
 
 // User Signup Field Type. Infered using zod library
 type UserSignupInputType = z.infer<typeof UserSignupSchema>;
@@ -21,6 +22,7 @@ type UserSignupInputType = z.infer<typeof UserSignupSchema>;
  * @returns React.JSX.Element
  */
 const SignupForm = () => {
+  const router = useRouter();
   // functionality provided by external library react-hook-form
   const {
     register,
@@ -50,8 +52,9 @@ const SignupForm = () => {
   const formSubmitHandler = handleSubmit(async (formData) => {
     const data = await signUpUser(formData);
     console.log("client code");
-    if (data.success === false) {
+    if (data.success === true) {
       reset();
+      router.push("/");
       alert("user created successfully");
     }
 

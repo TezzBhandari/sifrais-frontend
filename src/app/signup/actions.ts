@@ -1,5 +1,7 @@
 "use server";
 
+import { redirect } from "next/navigation";
+
 import { z } from "zod";
 import { UserSignupSchema } from "./types";
 import { axiosInstance } from "../lib/axios/axiosApi";
