@@ -2,12 +2,19 @@
 
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { set, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSignupSchema } from "../types";
+import { signUpUser } from "../actions";
 
 // User Signup Field Type. Infered using zod library
 type UserSignupInputType = z.infer<typeof UserSignupSchema>;
+
+// type UserServerResponseData = {
+//   success: boolean;
+//   data?: any;
+//   error?: any;
+// };
 
 /**
  * React Client Component for user Signup Form
@@ -31,7 +38,7 @@ const SignupForm = () => {
     },
   });
 
-  const [data, setData] = useState<UserSignupInputType>({
+  const [serverData, setServerData] = useState<UserSignupInputType>({
     email: "",
     full_name: "",
     full_name_np: "",
@@ -39,15 +46,19 @@ const SignupForm = () => {
     mobile: "",
   });
 
-  const { name, onChange, onBlur, ref } = register("full_name");
-
-  console.log({ ...register("full_name") });
-
   // form submit handler
-  const formSubmitHandler = handleSubmit((data) => {
-    console.log(data);
-    setData(data);
-    reset();
+  const formSubmitHandler = handleSubmit(async (formData) => {
+    const data = await signUpUser(formData);
+    console.log("client code");
+    if (data.success === false) {
+      reset();
+      alert("user created successfully");
+    }
+
+    if (data.success === false) {
+      alert("failed to create user");
+    }
+    setServerData(formData);
   });
 
   return (
@@ -135,7 +146,9 @@ const SignupForm = () => {
           </button>
         </div>
       </form>
-      <div className="bg-blue-300 p-8 text-white">{JSON.stringify(data)}</div>
+      <div className="bg-blue-300 p-8 text-white">
+        {JSON.stringify(serverData)}
+      </div>
     </div>
   );
 };
