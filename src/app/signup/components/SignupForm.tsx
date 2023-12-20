@@ -11,12 +11,6 @@ import { useRouter } from "next/navigation";
 // User Signup Field Type. Infered using zod library
 type UserSignupInputType = z.infer<typeof UserSignupSchema>;
 
-// type UserServerResponseData = {
-//   success: boolean;
-//   data?: any;
-//   error?: any;
-// };
-
 /**
  * React Client Component for user Signup Form
  * @returns React.JSX.Element
@@ -40,16 +34,9 @@ const SignupForm = () => {
     },
   });
 
-  const [serverData, setServerData] = useState<UserSignupInputType>({
-    email: "",
-    full_name: "",
-    full_name_np: "",
-    password: "",
-    mobile: "",
-  });
-
   // form submit handler
   const formSubmitHandler = handleSubmit(async (formData) => {
+    console.log("about to submit user info");
     const data = await signUpUser(formData);
     console.log("client code");
     if (data.success === true) {
@@ -61,7 +48,6 @@ const SignupForm = () => {
     if (data.success === false) {
       alert("failed to create user");
     }
-    setServerData(formData);
   });
 
   return (
@@ -93,7 +79,7 @@ const SignupForm = () => {
             className="border border-black"
             {...register("full_name_np")}
             type="text"
-          />{" "}
+          />
           {/* input: make it a separate custom component */}
           {/* make a separate error component */}
           {errors.full_name_np?.message ? (
@@ -149,9 +135,6 @@ const SignupForm = () => {
           </button>
         </div>
       </form>
-      <div className="bg-blue-300 p-8 text-white">
-        {JSON.stringify(serverData)}
-      </div>
     </div>
   );
 };

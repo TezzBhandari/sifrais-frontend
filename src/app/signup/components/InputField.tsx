@@ -8,7 +8,7 @@ export interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const InputField: React.FC<InputFieldProps> = ({ refer, ...rest }) => {
   return (
-    <input ref={refer} {...rest}>
+    <input className="px-2 py-2 " ref={refer} {...rest}>
       InputField
     </input>
   );
