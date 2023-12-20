@@ -5,10 +5,23 @@ import { UserSignupSchema } from "./types";
 import { axiosInstance } from "../lib/axios/axiosApi";
 import { isAxiosError } from "axios";
 
+// Infering type from zod schema for user register fields;
 type UserSignupType = z.infer<typeof UserSignupSchema>;
 
+// URL path of user registration
 const registerUrl = "/api/otp/register";
 
+/**
+ * 
+ * @param UserSignupType {
+    full_name: string;
+    full_name_np: string;
+    email: string;
+    password: string;
+    mobile: string;
+ 
+ * @returns  {success: boolean; error?: any; data?: any;}
+ */
 export const signUpUser = async (data: UserSignupType) => {
   try {
     const response = await axiosInstance.post(registerUrl, data, {});

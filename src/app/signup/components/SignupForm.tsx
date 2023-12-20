@@ -124,7 +124,11 @@ const SignupForm = () => {
             {...register("mobile")}
             type="text"
           />
-          {errors.mobile?.message ? <p>{errors.mobile.message}</p> : null}
+          {errors.mobile?.message ? (
+            <p className="bg-red-200 text-red-400 p-1 rounded-lg">
+              {errors.mobile.message}
+            </p>
+          ) : null}
         </div>
         <div>
           <button
