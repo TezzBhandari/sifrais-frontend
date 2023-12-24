@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSignupSchema } from "../types";
 import { signUpUser } from "../actions";
 import { useRouter } from "next/navigation";
+import Button from "@/components/Button";
 
 // User Signup Field Type. Infered using zod library
 type UserSignupInputType = z.infer<typeof UserSignupSchema>;
@@ -131,12 +132,12 @@ const SignupForm = () => {
           ) : null}
         </div>
         <div>
-          <button
+          <Button
             type="submit"
             className="border-none px-2 py-3 bg-indigo-400 rounded-xl text-white font-semibold"
           >
             Submit
-          </button>
+          </Button>
         </div>
       </form>
     </div>
