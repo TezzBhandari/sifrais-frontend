@@ -1,0 +1,191 @@
+"use client";
+import React, { ChangeEvent, useState } from "react";
+import styles from "./components/Login.module.css";
+import Button from "./components/Button/Button";
+import InputField from "./components/InputField/InputField";
+import FormBanner from "./components/FormBanner/FormBanner";
+import Link from "next/link";
+import { userLoginStore } from "./components/authFile/loginAuth";
+import { toast } from 'react-toastify';
+import ToastifyAlert from "../toastifyAlert/toastifyAlert";
+import Dashboard from "../dashboard/page";
+
+const BASE_URL="https://sifaris.ktmserver.com/backend"
+interface IFormData {
+  username: string | undefined;
+  password: string | undefined;
+}
+
+interface TUserLogin {
+  token_type: string,
+  expires_in: number,
+  access_token: string,
+  refresh_token: string
+}
+
+
+const page = () => {
+
+ 
+  const { userLogin } = userLoginStore()
+
+  const [formData, setFormData] = useState<IFormData>({
+    username: "",
+    password: "",
+  });
+
+
+  const [userValid, setUserValid] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>("")
+
+  const handleUsername = () => {
+
+    const fetchUsername = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/checkuser`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: formData.username,
+          }),
+        });
+    
+        if (!response.ok) {
+          toast.error("Username doesn't exist.") 
+        }
+        const data = await response.json();
+        console.log(data)
+        if (data.email && data.status == 200){
+          setUserName(data.email)
+          setUserValid(true);
+        }
+       
+      } catch (error) {
+        // Handle network errors or other exceptions
+        toast.error("Username doesn't exist.")     
+        
+      }
+  }
+
+  if(!formData.username){
+    toast.error("Please input the email field.")
+  } else {
+  fetchUsername()
+}}
+
+
+  const handleLogin = () => {
+
+          const fetchLoginReq = async () => {
+
+         try {
+            const response = await fetch(`${BASE_URL}/api/login`, {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: formData.username,
+            password: formData.password,
+          }),
+        });
+    
+        if (!response.ok) {
+          toast.error("Username or Password didn't match.")
+        }
+
+        const data = await response.json();
+        //Passing the loggedIN data received from the server to userLogin function to loginAuth.ts file to store in Zustand.
+        userLogin(data)
+        localStorage.setItem("access_token" , data.access_token)
+        console.log(data)
+       
+      } catch (error) {
+        // Handle network errors or other exceptions
+        toast.error("Username or Password didn't match.")
+      }
+    }
+    fetchLoginReq();
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+
+  return (
+    <>
+      <div
+        className="flex justify-center"
+        style={{ height: "800px", alignItems: "center" }}
+      >
+        <div
+          className={styles.loginContainer}
+          style={{ alignItems: "center", flexDirection: "column" }}
+        >
+          {/* Title and District Name here */}
+          <div className={styles.formBox}>
+            <div className={styles.formStyles}>
+              {!userValid ? (
+                <>
+                <FormBanner email={userName}/>
+                  <p className="label-text">प्रयोगकर्ताको ईमेल</p>
+                  <InputField
+                    onChange={handleInputChange}
+                    type="text"
+                    name="username"
+                    placeholder="ईमेल"
+                    value={formData.username}
+                    className="my-3  rounded-sm p-1"
+                  />
+                  <Link className="link-blue" href="forgotemail">प्रयोगकर्ता ईमेल बिर्सनुभयो ?</Link>
+                  <div className="flex justify-between mt-5 items-center">
+                    <Link style={{ fontSize: "12px" }} className="link-grey" href="/createaccount">नया खाता खोल्नुहोस </Link>
+                    <Button
+                      onClick={handleUsername}
+                      buttonName="अर्को"
+                      className="btn"
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                <FormBanner email={userName}/>
+                  <p className="label-text">प्रयोगकर्ताको पासवर्ड</p>
+                  <InputField
+                    placeholder="पासवर्ड"
+                    onChange={handleInputChange}
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    className="my-3  rounded-sm p-1"
+                  />
+                  <Link className="link-blue" href="/forgotpassword">प्रयोगकर्ता पासवर्ड बिर्सनुभयो ?</Link>
+                  <div className="flex justify-between mt-5 items-center">
+                    <Link href="/createaccount" className='link-grey' style={{ fontSize: "12px" }}>नया खाता खोल्नुहोस </Link>
+                    <Button
+                      onClick={handleLogin}
+                      buttonName="साइन इन"
+                      className="btn"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+  
+          </div>
+        </div>
+      </div>
+      <ToastifyAlert />
+    </>
+  );
+};
+
+export default page

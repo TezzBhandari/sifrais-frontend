@@ -1,0 +1,7 @@
+.customBtn {
+    background-color: #00448C;
+    height: 40px;
+    width: 100px;
+    color: white;
+    min-height: 40px !important;
+}
