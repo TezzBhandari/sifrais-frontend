@@ -58,33 +58,35 @@ const SignupForm = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-[#003878] ">
-      <div className="Signup-Container border-[3px] border-red-400 bg-white min-w-full flex items-center">
+      <div className="Signup-Container border-[3px] border-red-400 bg-white min-w-full px-20 flex items-center">
         {/* Logo Container - Left Section  */}
         <div className="logo-container flex justify-center items-center border border-red-400 grow">
           <Image src={SignupLogo} alt="signup logo" />
         </div>
 
         {/* FORM CONTAINER - RIGHT SECTION  */}
-        <div className="Form-Container flex flex-col items-center justify-center border border-emerald-400 grow-[3]">
+        <div className="Form-Container flex flex-col border-[3px] border-emerald-400 grow-[3]">
           {/* FORM HEADING  */}
-          <div className="Form-heading-container">
-            <h2 className="text-[#002147] ">खाता बनाउनुहोस</h2>
+          <div className="Form-heading-container w-full border border-red-400 text-center">
+            <h2 className="text-[#002147] text-lg font-semibold ">
+              खाता बनाउनुहोस
+            </h2>
           </div>
 
           {/* SIGNUP FORM  */}
           <form
             // action=""
             onSubmit={formSubmitHandler}
-            className="flex flex-col max-w-lg gap-2"
+            className="flex flex-col w-full gap-2 border border-pink-500"
           >
             {/* FORM FIELD SECTION  */}
-            <div className="Form-Field-Container flex gap-8">
+            <div className="Form-Field-Container flex gap-8 w-full">
               {/* FORM-LEFT-INPUT-SECTION  */}
               <div className="Form-Input-Section-Left-Container">
                 {/* FULLNAME(EN) FIELD  */}
                 <div className="flex flex-col gap-1">
                   <label htmlFor="">
-                    प्रयोगकर्ताको पुरा नाम{" "}
+                    प्रयोगकर्ताको पुरा नाम
                     <span className="text-red-600">{"*"}</span>
                   </label>
                   <input
@@ -196,7 +198,7 @@ const SignupForm = () => {
                 </div> */}
               </div>
             </div>
-            <div className="Form-Button-Section flex items-center space-x-2 justify-end">
+            <div className="Form-Button-Section flex items-center space-x-2 border border-red-400 justify-end">
               <Button className="bg-[#003878] text-white rounded-md">
                 होम पेज
               </Button>
@@ -207,7 +209,7 @@ const SignupForm = () => {
                 <span>साइन अप गर्नुहोस्</span>
               </Button>
             </div>
-            <div className="SignIn-Link-Section flex items-center justify-end text-sm text-[#002147]">
+            <div className="SignIn-Link-Section flex items-center justify-end text-sm border border-red-500 text-[#002147]">
               <p>पहिले नै खाता छ ? साइन इन</p>
             </div>
           </form>
