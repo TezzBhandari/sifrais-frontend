@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.sidebar-height {
+  height: calc(100vh - 6rem);
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
