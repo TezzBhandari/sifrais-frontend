@@ -8,9 +8,16 @@ interface TUserLogin {
     access_token: string,
     refresh_token: string
 }
-
 interface TUserLoginStore extends TUserLogin  {
         userLogin: (data: TUserLogin)=> void;
+}
+
+interface IEmail {
+    email: string;
+}
+
+interface IEmailStore extends IEmail {
+    emailCheck: (data: IEmail ) => void;
 }
 
 export const userLoginStore = create<TUserLoginStore>((set)=> (
@@ -30,3 +37,15 @@ export const userLoginStore = create<TUserLoginStore>((set)=> (
 
     }
 ))
+
+//Needs to hit the function emailCheck while logout and set it to "";
+export const userEmailCheck = create<IEmailStore>((set)=>(
+    {
+        email: "",
+        emailCheck: (data) => set((state)=> (
+            {
+            email: data.email,
+        }))
+    }
+)
+)

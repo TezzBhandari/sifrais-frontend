@@ -7,9 +7,13 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  background-color:#00448C;
+  background-color:#003878;
   color: black;
 
+}
+
+.font-sign{
+ color: #002147;
 }
 
 .red-title{

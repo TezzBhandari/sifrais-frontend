@@ -1,13 +1,17 @@
 
 .loginContainer {
+    background-color: #034183;
     height: 600px;
     width: 445px;
-    border: 2px solid grey;
+    box-shadow: 4px 2px 4px #04284e ;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #FFFFFF;
+    background-image: url("/assets/images/form_white.svg");
+    background-position:top;
+    background-repeat: no-repeat;
+    background-size: 485px 750px;
 
 }
 .loginContainer .formStyles{
@@ -23,9 +27,10 @@
     background-color: #FFFFFF;
     border: 1px solid #AEAEAE;
     font-size: 12px;
+
     
 }
 .formBox {
-    margin-top: 40px;
+    margin-top:40px;
 }
 
