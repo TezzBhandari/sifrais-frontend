@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 //Component props for custom button
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  variant?: string;
+  variant?: "text" | "contained" | "outlined";
   size?: string;
   type?: "submit" | "button" | "reset";
   ButtonColor?: "secondary" | "primary" | "error" | "success";
