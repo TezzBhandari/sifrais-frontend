@@ -1,17 +1,15 @@
-'use client'
+"use client";
 
-import React, { HTMLAttributes } from 'react'
-import classNames from "classnames"
-
+import React, { HTMLAttributes } from "react";
+import classNames from "classnames";
 
 //Component props for custom button
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  variant?: string;
+  variant?: "text" | "contained" | "outlined";
   size?: string;
+  type?: "submit" | "button" | "reset";
   ButtonColor?: "secondary" | "primary" | "error" | "success";
 }
-
-
 
 /**
  * It is a custom Button component
@@ -19,95 +17,94 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
  * variant?: string;
  * size?: string;
  * ButtonColor?: "secondary" | "primary" | "error" | "success";
- * } 
+ * }
  * @returns React.JSX.Element
  */
-const Button:React.FC<ButtonProps> = ({variant, ButtonColor, size, className, children, ...rest}) => {
-
+const Button: React.FC<ButtonProps> = ({
+  variant,
+  type,
+  ButtonColor,
+  size,
+  className,
+  children,
+  ...rest
+}) => {
   //Default styles for the button
-  let defaultStyles = "text-black rounded-full border border-slate-300 hover:border-blue-300 hover:bg-blue-300 px-8 py-3";
+  let defaultStyles =
+    "text-black rounded-full border border-slate-300 hover:border-blue-300 hover:bg-blue-300 px-8 py-3";
 
   // This switch case applies css styles based on the specified variant
-  switch(variant){
-
+  switch (variant) {
     case "text":
-      defaultStyles += " text-indigo-400 hover:border-indigo-300 hover:bg-blue-300 hover:rounded-full hover:text-white";
+      defaultStyles +=
+        " text-indigo-400 hover:border-indigo-300 hover:bg-blue-300 hover:rounded-full hover:text-white";
       break;
 
     case "contained":
-      defaultStyles += " rounded-full text-white hover:bg-red-200 hover:text-black active:bg-red-400 focus:outline-none focus:ring focus:ring-violet-300";
+      defaultStyles +=
+        " rounded-full text-white hover:bg-red-200 hover:text-black active:bg-red-400 focus:outline-none focus:ring focus:ring-violet-300";
       break;
-    
+
     case "outlined":
-       defaultStyles += " rounded-full text-black border border-slate-300 hover:border-indigo-300 hover:bg-indigo-300";
-       break;
+      defaultStyles +=
+        " rounded-full text-black border border-slate-300 hover:border-indigo-300 hover:bg-indigo-300";
+      break;
 
     default:
       break;
-
   }
 
   // This switch case applies css styles based on the specified Button Color
   switch (ButtonColor) {
     case "secondary":
-      defaultStyles += "border-0 border-white"
+      defaultStyles += "border-0 border-white";
       break;
- 
+
     case "primary":
-      
-      defaultStyles += " bg-indigo-700"
+      defaultStyles += " bg-indigo-700";
       break;
 
     case "error":
-      defaultStyles += "bg-red-300"
+      defaultStyles += "bg-red-300";
       break;
 
-      case "success":
-        defaultStyles += " bg-blue-500"
-        break;
+    case "success":
+      defaultStyles += " bg-blue-500";
+      break;
 
-      default: 
-        break;
-  
-    }  
+    default:
+      break;
+  }
 
   // This switch case applies css styles based on the specified custom sizes
 
   switch (size) {
     case "small":
-      defaultStyles += " px-10 py-4"
+      defaultStyles += " px-10 py-4";
       break;
 
     case "medium":
-      defaultStyles += " px-8 py-3"
+      defaultStyles += " px-8 py-3";
       break;
 
     case "large":
-      defaultStyles += " px-10 py-3"
+      defaultStyles += " px-10 py-3";
       break;
 
     default:
       break;
-
-    }
+  }
 
   // Render the button element with the combined styles
   return (
-    <button  
-    {...rest}
-     className={classNames(className , defaultStyles)}
+    <button
+      {...rest}
+      type={type}
+      className={classNames(className, defaultStyles)}
     >
       {children}
-      </button>
-  )
-}
+    </button>
+  );
+};
 
-export default Button
-
-  
-
-  
-
-  
-
-  
+export default Button;
