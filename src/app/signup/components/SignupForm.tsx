@@ -14,6 +14,7 @@ import SignupLogo from "../../../../public/assets/Signup_Logo.svg";
 import FlagBanner from "../../../../public/assets/Flag_Banner.svg";
 import Link from "next/link";
 import InputField from "./InputField";
+import ErrorMessage from "./ErrorMessage";
 
 // User Signup Field Type. Infered using zod library
 type UserSignupInputType = z.infer<typeof UserSignupSchema>;
@@ -50,7 +51,7 @@ const SignupForm = () => {
     console.log("rerender");
     if (data.success === true) {
       reset();
-      router.push("/");
+      router.push("/signup/otp");
       alert("user created successfully");
     }
 
@@ -102,7 +103,7 @@ const SignupForm = () => {
             <div className="Form-Field-Container flex items-center px-2 mb-8 space-x-14 w-full">
               {/* FORM-LEFT-INPUT-SECTION  */}
               <div className="Form-Input-Section-Left-Container flex  flex-col space-y-5 flex-1 ">
-                {/* FULLNAME(EN) FIELD  */}
+                {/* FULLNAME(Np) FIELD  */}
                 <div className="flex flex-col">
                   <label className="text-sm text-[#2D3748]" htmlFor="">
                     प्रयोगकर्ताको पुरा नाम
@@ -113,15 +114,10 @@ const SignupForm = () => {
                     {...register("full_name_np")}
                     type="text"
                   />
-                  {/* input: make it a separate custom component */}
-                  {/* make a separate error component */}
-                  {errors.full_name?.message ? (
-                    <p className="bg-red-200 text-red-400 p-0.5 rounded-sm">
-                      {errors.full_name.message}
-                    </p>
-                  ) : (
-                    <p className="p-0.5 bg-transparent"></p>
-                  )}
+                  {/* CUSTOM ERROR MESSAGE COMPONENT  */}
+                  {errors.full_name_np?.message ? (
+                    <ErrorMessage message={errors.full_name_np.message} />
+                  ) : null}
                 </div>
 
                 {/* EMAIL FIELD  */}
@@ -133,12 +129,11 @@ const SignupForm = () => {
                   <input
                     className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                     {...register("email")}
-                    type="text"
+                    type="email"
                   />
+                  {/* CUSTOM ERROR MESSAGE COMPONENT  */}
                   {errors.email?.message ? (
-                    <p className="bg-red-200 text-red-400 p-1 rounded-lg">
-                      {errors.email.message}
-                    </p>
+                    <ErrorMessage message={errors.email.message} />
                   ) : null}
                 </div>
 
@@ -150,12 +145,11 @@ const SignupForm = () => {
                   <input
                     className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                     {...register("password")}
-                    type="text"
+                    type="password"
                   />
+                  {/* CUSTOM ERROR MESSAGE COMPONENT  */}
                   {errors.password?.message ? (
-                    <p className="bg-red-200 text-red-400 p-1 rounded-lg">
-                      {errors.password.message}
-                    </p>
+                    <ErrorMessage message={errors.password.message} />
                   ) : null}
                 </div>
               </div>
@@ -168,19 +162,15 @@ const SignupForm = () => {
                     प्रयोगकर्ताको पुरा नाम <span>{"(English)"}</span>
                     <span className="text-red-600">{"*"}</span>
                   </label>
-                  {/* <input
+                  <input
                     className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                     {...register("full_name")}
                     type="text"
-                  /> */}
+                  />
 
-                  <InputField {...register("full_name")} />
-                  {/* input: make it a separate custom component */}
-                  {/* make a separate error component */}
-                  {errors.full_name_np?.message ? (
-                    <p className="bg-red-200 text-red-400 p-1 rounded-lg">
-                      {errors.full_name_np.message}
-                    </p>
+                  {/* CUSTOM ERROR MESSAGE COMPONENT  */}
+                  {errors.full_name?.message ? (
+                    <ErrorMessage message={errors.full_name.message} />
                   ) : null}
                 </div>
 
@@ -195,10 +185,9 @@ const SignupForm = () => {
                     {...register("mobile")}
                     type="text"
                   />
+                  {/* CUSTOM ERROR MESSAGE COMPONENT  */}
                   {errors.mobile?.message ? (
-                    <p className="bg-red-200 text-red-400 p-1 rounded-lg">
-                      {errors.mobile.message}
-                    </p>
+                    <ErrorMessage message={errors.mobile.message} />
                   ) : null}
                 </div>
 
@@ -210,13 +199,12 @@ const SignupForm = () => {
                   </label>
                   <input
                     className="border-[1.5px] text-sm font-normal bg-transparent border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
-                    {...register("password")}
-                    type="text"
+                    // {...register("password")}
+                    type="password"
                   />
+                  {/* CUSTOM ERROR MESSAGE COMPONENT  */}
                   {errors.password?.message ? (
-                    <p className="bg-red-200 text-red-400 p-1 rounded-lg">
-                      {errors.password.message}
-                    </p>
+                    <ErrorMessage message={errors.password.message} />
                   ) : null}
                 </div>
               </div>

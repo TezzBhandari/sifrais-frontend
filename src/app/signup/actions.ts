@@ -15,7 +15,7 @@ export type SignupResponseType = {
 };
 
 // URL path of user registration
-const registerUrl = "/api/signup/initial";
+const registerUrl = "/api/otp/register";
 
 /**
  * 
