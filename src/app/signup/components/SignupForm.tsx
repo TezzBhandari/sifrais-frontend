@@ -43,7 +43,7 @@ const SignupForm = () => {
     },
   });
 
-  // form submit handler
+  // FORM SUBMIT  HANDLER
   const formSubmitHandler = handleSubmit(async (formData) => {
     const data = await signUpUser(formData);
     if (data.success === true) {
@@ -92,7 +92,6 @@ const SignupForm = () => {
 
           {/* SIGNUP FORM  */}
           <form
-            // action=""
             onSubmit={formSubmitHandler}
             className="flex flex-col w-full gap-2"
           >
@@ -206,6 +205,8 @@ const SignupForm = () => {
                 </div>
               </div>
             </div>
+
+            {/* FORM BUTTON SECION  */}
             <div className="Form-Button-Section flex items-center space-x-3 mb-6 justify-end">
               <Link
                 className="bg-[#003878] text-white rounded-md border border-slate-300 hover:border-blue-300 hover:bg-blue-300 px-8 py-3"
