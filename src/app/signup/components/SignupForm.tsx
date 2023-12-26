@@ -45,10 +45,7 @@ const SignupForm = () => {
 
   // form submit handler
   const formSubmitHandler = handleSubmit(async (formData) => {
-    console.log("about to submit user info: ", formData);
-    console.log("signup action start");
     const data = await signUpUser(formData);
-    console.log("rerender");
     if (data.success === true) {
       reset();
       router.push("/signup/otp");

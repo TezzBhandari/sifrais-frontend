@@ -38,11 +38,6 @@ export const signUpUser = async (data: UserSignupType) => {
       {}
     );
 
-    console.log("server response for user signup endpoint: ", response);
-    console.log(
-      "server response data for user signup endpoint: ",
-      response.data
-    );
     return { success: true, data: response.data };
   } catch (error) {
     console.log(error);
