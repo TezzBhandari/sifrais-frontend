@@ -221,7 +221,7 @@ const SignupForm = () => {
                 <span>साइन अप गर्नुहोस्</span>
               </Button>
             </div>
-            <div className="SignIn-Link-Section flex items-center justify-end text-sm  text-[#002147]">
+            <div className="SignIn-Link-Section flex items-center justify-end text-sm  text-[#002147] mb-4">
               <p className="text-sm">
                 पहिले नै खाता छ ?{" "}
                 <Link href={"/signin"}>
