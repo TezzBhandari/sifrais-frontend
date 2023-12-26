@@ -11,6 +11,9 @@ import Button from "@/components/Button";
 
 // Signup Logo Import
 import SignupLogo from "../../../../public/assets/Signup_Logo.svg";
+import FlagBanner from "../../../../public/assets/Flag_Banner.svg";
+import Link from "next/link";
+import InputField from "./InputField";
 
 // User Signup Field Type. Infered using zod library
 type UserSignupInputType = z.infer<typeof UserSignupSchema>;
@@ -57,18 +60,34 @@ const SignupForm = () => {
   });
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-[#003878] ">
-      <div className="Signup-Container border-[3px] border-red-400 bg-white min-w-full px-20 flex items-center">
+    <div className="min-h-screen flex items-stretch py-20 min-w-[60%] mx-auto w-full bg-[#003878] ">
+      <div className="Signup-Container relative bg-white min-w-full gap-32 px-20 flex">
+        {/* FLAG BANNER  */}
+        <Image
+          className="absolute bottom-[10px] left-0"
+          src={FlagBanner}
+          priority
+          width={620}
+          height={80}
+          alt={"Flag Banner"}
+        />
         {/* Logo Container - Left Section  */}
-        <div className="logo-container flex justify-center items-center border border-red-400 grow">
-          <Image src={SignupLogo} alt="signup logo" />
+        <div className="logo-container  flex justify-center pt-12 items-start grow">
+          <Image
+            src={SignupLogo}
+            priority
+            width={220}
+            height={380}
+            className="max-w-full"
+            alt="signup logo"
+          />
         </div>
 
         {/* FORM CONTAINER - RIGHT SECTION  */}
-        <div className="Form-Container flex flex-col border-[3px] border-emerald-400 grow-[3]">
+        <div className="Form-Container flex flex-col pt-24 grow-[3]">
           {/* FORM HEADING  */}
-          <div className="Form-heading-container w-full border border-red-400 text-center">
-            <h2 className="text-[#002147] text-lg font-semibold ">
+          <div className="Form-heading-container w-full mb-9 text-center">
+            <h2 className="text-[#002147] text-3xl font-semibold ">
               खाता बनाउनुहोस
             </h2>
           </div>
@@ -77,40 +96,42 @@ const SignupForm = () => {
           <form
             // action=""
             onSubmit={formSubmitHandler}
-            className="flex flex-col w-full gap-2 border border-pink-500"
+            className="flex flex-col w-full gap-2"
           >
             {/* FORM FIELD SECTION  */}
-            <div className="Form-Field-Container flex gap-8 w-full">
+            <div className="Form-Field-Container flex items-center px-2 mb-8 space-x-14 w-full">
               {/* FORM-LEFT-INPUT-SECTION  */}
-              <div className="Form-Input-Section-Left-Container">
+              <div className="Form-Input-Section-Left-Container flex  flex-col space-y-5 flex-1 ">
                 {/* FULLNAME(EN) FIELD  */}
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="">
+                <div className="flex flex-col">
+                  <label className="text-sm text-[#2D3748]" htmlFor="">
                     प्रयोगकर्ताको पुरा नाम
                     <span className="text-red-600">{"*"}</span>
                   </label>
                   <input
-                    className="border border-black"
+                    className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                     {...register("full_name_np")}
                     type="text"
                   />
                   {/* input: make it a separate custom component */}
                   {/* make a separate error component */}
                   {errors.full_name?.message ? (
-                    <p className="bg-red-200 text-red-400 p-1 rounded-lg">
+                    <p className="bg-red-200 text-red-400 p-0.5 rounded-sm">
                       {errors.full_name.message}
                     </p>
-                  ) : null}
+                  ) : (
+                    <p className="p-0.5 bg-transparent"></p>
+                  )}
                 </div>
 
                 {/* EMAIL FIELD  */}
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="">
+                <div className="flex flex-col ">
+                  <label className="text-sm text-[#2D3748]" htmlFor="">
                     प्रयोगकर्ताको ईमेल{" "}
                     <span className="text-red-600">{"*"}</span>
                   </label>
                   <input
-                    className="border border-black"
+                    className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                     {...register("email")}
                     type="text"
                   />
@@ -122,12 +143,12 @@ const SignupForm = () => {
                 </div>
 
                 {/* PASSWORD FIELD  */}
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="">
-                    पासवर्ड <span>{"*"}</span>
+                <div className="flex flex-col ">
+                  <label className="text-sm text-[#2D3748]" htmlFor="">
+                    पासवर्ड <span className="text-red-600">{"*"}</span>
                   </label>
                   <input
-                    className="border border-black"
+                    className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                     {...register("password")}
                     type="text"
                   />
@@ -139,19 +160,21 @@ const SignupForm = () => {
                 </div>
               </div>
 
-              {/* FORM-LEFT-INPUT-SECTION  */}
-              <div className="Form-Right-Input-Container flex flex-col">
+              {/* FORM-RIGHT-INPUT-SECTION  */}
+              <div className="Form-Right-Input-Container flex flex-col space-y-5 flex-1">
                 {/* FULLNAME(en) FIELD  */}
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="">
+                <div className="flex flex-col ">
+                  <label className="text-sm text-[#2D3748]" htmlFor="">
                     प्रयोगकर्ताको पुरा नाम <span>{"(English)"}</span>
                     <span className="text-red-600">{"*"}</span>
                   </label>
-                  <input
-                    className="border border-black"
+                  {/* <input
+                    className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                     {...register("full_name")}
                     type="text"
-                  />
+                  /> */}
+
+                  <InputField {...register("full_name")} />
                   {/* input: make it a separate custom component */}
                   {/* make a separate error component */}
                   {errors.full_name_np?.message ? (
@@ -162,13 +185,13 @@ const SignupForm = () => {
                 </div>
 
                 {/* MOBILE FIELD  */}
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="">
+                <div className="flex flex-col ">
+                  <label className="text-sm text-[#2D3748]" htmlFor="">
                     प्रयोगकर्ताको मोबाइल नम्बर{" "}
                     <span className="text-red-600">{"*"}</span>
                   </label>
                   <input
-                    className="border border-black"
+                    className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                     {...register("mobile")}
                     type="text"
                   />
@@ -180,13 +203,13 @@ const SignupForm = () => {
                 </div>
 
                 {/* CONFIRM PASSWORD FIELD  */}
-                {/* <div className="flex flex-col gap-1">
-                  <label htmlFor="">
+                <div className="flex flex-col ">
+                  <label className="text-sm text-[#2D3748]" htmlFor="">
                     पासवर्ड अनुरुप गर्नुहोस
                     <span className="text-red-600">{"*"}</span>
                   </label>
                   <input
-                    className="border border-black"
+                    className="border-[1.5px] text-sm font-normal bg-transparent border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                     {...register("password")}
                     type="text"
                   />
@@ -195,13 +218,16 @@ const SignupForm = () => {
                       {errors.password.message}
                     </p>
                   ) : null}
-                </div> */}
+                </div>
               </div>
             </div>
-            <div className="Form-Button-Section flex items-center space-x-2 border border-red-400 justify-end">
-              <Button className="bg-[#003878] text-white rounded-md">
+            <div className="Form-Button-Section flex items-center space-x-3 mb-6 justify-end">
+              <Link
+                className="bg-[#003878] text-white rounded-md border border-slate-300 hover:border-blue-300 hover:bg-blue-300 px-8 py-3"
+                href={"/"}
+              >
                 होम पेज
-              </Button>
+              </Link>
               <Button
                 type="submit"
                 className="bg-[#003878] text-white rounded-md"
@@ -209,8 +235,13 @@ const SignupForm = () => {
                 <span>साइन अप गर्नुहोस्</span>
               </Button>
             </div>
-            <div className="SignIn-Link-Section flex items-center justify-end text-sm border border-red-500 text-[#002147]">
-              <p>पहिले नै खाता छ ? साइन इन</p>
+            <div className="SignIn-Link-Section flex items-center justify-end text-sm  text-[#002147]">
+              <p className="text-sm">
+                पहिले नै खाता छ ?{" "}
+                <Link href={"/signin"}>
+                  <span className="text-[#002147] font-semibold">साइन इन</span>
+                </Link>
+              </p>
             </div>
           </form>
         </div>
