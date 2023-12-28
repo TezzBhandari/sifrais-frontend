@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { set, z } from "zod";
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSignupSchema } from "../types";
 import { signUpUser } from "../actions";
@@ -13,8 +13,8 @@ import Button from "@/components/Button";
 import SignupLogo from "../../../../public/assets/Signup_Logo.svg";
 import FlagBanner from "../../../../public/assets/Flag_Banner.svg";
 import Link from "next/link";
-import InputField from "./InputField";
 import ErrorMessage from "./ErrorMessage";
+import { useSignUpUserIdStore } from "@/store/signUpUserIdStore";
 
 // User Signup Field Type. Infered using zod library
 type UserSignupInputType = z.infer<typeof UserSignupSchema>;
@@ -24,6 +24,8 @@ type UserSignupInputType = z.infer<typeof UserSignupSchema>;
  * @returns React.JSX.Element
  */
 const SignupForm = () => {
+  const { uid, setUserId } = useSignUpUserIdStore();
+
   const router = useRouter();
   // functionality provided by external library react-hook-form
   const {
@@ -35,24 +37,34 @@ const SignupForm = () => {
     resolver: zodResolver(UserSignupSchema),
 
     defaultValues: {
-      full_name_np: "",
-      full_name: "",
+      // full_name_np: "",
+      name: "",
       email: "",
       password: "",
-      mobile: "",
+      phone_number: "",
     },
   });
 
   // FORM SUBMIT  HANDLER
   const formSubmitHandler = handleSubmit(async (formData) => {
-    const data = await signUpUser(formData);
-    if (data.success === true) {
-      reset();
-      router.push("/signup/otp");
-      alert("user created successfully");
+    const response = await signUpUser(formData);
+    if (response.success === true) {
+      // reset();
+
+      alert(JSON.stringify(response.data));
+
+      // save user id in memory
+      // so that you can use it while verifying otp
+      if (response.data?.uid) {
+        setUserId(response.data.uid);
+        alert("user created successfully");
+        router.push("/signup/otp");
+      } else {
+        alert("failed to register user. no userid");
+      }
     }
 
-    if (data.success === false) {
+    if (response.success === false) {
       alert("failed to create user");
     }
   });
@@ -107,13 +119,13 @@ const SignupForm = () => {
                   </label>
                   <input
                     className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
-                    {...register("full_name_np")}
+                    // {...register("full_name_np")}
                     type="text"
                   />
                   {/* CUSTOM ERROR MESSAGE COMPONENT  */}
-                  {errors.full_name_np?.message ? (
+                  {/* {errors.full_name_np?.message ? (
                     <ErrorMessage message={errors.full_name_np.message} />
-                  ) : null}
+                  ) : null} */}
                 </div>
 
                 {/* EMAIL FIELD  */}
@@ -160,13 +172,13 @@ const SignupForm = () => {
                   </label>
                   <input
                     className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
-                    {...register("full_name")}
+                    {...register("name")}
                     type="text"
                   />
 
                   {/* CUSTOM ERROR MESSAGE COMPONENT  */}
-                  {errors.full_name?.message ? (
-                    <ErrorMessage message={errors.full_name.message} />
+                  {errors.name?.message ? (
+                    <ErrorMessage message={errors.name.message} />
                   ) : null}
                 </div>
 
@@ -178,12 +190,12 @@ const SignupForm = () => {
                   </label>
                   <input
                     className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
-                    {...register("mobile")}
+                    {...register("phone_number")}
                     type="text"
                   />
                   {/* CUSTOM ERROR MESSAGE COMPONENT  */}
-                  {errors.mobile?.message ? (
-                    <ErrorMessage message={errors.mobile.message} />
+                  {errors.phone_number?.message ? (
+                    <ErrorMessage message={errors.phone_number.message} />
                   ) : null}
                 </div>
 
@@ -221,7 +233,7 @@ const SignupForm = () => {
                 <span>साइन अप गर्नुहोस्</span>
               </Button>
             </div>
-            <div className="SignIn-Link-Section flex items-center justify-end text-sm  text-[#002147]">
+            <div className="SignIn-Link-Section flex items-center justify-end text-sm  text-[#002147] mb-4">
               <p className="text-sm">
                 पहिले नै खाता छ ?{" "}
                 <Link href={"/signin"}>
