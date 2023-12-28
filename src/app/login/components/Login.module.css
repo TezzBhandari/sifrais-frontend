@@ -1,9 +1,9 @@
 
 .loginContainer {
-    background-color: #034183;
+    background-color: white;
     height: 600px;
     width: 445px;
-    box-shadow: 4px 2px 4px #04284e ;
+    box-shadow: 4px 2px 4px #151617 ;
     border-radius: 5px;
     display: flex;
     justify-content: center;

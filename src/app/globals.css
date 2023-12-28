@@ -7,7 +7,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  background-color:#003878;
+  background-color:#FAFAFA;
   color: black;
 
 }
@@ -44,14 +44,5 @@
 }
 .link-grey:hover{
   color: rgb(167, 159, 159);
-}
-
-#curve-middle{
-  position: absolute;
-  top: 0;
-  height: 220px;
-  width: 520px;
-  background-color: #00448C;
-  border-radius:47% 53% 47% 53% / 43% 39% 61% 57% ;
 }
 

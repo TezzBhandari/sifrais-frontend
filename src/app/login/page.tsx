@@ -49,7 +49,7 @@ const page = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            email: formData.username,
+            username: formData.username,
           }),
         });
     
@@ -58,7 +58,9 @@ const page = () => {
         }
         const data = await response.json();
         console.log(data)
-        if (data.email && data.status == 200){
+
+        //Check the Login Status
+        if (data.email && data.status == 409){
           emailCheck({"email": data.email})
         }
        

@@ -1,0 +1,29 @@
+.sidebarMain{
+    transition: width 0.3s ease-in-out;
+    background-color: #2E8FFF;
+    border-radius: 5px;
+}
+.elementBox {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.elementBox li {
+    margin: 10px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.elementBox p {
+    margin: 0px 10px;
+    width: 120px;
+}
+/* @media screen and (max-width: 700px){
+    .sidebarMain {
+            color: red;
+            max-width: 60px;
+    }
+} */
