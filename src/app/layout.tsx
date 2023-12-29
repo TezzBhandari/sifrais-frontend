@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Mukta } from "next/font/google";
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.min.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 const mukta = Mukta({
@@ -20,7 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={mukta.className}>{children}</body>
+      <body className={mukta.className}>
+        {children}
+        <ToastContainer />
+      </body>
     </html>
   );
 }

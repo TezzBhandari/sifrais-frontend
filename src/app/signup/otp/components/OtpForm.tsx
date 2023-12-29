@@ -9,6 +9,8 @@ import { useAccessTokenStore } from "@/store/accessTokenStore";
 import Image from "next/image";
 
 import GovLogo from "../../../../../public/assets/Gov_Logo.svg";
+import { toast } from "react-toastify";
+import { totalmem } from "os";
 
 const OtpForm = () => {
   const [
@@ -69,31 +71,33 @@ const OtpForm = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (uid === "") {
-      alert("user id doesn't exist in zustand store");
+      toast.error("User Id Doesn't exists. Signup User", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+
+      router.push("/signup");
       return;
     }
 
     const response = await VerifyOtp({ otp: otp, uid: uid });
     alert(JSON.stringify(response));
 
-    if (
-      response.code === "success" &&
-      response.data?.access_token &&
-      response.data?.refresh_token
-    ) {
+    if (response.code === "success" && response.statusCode === 200) {
       setAccessToken(response.data.access_token);
       const jsonData = JSON.stringify(response.data.refresh_token);
       localStorage.setItem("refresh_token", jsonData);
-
+      toast.success("successfull verified. redirecting to dashboard", {
+        position: toast.POSITION.TOP_CENTER,
+      });
       router.push("/admin/dashboard");
 
-      alert("otp verified redirecting to dashboard page");
-    }
-
-    if (response.code === "error") {
-      alert("otp verification failed");
-      alert("failed to verify otp");
-      router.push("/signup");
+      // alert("otp verified redirecting to dashboard page");
+    } else {
+      if (response.code === "erorr") {
+        toast.error(response.error.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
     }
   };
 
