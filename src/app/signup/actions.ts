@@ -4,7 +4,7 @@ import { z } from "zod";
 import { UserSignupSchema } from "./types";
 import { axiosInstance } from "../lib/axios/axiosApi";
 import axios, { isAxiosError } from "axios";
-import { PostOtpResponse } from "./otp/utils/postOtp";
+import verifyOtp from "./otp/utils/verifyOtp";
 
 // Infering type from zod schema for user register fields;
 type UserSignupType = z.infer<typeof UserSignupSchema>;
@@ -116,91 +116,99 @@ export const signUpUser = async (
 
 /// OTP VERIFICATION
 
-interface OtpVerificationSuccessResponse {
-  code: "success";
-  statusCode: number;
-  data: {
-    token_type: string;
-    expires_in: string;
-    access_token: string;
-    refresh_token: string;
-    status: number;
-    message: string;
-  };
-}
+// interface OtpVerificationSuccessResponse {
+//   code: "success";
+//   statusCode: number;
+//   data: {
+//     token_type: string;
+//     expires_in: string;
+//     access_token: string;
+//     refresh_token: string;
+//     status: number;
+//     message: string;
+//   };
+// }
 
-interface OtpVerificationErrorResponse {
-  code: "erorr";
-  statusCode: number;
-  errorType: string;
-  error: {
-    status: number;
-    message: string;
-  };
-}
+// interface OtpVerificationErrorResponse {
+//   code: "erorr";
+//   statusCode: number;
+//   errorType: string;
+//   error: {
+//     status: number;
+//     message: string;
+//   };
+// }
 
-export const VerifyOtp = async (data: {
-  otp: string;
-  uid: string;
-}): Promise<OtpVerificationSuccessResponse | OtpVerificationErrorResponse> => {
-  try {
-    const response = await axios.post<{
-      token_type: string;
-      expires_in: string;
-      access_token: string;
-      refresh_token: string;
-      status: number;
-      message: string;
-    }>("https://sifaris.ktmserver.com/backend/api/signup/complete", data, {});
+// export const VerifyOtp = async (data: {
+//   otp: string;
+//   uid: string;
+// }): Promise<OtpVerificationSuccessResponse | OtpVerificationErrorResponse> => {
+//   try {
+//     const response = await axios.post<{
+//       token_type: string;
+//       expires_in: string;
+//       access_token: string;
+//       refresh_token: string;
+//       status: number;
+//       message: string;
+//     }>("https://sifaris.ktmserver.com/backend/api/signup/complete", data, {});
 
-    return {
-      code: "success",
-      data: response.data,
-      statusCode: response.status,
-    };
-  } catch (error) {
-    console.log(error);
-    if (isAxiosError(error)) {
-      if (error.response) {
-        return {
-          code: "erorr",
-          errorType: error.name,
-          statusCode: error.response.status,
-          error: error.response.data,
-        };
-      }
+//     return {
+//       code: "success",
+//       data: response.data,
+//       statusCode: response.status,
+//     };
+//   } catch (error) {
+//     console.log(error);
+//     if (isAxiosError(error)) {
+//       if (error.response) {
+//         return {
+//           code: "erorr",
+//           errorType: error.name,
+//           statusCode: error.response.status,
+//           error: error.response.data,
+//         };
+//       }
 
-      if (error.request) {
-        return {
-          code: "erorr",
-          statusCode: 401,
-          errorType: error.name,
-          error: {
-            message: error.message,
-            status: 401,
-          },
-        };
-      }
-      return {
-        code: "erorr",
-        statusCode: 0,
-        errorType: "Request Configuration Error",
-        error: {
-          message: "something went wrong. Try again!",
-          status: 401,
-        },
-      };
-    } else {
-      console.log("other error: ", error);
-      return {
-        code: "erorr",
-        statusCode: 0,
-        errorType: "Unknown Error",
-        error: {
-          message: "something went wrong. Try again!",
-          status: 401,
-        },
-      };
-    }
-  }
+//       if (error.request) {
+//         return {
+//           code: "erorr",
+//           statusCode: 401,
+//           errorType: error.name,
+//           error: {
+//             message: error.message,
+//             status: 401,
+//           },
+//         };
+//       }
+//       return {
+//         code: "erorr",
+//         statusCode: 0,
+//         errorType: "Request Configuration Error",
+//         error: {
+//           message: "something went wrong. Try again!",
+//           status: 401,
+//         },
+//       };
+//     } else {
+//       console.log("other error: ", error);
+//       return {
+//         code: "erorr",
+//         statusCode: 0,
+//         errorType: "Unknown Error",
+//         error: {
+//           message: "something went wrong. Try again!",
+//           status: 401,
+//         },
+//       };
+//     }
+//   }
+// };
+
+export const OtpVerification = async (data: { otp: string; uid: string }) => {
+  return await verifyOtp({
+    url: "/api/signup/complete",
+    httpMethod: "post",
+    body: data,
+  });
 };

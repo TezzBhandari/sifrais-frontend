@@ -6,7 +6,7 @@ import { AxiosError } from "axios";
  *
  * @returns
  */
-const query = <TData, TError = AxiosError, TBody = {}, TParams = {}>() =>
+const Query = <TData, TError = AxiosError, TBody = {}, TParams = {}>() =>
   RequestHandler<TData, TError, TBody, TParams>((requestConfig) =>
     httpClient<TData>({
       url: requestConfig.url,
@@ -16,4 +16,4 @@ const query = <TData, TError = AxiosError, TBody = {}, TParams = {}>() =>
     })
   );
 
-export default query;
+export default Query;
