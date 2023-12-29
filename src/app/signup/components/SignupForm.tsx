@@ -15,6 +15,7 @@ import FlagBanner from "../../../../public/assets/Flag_Banner.svg";
 import Link from "next/link";
 import ErrorMessage from "./ErrorMessage";
 import { useSignUpUserIdStore } from "@/store/signUpUserIdStore";
+import { toast } from "react-toastify";
 
 // User Signup Field Type. Infered using zod library
 type UserSignupInputType = z.infer<typeof UserSignupSchema>;
@@ -48,24 +49,29 @@ const SignupForm = () => {
   // FORM SUBMIT  HANDLER
   const formSubmitHandler = handleSubmit(async (formData) => {
     const response = await signUpUser(formData);
-    if (response.success === true) {
+    if (response.code === "success" && response.statusCode === 201) {
       // reset();
 
-      alert(JSON.stringify(response.data));
+      alert(JSON.stringify(response.data.uid));
 
       // save user id in memory
       // so that you can use it while verifying otp
-      if (response.data?.uid) {
-        setUserId(response.data.uid);
-        alert("user created successfully");
-        router.push("/signup/otp");
-      } else {
-        alert("failed to register user. no userid");
-      }
-    }
+      setUserId(response.data.uid);
+      toast.success("User Account Created. Redirecting To OTP Verification", {
+        position: toast.POSITION.TOP_CENTER,
+      });
 
-    if (response.success === false) {
-      alert("failed to create user");
+      router.push("/signup/otp");
+    } else {
+      if (response.code === "erorr") {
+        if (response.statusCode === 422) {
+          toast.error(response.error.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } else {
+          toast.error(response.error.message);
+        }
+      }
     }
   });
 
