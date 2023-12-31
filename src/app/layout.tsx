@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Mukta } from "next/font/google";
 import "./globals.css";
-import "react-toastify/dist/ReactToastify.min.css";
-import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 const mukta = Mukta({
