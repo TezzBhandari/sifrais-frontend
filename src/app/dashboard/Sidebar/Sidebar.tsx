@@ -12,14 +12,13 @@ import ArrowUpDown from './Components/ArrowUpDown';
 const Sidebar = () => {
 
     const [ isSidebarOpen, setSidebarOpen] = useState(true);
-  
+    const [isArrowDown, setArrowDown ] = useState(false);
 
- 
  
     const handleBurger = () => {
         setSidebarOpen(!isSidebarOpen)
     }
-
+console.log("sidebar rerendered: ", isArrowDown)
 
   return (
     <nav
@@ -30,9 +29,9 @@ const Sidebar = () => {
            </div>
            <div className='sidebarelements' style={{ marginTop: "10px"}}>
                 {
-                    sidebarElements.map((sideelement)=> {
+                    sidebarElements.map((sideelement, idxValue)=> {
                         return (
-                            <>
+                            <React.Fragment key={idxValue}>
                             <div className='flex flex-row justify-center'>
                                 <div className={styles.elementBox}>
                                     <Image src={sideelement.icon} width={24} height={24} alt={sideelement.name} className={styles.sidebaricon} />
@@ -41,7 +40,7 @@ const Sidebar = () => {
                                         !isSidebarOpen? 
                                         <>
                                         <li className={styles.elementname} ><p>{sideelement.name}</p></li> 
-                                        <ArrowUpDown  />
+                                        <ArrowUpDown setArrowDown={setArrowDown} />
                                         </>
                                         : ''
                                         
@@ -49,8 +48,11 @@ const Sidebar = () => {
                                 </div>
 
                             </div>
+                            {
+                                        isArrowDown ? <Sifaris/> : ''
+                                }
                            
-                            </>
+                            </React.Fragment>
                         )
                     })
                 }
