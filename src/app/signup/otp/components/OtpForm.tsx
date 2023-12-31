@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import OtpInput from "react-otp-input";
 import { useRouter } from "next/navigation";
 import { useSignUpUserIdStore } from "@/store/signUpUserIdStore";
@@ -14,14 +14,13 @@ import { OtpVerification } from "../../actions";
 
 const OtpForm = () => {
   const [
-    { otp, skipDefaultStyles, minLength, maxLength, placeholder, inputType },
+    { otp, skipDefaultStyles, minLength, maxLength, inputType },
     setConfig,
   ] = React.useState({
     otp: "",
     numInputs: 6,
     minLength: 0,
     maxLength: 40,
-    placeholder: "_",
     inputType: "text" as const,
     skipDefaultStyles: true,
   });
@@ -57,9 +56,16 @@ const OtpForm = () => {
 
   // NEXT ROUTER NAVIGATION
   const router = useRouter();
-
   const { uid, revokeUserId } = useSignUpUserIdStore();
   const { setAccessToken } = useAccessTokenStore();
+
+  // not a permanent solution
+  // figure out the case where user is already verified and logged in redirect him to dashboard or previos route
+  useEffect(() => {
+    if (uid === "") {
+      router.push("/signup");
+    }
+  }, [router, uid]);
 
   // OTP FORM'S SUBMIT HANDLER
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -155,7 +161,6 @@ const OtpForm = () => {
                 skipDefaultStyles={skipDefaultStyles}
                 value={otp}
                 onChange={handleOTPChange}
-                placeholder={placeholder}
                 inputType={inputType}
                 shouldAutoFocus
                 numInputs={6}

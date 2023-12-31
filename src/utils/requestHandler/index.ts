@@ -95,4 +95,5 @@ const RequestHandler =
   };
 
 export type { BaseRequest, BaseResponse, BaseRequestConfig };
+
 export default RequestHandler;
