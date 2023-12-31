@@ -1,0 +1,11 @@
+.sidebarSubheading {
+    display: flex;
+    justify-content: start;
+    background-color: rgba(217, 217, 217, 0.08);  
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+    align-items: center;
+    margin: 10px 0px;
+    padding: 0px 10px;
+}
