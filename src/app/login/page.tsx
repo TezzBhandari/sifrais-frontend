@@ -9,10 +9,10 @@ import Link from "next/link";
 import { userLoginStore, userEmailCheck } from "./components/authFile/loginAuth";
 import { toast } from 'react-toastify';
 import ToastifyAlert from "../toastifyAlert/toastifyAlert";
-import Dashboard from "../dashboard/page";
 import { GoArrowRight } from "react-icons/go";
 
 const BASE_URL="https://sifaris.ktmserver.com/backend"
+
 interface IFormData {
   username: string | undefined;
   password: string | undefined;
@@ -63,7 +63,6 @@ const page = () => {
         if (data.email && data.status == 409){
           emailCheck({"email": data.email})
         }
-       
       } catch (error) {
         // Handle network errors or other exceptions
         toast.error("Username doesn't exist.")     
