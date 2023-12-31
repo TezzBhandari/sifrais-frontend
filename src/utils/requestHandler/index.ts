@@ -1,5 +1,4 @@
 import {
-  Axios,
   AxiosError,
   AxiosRequestHeaders,
   AxiosResponse,
@@ -8,11 +7,11 @@ import {
 
 // TYPE: BASE REQUEST COFIGURATION TYPE
 interface BaseRequestConfig<TBody = {}, TParams = {}> {
+  url: string;
+  httpMethod: "get" | "post" | "put" | "patch" | "delete" | "options";
   params?: TParams;
   headers?: AxiosRequestHeaders;
   body?: TBody;
-  url: string;
-  httpMethod: "get" | "post" | "put" | "patch" | "delete" | "options";
 }
 
 // TYPE: BASE REQUEST
@@ -23,15 +22,17 @@ type BaseRequest<TData, TBody = {}, TParams = {}> = (
 // SUCCESS RESPONSE TYPE
 type SuccessResponse<TData> = {
   code: "success";
-  // statusCode: number;
+  statusCode: number;
   data: TData;
 };
 
 // ERROR RESPONSE TYPE
 type ErrorResponse<TError = AxiosError> = {
   code: "error";
-  // statusCode: number;
-  error: TError;
+  errorName: string;
+  errorMessage: string;
+  statusCode?: number;
+  error?: TError;
 };
 
 // BASE RESPONSE TYPE
@@ -56,26 +57,43 @@ const RequestHandler =
       const response = await request(requestCofig);
       return {
         code: "success",
-        // statusCode: response.status,
+        statusCode: response.status,
         data: response.data,
       };
     } catch (err) {
-      // if (isAxiosError(err)) {
-      //   return {
-      //     code: "error",
-      //     statusCode: err.response?.status ? err.response.status : 0,
-      //     error: err as TError,
-      //   };
-      // } else {
-      //   return {
-      //     code: "error",
-      //     statusCode: 0,
-      //     error: err as TError,
-      //   };
-      // }
-      return { code: "error", error: err as TError };
+      if (isAxiosError(err)) {
+        if (err.response) {
+          return {
+            code: "error",
+            errorName: err.name,
+            errorMessage: err.message,
+            statusCode: err.response.status,
+            error: err.response.data as TError,
+          };
+        }
+        if (err.request) {
+          return {
+            code: "error",
+            errorName: err.name,
+            errorMessage: err.message,
+            error: err.request,
+          };
+        }
+        return {
+          code: "error",
+          errorName: "Unknown Error",
+          errorMessage: "Something Went Wrong. Try Again!",
+        };
+      } else {
+        return {
+          code: "error",
+          errorName: "Unknown Error",
+          errorMessage: "Something Went Wrong. Try Again!",
+        };
+      }
     }
   };
 
 export type { BaseRequest, BaseResponse, BaseRequestConfig };
+
 export default RequestHandler;
