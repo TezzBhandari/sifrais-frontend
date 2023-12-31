@@ -1,14 +1,20 @@
 .sidebarMain{
     transition: width 0.3s ease-in-out;
-    background-color: #2E8FFF;
-    border-radius: 5px;
+    background-color: #002147;
 }
 .elementBox {
     width: 500px;
     display: flex;
-    flex-direction: row;
+    background-color: rgba(217, 217, 217, 0.08);  
     justify-content: center;
+    margin: 5px 0px;
+    border-radius: 10px ;
 }
+
+.sidebarshowcase{
+        max-height: 240px;
+        transition: max-height 1s ease-in-out;
+      }
 
 .elementBox li {
     margin: 10px 0px;
@@ -17,10 +23,19 @@
     align-items: center;
 }
 
+.sidebaricon {
+    margin: 15px 0px;
+}
+
 .elementBox p {
     margin: 0px 10px;
     width: 120px;
 }
+
+.sidebarshowcase {
+    transition: width 1s ease-in-out;
+}
+
 /* @media screen and (max-width: 700px){
     .sidebarMain {
             color: red;
