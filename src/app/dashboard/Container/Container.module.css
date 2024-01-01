@@ -1,0 +1,10 @@
+.containerBody {
+    height: 1000px;
+    position: absolute;
+    z-index: -1;
+    top: 90px;
+    color: red;
+    background-color: rebeccapurple;
+    transition: left 0.3s ease-in-out;
+}
+
