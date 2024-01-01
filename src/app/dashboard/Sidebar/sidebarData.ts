@@ -30,3 +30,18 @@ export const sidebarSifaris = [
         name: "सिफारिसको प्रकार"
     },
 ]
+
+export const sidebarDashboard = [
+    {
+        id: 1,
+        name: "सिर्जना"
+    },
+    {
+        id: 2,
+        name: "प्रकार"
+    },
+    {
+        id: 3,
+        name: "प्रकार"
+    },
+]

@@ -2,7 +2,8 @@ import React from 'react'
 import styles from "./Navcomponents.module.css"
 import Image from 'next/image'
 
-const NavProfile = () => {
+const NavProfile: React.FC<{email: string}> = ({email}) => {
+
   return (
     <div className={styles.navprofile}>
       <div className='flex flex-row ml-3'>
@@ -15,7 +16,7 @@ const NavProfile = () => {
         <Image src="/assets/icons/navbar/fakeuser.jpeg" width={50} height={50} alt="user" className={styles.userimage} />
         </div>
         <div className={`mx-3 ${styles.navuserdetails}`}>
-        <p>User name</p>
+        <p>EMAIL: {email}</p>
         <p className='font-medium'>Designation</p>
         </div>
         <button onClick={()=>alert("Logout garney ho?")}>

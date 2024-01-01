@@ -8,7 +8,6 @@ import FormBanner from "./components/FormBanner/FormBanner";
 import Link from "next/link";
 import { userLoginStore, userEmailCheck } from "./components/authFile/loginAuth";
 import { toast } from 'react-toastify';
-import ToastifyAlert from "../toastifyAlert/toastifyAlert";
 import { GoArrowRight } from "react-icons/go";
 
 const BASE_URL="https://sifaris.ktmserver.com/backend"
@@ -195,7 +194,6 @@ const page = () => {
           </div>
         </div>
       </div>
-      <ToastifyAlert />
     </>
   );
 };
