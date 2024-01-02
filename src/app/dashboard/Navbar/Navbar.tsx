@@ -1,5 +1,5 @@
 // NavBar.tsx
-
+"use client";
 import React from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Image from 'next/image';

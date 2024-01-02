@@ -1,13 +1,7 @@
-import React, {InputHTMLAttributes, useState} from 'react'
+import React, { useState} from 'react'
 import Image from 'next/image';
-import styles from '../Sidebar.module.css'
+import { TArrow } from '../../types';
 
-type TArrow = {
-    setArrowDown: React.Dispatch<React.SetStateAction<boolean>>;
-    setClickedArrow: React.Dispatch<React.SetStateAction<number>>
-    sideElementId: number;
-    sideElementName: string;
-}
 
 const ArrowUpDown: React.FC<TArrow> = ( { setArrowDown, setClickedArrow, sideElementId,  sideElementName } ) => {
 

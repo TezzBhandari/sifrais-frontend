@@ -1,7 +1,6 @@
 // SideBar.tsx
-
+"use client";
 import React, {useState} from 'react';
-import { FaBars } from "react-icons/fa6";
 import styles from './Sidebar.module.css';
 import Image from 'next/image';
 import SideSifaris from './Components/SideSifaris';
@@ -9,14 +8,11 @@ import { sidebarElements} from './sidebarData'
 import ArrowUpDown from './Components/ArrowUpDown';
 import SideDashboard from './Components/SideDashboard';
 import SideEmployee from './Components/SideEmployee';
+import { TSidebar } from '../types'
 
 
-type TSidepar = {
-    isSidebarOpen: boolean;
-    setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
 
-const Sidebar: React.FC<TSidepar> = ({ isSidebarOpen, setSidebarOpen }) => {
+const Sidebar: React.FC<TSidebar> = ({ isSidebarOpen, setSidebarOpen }) => {
 
     const data = [
         {

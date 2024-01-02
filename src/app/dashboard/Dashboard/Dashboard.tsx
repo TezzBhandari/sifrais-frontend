@@ -1,5 +1,5 @@
 // Dashboard.tsx
-
+"use client";
 import React, { useState } from 'react';
 import Navbar from '../Navbar/Navbar';
 import Sidebar from '../Sidebar/Sidebar';
@@ -15,7 +15,7 @@ const Dashboard: React.FC = () => {
         <Navbar />
         <div className='flex flex-row'>
         <Sidebar isSidebarOpen={isSidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <Container isSidebarOpen={isSidebarOpen}/>
+        <Container isSidebarOpen={isSidebarOpen} />
         </div>
 
         </>

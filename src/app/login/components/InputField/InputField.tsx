@@ -4,12 +4,6 @@ import { useFormContext, FieldValues } from 'react-hook-form';
 interface IInputField extends InputHTMLAttributes<HTMLInputElement> {
 }
 
-interface InputFieldProps {
-    label: string;
-    name: string;
-    value? : string;
-  }
-
 const InputField: React.FC<IInputField> = ({type, id, className, name, placeholder, onChange, value}) => {
   return (
     <>
