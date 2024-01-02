@@ -1,6 +1,6 @@
 import React from "react";
 
-let x = [1, 2, 3, 5, 5, 5, 555, 5, 5, 55, 5];
+let x = [1, 2, 3, 5, 5, 5, 555, 5, 5, 55, 5, 5, 555, 5, 5, 55];
 
 const page = () => {
   return (
