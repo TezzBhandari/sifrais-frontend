@@ -5,7 +5,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Users } from "./FakeData";
 import { MdAdd, MdDelete } from "react-icons/md";
 
@@ -16,7 +16,6 @@ const UserList = () => {
 
   // table data
   const [data, setData] = useState(Users);
-  // memoize data
 
   // table column
   const columns = [
@@ -132,7 +131,7 @@ const UserList = () => {
                 {bodyRow.getVisibleCells().map((visibleCell) => {
                   return (
                     <td
-                      className="text-center text-[#1D1C2B] text-sm py-4 font-normal"
+                      className="text-center text-[#1D1C2B] text-sm py-1 font-normal"
                       key={visibleCell.id}
                     >
                       {flexRender(
