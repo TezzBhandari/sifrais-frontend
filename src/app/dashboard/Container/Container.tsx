@@ -1,9 +1,20 @@
-import React from 'react'
+import React from 'react';
+import styles from "./Container.module.css";
+import { TContainer } from '../types';
 
-const Container = () => {
+
+const Container: React.FC<TContainer> = ( {isSidebarOpen} ) => {
   
   return (
-    <div>Container</div>
+    <div className={styles.containerBody} style={{left: `${isSidebarOpen? '90px': '300px'}`}}>
+             <p style={{height: "900px"}}>FROM DASHBOARD</p>
+      <p style={{height: "900px"}}>FROM DASHBOARD</p>
+      <p style={{height: "900px"}}>FROM DASHBOARD</p>
+      <p style={{height: "900px"}}>FROM DASHBOARD</p>
+      <p style={{height: "900px"}}>FROM DASHBOARD</p>
+      <p style={{height: "900px"}}>FROM DASHBOARD</p>
+      <p style={{height: "900px"}}>FROM DASHBOARD</p>
+    </div>
   )
 }
 

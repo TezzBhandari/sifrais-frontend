@@ -1,3 +1,4 @@
+import { InputHTMLAttributes } from "react";
 import { z } from "zod";
 
 //Creating a schema for Uesr login Input.
@@ -8,3 +9,22 @@ export const userLoginSchema = z.object({
 
 })
 
+export interface IFormData {
+    username: string | undefined;
+    password: string | undefined;
+  }
+  
+export interface TUserLogin {
+    token_type: string,
+    expires_in: number,
+    access_token: string,
+    refresh_token: string
+  }
+
+export interface TButtonProps extends InputHTMLAttributes<HTMLInputElement> {
+    buttonName: string;
+    onClick?: () => void;
+}
+
+
+  

@@ -3,7 +3,8 @@ import styles from './Subheading.module.css';
 import { sidebarSifaris } from '../sidebarData';
 import Image from 'next/image';
 
-const Sifaris = () => {
+const SideSifaris = () => {
+  
   return (
     <div>
             {
@@ -19,4 +20,4 @@ const Sifaris = () => {
   )
 }
 
-export default Sifaris
+export default SideSifaris

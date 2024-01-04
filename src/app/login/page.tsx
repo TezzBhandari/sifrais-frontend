@@ -8,23 +8,10 @@ import FormBanner from "./components/FormBanner/FormBanner";
 import Link from "next/link";
 import { userLoginStore, userEmailCheck } from "./components/authFile/loginAuth";
 import { toast } from 'react-toastify';
-import ToastifyAlert from "../toastifyAlert/toastifyAlert";
 import { GoArrowRight } from "react-icons/go";
+import {IFormData } from "./types";
 
 const BASE_URL="https://sifaris.ktmserver.com/backend"
-
-interface IFormData {
-  username: string | undefined;
-  password: string | undefined;
-}
-
-interface TUserLogin {
-  token_type: string,
-  expires_in: number,
-  access_token: string,
-  refresh_token: string
-}
-
 
 const page = () => {
 
@@ -195,7 +182,6 @@ const page = () => {
           </div>
         </div>
       </div>
-      <ToastifyAlert />
     </>
   );
 };

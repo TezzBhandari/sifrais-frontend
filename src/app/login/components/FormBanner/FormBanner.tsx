@@ -2,8 +2,6 @@
 //This componenet implements the Image Logo and title in the Login box.
 
 import React, {useEffect, useState} from 'react'
-import Link from "next/link";
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import styles from './FormBanner.module.css';
 import { IoChevronBackCircleOutline } from "react-icons/io5";
@@ -14,7 +12,6 @@ const FormBanner: React.FC = () => {
 
   //Hook to check whether email has been received or not from the page.tsx.
   const [emailReceived, setEmailReceived] = useState<boolean>(false)
-  const router = useRouter();
   const { email, emailCheck } = userEmailCheck();
   
   useEffect(()=>{

@@ -1,14 +1,24 @@
 .sidebarMain{
     transition: width 0.3s ease-in-out;
     background-color: #002147;
+    position: fixed;
+    top: 90px;
 }
+.sidebox {
+    background-color: rgba(217, 217, 217, 0.08);
+    border-radius: 15px ;
+}
+
 .elementBox {
     width: 500px;
-    display: flex;
-    background-color: rgba(217, 217, 217, 0.08);  
+    display: flex; 
     justify-content: center;
     margin: 5px 0px;
     border-radius: 10px ;
+}
+
+.elementBox:hover{
+    background-color: rgba(217, 217, 217, 0.08); 
 }
 
 .sidebarshowcase{
@@ -26,6 +36,7 @@
 .sidebaricon {
     margin: 15px 0px;
 }
+
 
 .elementBox p {
     margin: 0px 10px;

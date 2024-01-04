@@ -1,14 +1,18 @@
 // NavBar.tsx
-
+"use client";
 import React from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Image from 'next/image';
 import styles from './Navbar.module.css';
 import Searchbar from './Components/Searchbar';
 import NavProfile from './Components/NavProfile';
+import { userEmailCheck }  from '../../login/components/authFile/loginAuth'
 
 
 const Navbar = () => {
+
+  const { email  } = userEmailCheck();
+
   return (
     <div className={styles.navbarMain}>
       <div className='flex flex-row items-center'>
@@ -25,7 +29,7 @@ const Navbar = () => {
         </div>
 
         <div className="navuserprofile">
-        <NavProfile />
+        <NavProfile email={email} />
         </div>
     </div>
   );
