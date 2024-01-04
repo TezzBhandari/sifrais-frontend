@@ -46,3 +46,32 @@
   color: rgb(167, 159, 159);
 }
 
+@media print {
+  body * {
+      
+  }
+    @page {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+
+  .printbutton{
+    display: none;
+  }
+
+ #print-input {
+  border: none;
+  background-color:#FAFAFA;
+ }
+
+ #print-select {
+
+  appearance: none;
+ }
+ 
+  /* #printable-section, #printable-section * {
+      display: flex;
+      
+  } */
+}
