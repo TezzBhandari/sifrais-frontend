@@ -2,7 +2,7 @@
 
 import { createColumnHelper } from "@tanstack/react-table";
 import { MdAdd, MdDelete } from "react-icons/md";
-import { User } from "./types";
+import { User } from "../types";
 
 // helpers function from the library
 // create column with proper type definition with full typesaftey
@@ -40,8 +40,8 @@ const UserColumns = [
   }),
 
   // Status column
-  columnHelper.accessor((row) => row.status, {
-    id: "status",
+  columnHelper.accessor((row) => row.active_status, {
+    id: "active_status",
     cell: (props) => <p>{props.getValue()}</p>,
     enableGlobalFilter: false,
 

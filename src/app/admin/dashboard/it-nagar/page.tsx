@@ -5,12 +5,27 @@ import Image from "next/image";
 import AddIcon from "../../../../../public/assets/Add_Icon.svg";
 import ClearIcon from "../../../../../public/assets/Clear_Logo.svg";
 import ProvinceFilter from "./components/ProvinceFilter";
-import { Users } from "./components/FakeData";
 import UserColumns from "./components/UserColumn";
-import { User } from "./components/types";
 import FilterInputField from "./components/FilterInputField";
+import GetUser from "./utils/api/Users";
+import { User } from "./types";
 
-const page = () => {
+const page = async () => {
+  // user list
+  const userList = await GetUser({
+    httpMethod: "get",
+    url: "/api/users",
+  });
+
+  if (userList.code === "error") {
+    return (
+      <div>
+        error from the server. we will handle it later after we fix it on the
+        server
+      </div>
+    );
+  }
+
   return (
     <div className="bg-[#dde4ee] min-h-[calc(100vh-6rem)] overflow-hidden px-4 py-6">
       <div className="container flex flex-col gap-3 mx-auto">
@@ -74,7 +89,10 @@ const page = () => {
           </div>
           {/* actual table  */}
           <div className="table-container w-full bg-transparent">
-            <UserList<User> tableColumns={UserColumns} tableData={Users} />
+            <UserList<User>
+              tableColumns={UserColumns}
+              tableData={userList.data.data}
+            />
           </div>
         </div>
       </div>

@@ -62,7 +62,14 @@ const RequestHandler =
       };
     } catch (err) {
       if (isAxiosError(err)) {
+        console.log("\n\nrequest handler  \n\n", err);
+
         if (err.response) {
+          console.log(
+            "\n\nrequest handler axios error, response: ,  \n\n",
+            err.response
+          );
+
           return {
             code: "error",
             errorName: err.name,
@@ -72,10 +79,14 @@ const RequestHandler =
           };
         }
         if (err.request) {
+          console.log(
+            "\n\nrequest handler axios error, request: ,  \n\n",
+            err.request
+          );
           return {
             code: "error",
             errorName: err.name,
-            errorMessage: err.message,
+            errorMessage: "request didn't reach server",
             error: err.request,
           };
         }
@@ -85,6 +96,7 @@ const RequestHandler =
           errorMessage: "Something Went Wrong. Try Again!",
         };
       } else {
+        console.log("\n\nrequest handler not an axios error: ,  \n\n", err);
         return {
           code: "error",
           errorName: "Unknown Error",
