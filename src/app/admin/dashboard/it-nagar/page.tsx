@@ -9,15 +9,18 @@ import UserColumns from "./components/UserColumn";
 import FilterInputField from "./components/FilterInputField";
 import GetUser from "./utils/api/Users";
 import { User } from "./types";
+import { error } from "console";
 
 const page = async () => {
-  // user list
+  // Fetching User form the server
   const userList = await GetUser({
     httpMethod: "get",
     url: "/api/users",
   });
 
+  // handling errors
   if (userList.code === "error") {
+    console.log("status code from server: ", userList.statusCode);
     return (
       <div>
         error from the server. we will handle it later after we fix it on the
@@ -48,11 +51,14 @@ const page = async () => {
           </div>
           {/* FILTER BUTTON SECTION  */}
           <div className="filter-button-wrapper flex items-center space-x-4">
+            {/* FILTER CLEAR BUTTON SECTION  */}
             <div className="clear-button">
               <button className="px-4 py-2.5 rounded-xl border-[1.5px] border-[#ACB1C6]">
                 <Image src={ClearIcon} alt={"clear button icon"} />
               </button>
             </div>
+
+            {/* APPLY FILTER BUTTON SECTION  */}
             <div className="filter-button ">
               <button className="bg-[#002147] py-3 px-5 capitalize font-medium text-sm gap-2 rounded-xl text-white">
                 apply filter
@@ -87,7 +93,7 @@ const page = async () => {
               </div>
             </div>
           </div>
-          {/* actual table  */}
+          {/* Acutal User Table  */}
           <div className="table-container w-full bg-transparent">
             <UserList<User>
               tableColumns={UserColumns}

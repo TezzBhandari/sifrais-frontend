@@ -4,6 +4,7 @@ export interface FilterInputState {
   filtering: string;
 }
 
+// action  related to the filter input
 export interface FilterInputAction {
   setFiltering: (filteringText: FilterInputState["filtering"]) => void;
   resetFilter: () => void;

@@ -18,11 +18,17 @@ import PaginationPreviousPage from "../../../../../../public/assets/logo/Paginat
 import PaginationNextPage from "../../../../../../public/assets/logo/PaginationNextPage.svg";
 import PaginationLastPage from "../../../../../../public/assets/logo/PaginationLastPage.svg";
 
+// Props Definition
 interface DataTableProps<TData, TValue> {
   tableColumns: ColumnDef<TData, TValue>[];
   tableData: TData[];
 }
 
+/**
+ *
+ * @param DataTable Props - contain table column and data to be displayed
+ * @returns React JSX
+ */
 function UserList<TData, TValue = any>({
   tableColumns,
   tableData,
@@ -30,13 +36,14 @@ function UserList<TData, TValue = any>({
   // filter state form zustand store for filtering table by name, phonenumber, address
   const { filtering, setFiltering } = useTableFilterInputStore();
   // table data
-  const [data, setData] = useState(tableData);
+  // const [data, setData] = useState(tableData);
 
   const table = useReactTable<TData>({
-    data: data,
+    data: tableData,
     columns: tableColumns,
     // state of the table
     state: {
+      // filtering input synchornization with the tanstack table
       globalFilter: filtering,
     },
 
