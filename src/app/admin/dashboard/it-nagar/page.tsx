@@ -2,14 +2,17 @@ import React from "react";
 import UserList from "./components/UserList";
 import Image from "next/image";
 
-import SearchLogo from "../../../../../public/assets/icons/navbar/Search_Icon.svg";
 import AddIcon from "../../../../../public/assets/Add_Icon.svg";
 import ClearIcon from "../../../../../public/assets/Clear_Logo.svg";
 import ProvinceFilter from "./components/ProvinceFilter";
+import { Users } from "./components/FakeData";
+import UserColumns from "./components/UserColumn";
+import { User } from "./components/types";
+import FilterInputField from "./components/FilterInputField";
 
 const page = () => {
   return (
-    <div className="bg-[#dde4ee] min-h-[calc(100vh-6rem)] overflow-hidden px-4 pt-6">
+    <div className="bg-[#dde4ee] min-h-[calc(100vh-6rem)] overflow-hidden px-4 py-6">
       <div className="container flex flex-col gap-3 mx-auto">
         {/* FILTER SECTION  */}
         <div className="filter-container bg-white rounded-lg px-6 py-4 grid grid-cols-[1fr_max-content]">
@@ -56,19 +59,7 @@ const page = () => {
             {/* SEARCH BAR SECTION  */}
             <div className="search flex items-center justify-center">
               <div className="input-container relative flex items-center justify-center">
-                <input
-                  className=" min-w-[360px] placeholder:tracking-wide placeholder:font-light placeholder:text-[#ACB1C6] px-3 py-1.5 border-[1.5px] border-[#ACB1C6] rounded-full text-base placeholder:text-base focus:outline text-[#ACB1C6] focus:outline-[#ACB1C6] bg-transparent bg-slate-300"
-                  type="text"
-                  autoComplete="off"
-                  placeholder="Search by name, address or phone number"
-                />
-                <button className="bg-[#002147] p-[9px] absolute right-0 rounded-full">
-                  <Image
-                    className="bg-transparent"
-                    src={SearchLogo}
-                    alt={"search icon"}
-                  />
-                </button>
+                <FilterInputField />
               </div>
             </div>
             {/* BUTTON SECTION  */}
@@ -82,8 +73,8 @@ const page = () => {
             </div>
           </div>
           {/* actual table  */}
-          <div className="table-container w-fullbg-transparent">
-            <UserList />
+          <div className="table-container w-full bg-transparent">
+            <UserList<User> tableColumns={UserColumns} tableData={Users} />
           </div>
         </div>
       </div>

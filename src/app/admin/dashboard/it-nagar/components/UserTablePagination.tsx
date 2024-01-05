@@ -1,135 +1,28 @@
-"use client";
+import { Table } from "@tanstack/react-table";
+import React from "react";
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  getFilteredRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import React, { useState } from "react";
-import SelectInput from "./SelectInput";
-import { useTableFilterInputStore } from "@/store/tableFilterInputStore";
-
-interface DataTableProps<TData, TValue> {
-  tableColumns: ColumnDef<TData, TValue>[];
-  tableData: TData[];
+export interface UserTablePaginationProps<TData> {
+  table: Table<TData>;
 }
 
-function UserList<TData, TValue = any>({
-  tableColumns,
-  tableData,
-}: DataTableProps<TData, TValue>) {
-  // filter state form zustand store for filtering table by name, phonenumber, address
-  const { filtering, setFiltering } = useTableFilterInputStore();
-  // table data
-  const [data, setData] = useState(tableData);
-
-  const table = useReactTable<TData>({
-    data: data,
-    columns: tableColumns,
-    // state of the table
-    state: {
-      globalFilter: filtering,
-    },
-
-    // to get the model data
-    getCoreRowModel: getCoreRowModel(),
-    // added for enabling pagination features
-    getPaginationRowModel: getPaginationRowModel(),
-
-    // added for enabling filters
-    getFilteredRowModel: getFilteredRowModel(),
-    // synchronizing the input filter state to filter inside the table
-    onGlobalFilterChange: setFiltering,
-  });
-
-  // page size slect handler
-  function SelectChangeHandler(value: string) {
-    table.setPageSize(Number(value));
-  }
-
+function UserTablePagination<TData>({
+  table,
+}: UserTablePaginationProps<TData>) {
   return (
-    <div className="w-full">
-      <table className="w-full">
-        {/* TABLE HEADER  */}
-        <thead className="border-b border-[#F0F0F2]">
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th
-                  className="text-left  text-[#9291A5] text-sm font-medium py-3 uppercase"
-                  key={header.id}
-                >
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-
-        {/* TABLE BODY  */}
-        <tbody className="">
-          {table.getRowModel().rows.map((bodyRow) => {
-            return (
-              <tr
-                key={bodyRow.id}
-                className="hover:shadow-lg hover:cursor-pointer hover:scale-y-110"
-              >
-                {bodyRow.getVisibleCells().map((visibleCell) => {
-                  return (
-                    <td
-                      className="text-left text-[#1D1C2B] text-sm py-1 font-normal"
-                      key={visibleCell.id}
-                    >
-                      {flexRender(
-                        visibleCell.column.columnDef.cell,
-                        visibleCell.getContext()
-                      )}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-
-      {/* PAGINATION  */}
+    <>
+      <div></div>
       <div className="pagination-container flex items-center justify-between mt-14 text-[0.875rem] text-[#002147]">
-        <div className="page-count-wrapper flex items-center gap-1">
-          <p>Row per page{": "}</p>
-          {/* SELECT PAGE SIZE SECTION  */}
-          <SelectInput
-            onValueChange={SelectChangeHandler}
-            options={[10, 20, 30, 40, 50].map((value) => ({
-              id: value.toString(),
-              displayName: value.toString(),
-            }))}
-            value={table.getState().pagination.pageSize.toString()}
-            id="pageSize"
-          />
+        <div className="page-count-wrapper">
+          <p>
+            Row per page <span>{":10"}</span>
+          </p>
         </div>
         <div className="pagination-nav-container flex items-center justify-between space-x-8">
           <div className="pagination-info">
-            <p>
-              Page {table.getState().pagination.pageIndex + 1} of{" "}
-              {table.getPageCount()}
-            </p>
+            <p>1-3 of 13</p>
           </div>
           <div className="pagination-button flex gap-5 items-center">
-            <button
-              onClick={() => table.setPageIndex(0)}
-              disabled={!table.getCanPreviousPage()}
-              aria-disabled={!table.getCanPreviousPage()}
-              className="px-3 py-3 bg-white shadow-[0px_1px_10px_0px_rgba(0,0,0,0.10)] rounded-lg"
-            >
+            <button className="px-3 py-3 bg-white shadow-[0px_1px_10px_0px_rgba(0,0,0,0.10)] rounded-lg">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="12"
@@ -145,6 +38,7 @@ function UserList<TData, TValue = any>({
                 />
               </svg>
             </button>
+
             {/* previous page  */}
             <button
               onClick={() => table.previousPage()}
@@ -192,9 +86,7 @@ function UserList<TData, TValue = any>({
             </button>
             {/* LAST PAGE BUTTON  */}
             <button
-              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-              disabled={!table.getCanNextPage()}
-              aria-disabled={!table.getCanNextPage()}
+              // onClick={}
               className="px-3 py-3 bg-white shadow-[0px_1px_10px_0px_rgba(0,0,0,0.10)] rounded-lg"
             >
               <svg
@@ -215,8 +107,8 @@ function UserList<TData, TValue = any>({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
-export default UserList;
+export default UserTablePagination;
