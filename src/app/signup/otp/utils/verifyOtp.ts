@@ -1,4 +1,4 @@
-import Query from "@/utils/query";
+import { PublicQuery } from "@/lib/utils/query";
 
 export type VerifyOtpSuccessResponse = {
   token_type: string;
@@ -18,7 +18,7 @@ export type VerifyOtpBody = {
   uid: string;
   otp: string;
 };
-const verifyOtp = Query<
+const verifyOtp = PublicQuery<
   VerifyOtpSuccessResponse,
   VerifyOtpErrorResponse,
   VerifyOtpBody

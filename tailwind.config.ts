@@ -11,6 +11,9 @@ const config: Config = {
       height: {
         "signup-content": "calc(100vh- 2.5rem)",
       },
+      gridTemplateColumns: {
+        "3": "max-content minmax(auto, 30rem) 1fr",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -19,5 +22,5 @@ const config: Config = {
     },
   },
   plugins: [require("daisyui")],
-}
-export default config
+};
+export default config;

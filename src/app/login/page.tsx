@@ -1,102 +1,99 @@
 "use client";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
 import styles from "./components/Login.module.css";
 import Button from "./components/Button/Button";
 import InputField from "./components/InputField/InputField";
 import FormBanner from "./components/FormBanner/FormBanner";
 import Link from "next/link";
-import { userLoginStore, userEmailCheck } from "./components/authFile/loginAuth";
-import { toast } from 'react-toastify';
+import {
+  userLoginStore,
+  userEmailCheck,
+} from "./components/authFile/loginAuth";
+import { toast } from "react-toastify";
 import { GoArrowRight } from "react-icons/go";
-import {IFormData } from "./types";
+import { IFormData } from "./types";
 
-const BASE_URL="https://sifaris.ktmserver.com/backend"
+const BASE_URL = "https://sifaris.ktmserver.com/backend";
 
 const page = () => {
+  const router = useRouter();
 
-  const router = useRouter(); 
-  
   const { userLogin } = userLoginStore();
-  const{ email, emailCheck } = userEmailCheck();
- 
+  const { email, emailCheck } = userEmailCheck();
+
   const [formData, setFormData] = useState<IFormData>({
     username: "",
     password: "",
   });
 
-
   const handleUsername = () => {
-
     const fetchUsername = async () => {
       try {
         const response = await fetch(`${BASE_URL}/api/checkuser`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             username: formData.username,
           }),
         });
-    
+
         if (!response.ok) {
-          toast.error("Username doesn't exist.") 
+          toast.error("Username doesn't exist.");
         }
         const data = await response.json();
-        console.log(data)
+        console.log(data);
 
         //Check the Login Status
-        if (data.email && data.status == 409){
-          emailCheck({"email": data.email})
+        if (data.email && data.status == 409) {
+          emailCheck({ email: data.email });
         }
       } catch (error) {
         // Handle network errors or other exceptions
-        toast.error("Username doesn't exist.")     
-        
+        toast.error("Username doesn't exist.");
       }
-  }
+    };
 
-  if(!formData.username){
-    toast.error("Please input the email field.")
-  } else {
-  fetchUsername()
-}}
-
+    if (!formData.username) {
+      toast.error("Please input the email field.");
+    } else {
+      fetchUsername();
+    }
+  };
 
   const handleLogin = () => {
-
-          const fetchLoginReq = async () => {
-
-         try {
-            const response = await fetch(`${BASE_URL}/api/login`, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
+    const fetchLoginReq = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             username: formData.username,
             password: formData.password,
           }),
         });
-    
+
         if (!response.ok) {
-          toast.error("Username or Password didn't match.")
+          toast.error("Username or Password didn't match.");
         }
 
         const data = await response.json();
         //Passing the loggedIN data received from the server to userLogin function to loginAuth.ts file to store in Zustand.
-        if(data.message == "Success" && data.status == 200){
-          userLogin(data)
-          localStorage.setItem("access_token" , data.access_token)
+        if (data.message == "Success" && data.status == 200) {
+          userLogin(data);
+          localStorage.setItem("access_token", data.access_token);
           router.push("/dashboard");
-          console.log(data)
+          console.log(data);
         }
       } catch (error) {
         // Handle network errors or other exceptions
-        toast.error("Username or Password didn't match.")
+        toast.error("Username or Password didn't match.");
       }
-    }
+    };
     fetchLoginReq();
   };
 
@@ -107,7 +104,6 @@ const page = () => {
       [name]: value,
     });
   };
-
 
   return (
     <>
@@ -122,13 +118,12 @@ const page = () => {
           {/* Title and District Name here */}
           <div className={styles.formBox}>
             <div className={styles.formStyles}>
-
               {!email ? (
                 <>
-                <FormBanner/>
-                <div style={{marginTop: "50px"}}></div>
+                  <FormBanner />
+                  <div style={{ marginTop: "50px" }}></div>
                   <p className="label-text">प्रयोगकर्ताको ईमेल</p>
-    
+
                   <InputField
                     onChange={handleInputChange}
                     type="text"
@@ -137,11 +132,19 @@ const page = () => {
                     value={formData.username}
                     className="my-3  rounded-sm p-1"
                   />
-                  <Link className="link-blue" href="forgotemail">प्रयोगकर्ता ईमेल बिर्सनुभयो ?</Link>
+                  <Link className="link-blue" href="forgotemail">
+                    प्रयोगकर्ता ईमेल बिर्सनुभयो ?
+                  </Link>
                   <div className="flex justify-between mt-5 items-center">
                     <div className="flex flex-row items-center">
-                    <Link style={{ fontSize: "12px" }} className="link-grey" href="/createaccount">नया खाता खोल्नुहोस </Link>
-                    <GoArrowRight size="12px" /> 
+                      <Link
+                        style={{ fontSize: "12px" }}
+                        className="link-grey"
+                        href="/createaccount"
+                      >
+                        नया खाता खोल्नुहोस{" "}
+                      </Link>
+                      <GoArrowRight size="12px" />
                     </div>
                     <Button
                       onClick={handleUsername}
@@ -150,12 +153,10 @@ const page = () => {
                     />
                   </div>
                 </>
-              ) 
-              : 
-              (
+              ) : (
                 <>
-                <FormBanner/>
-                <div style={{marginTop: "25px"}}></div>
+                  <FormBanner />
+                  <div style={{ marginTop: "25px" }}></div>
                   <p className="label-text">प्रयोगकर्ताको पासवर्ड</p>
                   <InputField
                     placeholder="पासवर्ड"
@@ -166,9 +167,17 @@ const page = () => {
                     value={formData.password}
                     className="my-3  rounded-sm p-1"
                   />
-                  <Link className="link-blue" href="/forgotpassword">प्रयोगकर्ता पासवर्ड बिर्सनुभयो ?</Link>
+                  <Link className="link-blue" href="/forgotpassword">
+                    प्रयोगकर्ता पासवर्ड बिर्सनुभयो ?
+                  </Link>
                   <div className="flex justify-between mt-5 items-center">
-                    <Link href="/createaccount" className='link-grey' style={{ fontSize: "12px" }}>नया खाता खोल्नुहोस</Link>
+                    <Link
+                      href="/createaccount"
+                      className="link-grey"
+                      style={{ fontSize: "12px" }}
+                    >
+                      नया खाता खोल्नुहोस
+                    </Link>
                     <Button
                       onClick={handleLogin}
                       buttonName="साइन इन"
@@ -178,7 +187,6 @@ const page = () => {
                 </>
               )}
             </div>
-  
           </div>
         </div>
       </div>
@@ -186,4 +194,4 @@ const page = () => {
   );
 };
 
-export default page
+export default page;
