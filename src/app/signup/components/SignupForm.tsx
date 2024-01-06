@@ -16,6 +16,7 @@ import Link from "next/link";
 import ErrorMessage from "./ErrorMessage";
 import { useSignUpUserIdStore } from "@/store/signUpUserIdStore";
 import { toast } from "react-toastify";
+import { SignUpInput } from "./SignUpInput";
 
 // User Signup Field Type. Infered using zod library
 type UserSignupInputType = z.infer<typeof UserSignupSchema>;
@@ -132,8 +133,8 @@ const SignupForm = () => {
                       प्रयोगकर्ताको पुरा नाम
                       <span className="text-red-600">{"*"}</span>
                     </label>
-                    <input
-                      className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
+                    <SignUpInput
+                      className=" border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 bg-transparent focus:outline-[#0062D1]"
                       // {...register("full_name_np")}
                       type="text"
                     />
@@ -151,8 +152,8 @@ const SignupForm = () => {
                       प्रयोगकर्ताको ईमेल{" "}
                       <span className="text-red-600">{"*"}</span>
                     </label>
-                    <input
-                      className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
+                    <SignUpInput
+                      className=" bg-transparent border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                       {...register("email")}
                       type="email"
                     />
@@ -169,8 +170,8 @@ const SignupForm = () => {
                     <label className="text-sm text-[#2D3748]" htmlFor="">
                       पासवर्ड <span className="text-red-600">{"*"}</span>
                     </label>
-                    <input
-                      className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
+                    <SignUpInput
+                      className=" bg-transparent border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                       {...register("password")}
                       type="password"
                     />
@@ -191,8 +192,8 @@ const SignupForm = () => {
                       प्रयोगकर्ताको पुरा नाम <span>{"(English)"}</span>
                       <span className="text-red-600">{"*"}</span>
                     </label>
-                    <input
-                      className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
+                    <SignUpInput
+                      className=" bg-transparent border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                       {...register("name")}
                       type="text"
                     />
@@ -211,8 +212,8 @@ const SignupForm = () => {
                       प्रयोगकर्ताको मोबाइल नम्बर{" "}
                       <span className="text-red-600">{"*"}</span>
                     </label>
-                    <input
-                      className="border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
+                    <SignUpInput
+                      className=" bg-transparent border-[1.5px] text-sm font-normal border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                       {...register("phone_number")}
                       type="text"
                     />
@@ -230,11 +231,12 @@ const SignupForm = () => {
                       पासवर्ड अनुरुप गर्नुहोस
                       <span className="text-red-600">{"*"}</span>
                     </label>
-                    <input
-                      className="border-[1.5px] text-sm font-normal bg-transparent border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
+                    {/*<SignUpInput
+                      className=" bg-transparent border-[1.5px] text-sm font-normal bg-transparent border-black rounded-sm py-3 px-4 focus:outline-1 focus:outline-[#0062D1]"
                       // {...register("password")}
                       type="password"
-                    />
+                    /> */}
+                    <SignUpInput className="border-[1.5px] text-sm bg-transparent  font-normal border-black rounded-sm py-3 px-4 focus:outline-1 bg-transparent focus:outline-[#0062D1]" />
                     {/* CUSTOM ERROR MESSAGE COMPONENT  */}
                     {errors.password?.message ? (
                       <ErrorMessage message={errors.password.message} />
