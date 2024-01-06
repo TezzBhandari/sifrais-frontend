@@ -3,7 +3,6 @@ import { Inter, Mukta } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 const mukta = Mukta({
@@ -25,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={mukta.className}>
         {children}
+        {/* container for showing toast  */}
         <ToastContainer />
       </body>
     </html>
