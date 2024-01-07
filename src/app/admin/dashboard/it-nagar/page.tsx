@@ -17,6 +17,9 @@ const page = async () => {
   const userList = await GetUser({
     httpMethod: "get",
     url: "/api/users",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 
   // handling errors
