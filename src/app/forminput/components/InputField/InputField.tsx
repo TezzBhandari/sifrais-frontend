@@ -10,7 +10,7 @@ interface TInputEnglish extends InputHTMLAttributes<HTMLInputElement> {
 const InputField: React.FC<TInputEnglish> = ( {name, type, onChange, value} ) => {
   return (
     <div className={styles.formInputComponent}>
-    <input type={type} name={name} onChange={onChange}  value={value} id="print-input" ></input>
+    <input type={type} name={name} onChange={onChange}  value={value} id="print-input" />
     </div>
   )
 }
