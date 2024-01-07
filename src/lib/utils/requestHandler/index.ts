@@ -1,7 +1,10 @@
 import {
   AxiosError,
+  AxiosHeaders,
   AxiosRequestHeaders,
   AxiosResponse,
+  HeadersDefaults,
+  RawAxiosRequestHeaders,
   isAxiosError,
 } from "axios";
 
@@ -10,7 +13,8 @@ interface BaseRequestConfig<TBody = {}, TParams = {}> {
   url: string;
   httpMethod: "get" | "post" | "put" | "patch" | "delete" | "options";
   params?: TParams;
-  headers?: AxiosRequestHeaders;
+  // headers?: RawAxiosRequestHeaders | AxiosHeaders | Partial<HeadersDefaults>;
+  headers?: any;
   body?: TBody;
 }
 
