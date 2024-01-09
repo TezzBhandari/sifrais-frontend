@@ -92,7 +92,7 @@ const FamilyMember = () => {
               />
             </div>
           </div>
-          <div className="flex flex-row justify-between gap-10 flex-wrap">
+          <div className="flex flex-row justify-between gap-5 flex-wrap">
             <div>
               <FileInput
                 title="Drop Font-Side Citizenship"

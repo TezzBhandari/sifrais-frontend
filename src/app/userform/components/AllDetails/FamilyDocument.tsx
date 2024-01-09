@@ -1,8 +1,9 @@
 import React from 'react'
+import DummyTable from '../DummyTable'
 
 const FamilyDocument = () => {
   return (
-    <div>FamilyDocument</div>
+    <DummyTable />
   )
 }
 

@@ -7,17 +7,19 @@
     background-color: #FFFF;
     min-height: 80px;
     border-radius: 20px;
-    padding: 5px;
+    padding: 5px 10px;
     box-shadow: 0px -20px 0px -10px #002147;
 }
 
 .filterComponent .filterBox {
     justify-content: center;
     border-radius: 10px;
-    margin-top: 18px;
     min-width:80px;
     height: 40px;
     display: flex;
     align-items: center;
     border: 1px solid rgb(202, 196, 196);
+}
+.customSelect {
+    min-width: 140px ;
 }

@@ -1,10 +1,10 @@
 import React from 'react'
+import DummyTable from '../DummyTable'
 
 const FamilyMemberDocument = () => {
   return (
     <div>
-        <h1>Hello World</h1>
-        <h1>Family Member Document.</h1>
+        <DummyTable />
     </div>
   )
 }

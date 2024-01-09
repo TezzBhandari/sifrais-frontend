@@ -54,7 +54,7 @@ const FileInput: React.FC<FileInputProps> = ({ onFileUpload, title }) => {
         padding: '20px',
         textAlign: 'center',
         cursor: 'pointer',
-        width: "468px",
+        width: "408px",
         backgroundColor: "#ACB1C6"
       }}
     >

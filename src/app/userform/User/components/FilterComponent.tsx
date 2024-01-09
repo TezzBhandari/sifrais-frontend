@@ -2,14 +2,15 @@ import React from 'react';
 import styles from "./UserComponent.module.css";
 import SelectField from '../../components/InputField/SelectField';
 import { GrPowerReset } from "react-icons/gr";
+import Select from 'react-select';
 
 const FilterComponent = () => {
   return (
     <div className={styles.filterComponent}>
-    <SelectField label="Province" name="Province" options={["Lumbini", "Bagmati"]} customStylesInput={{width: "140px"}}/>     
-    <SelectField label="District" name="District" options={["Kapilvastu", "Rupandehi"]} customStylesInput={{width: "140px"}} />  
-    <SelectField label="Ward" name="Ward" options={["2", "3"]} customStylesInput={{width: "140px"}}/>  
-    <SelectField label="Ward" name="Ward" options={["1", "3"]} customStylesInput={{width: "140px"}}/>  
+    <Select options={[{value: "Hello", label: "Hsdffsello"}, {value: "ello", label: "ello"}]} placeholder="Province"  className={styles.customSelect} />
+    <Select options={[{value: "Hello", label: "Hsdffsello"}, {value: "ello", label: "ello"}]} placeholder="Province"  className={styles.customSelect} />
+    <Select options={[{value: "Hello", label: "Hsdffsello"}, {value: "ello", label: "ello"}]} placeholder="Ward"  className={styles.customSelect} />
+    <Select options={[{value: "Hello", label: "Hsdffsello"}, {value: "ello", label: "ello"}]} placeholder="Ward"  className={styles.customSelect} />
     <div className={`h-10 ${styles.filterBox}`}>
     <GrPowerReset />
     </div>
