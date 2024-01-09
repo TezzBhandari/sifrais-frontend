@@ -24,7 +24,7 @@ const FamilyMember = () => {
       <div>
         <h2 id={styles.ititle}>Basic Information</h2>
       </div>
-      <div className="flex flex-row flex-wrap">
+      <div className="flex flex-row flex-wrap justify-between">
         <div>
           <InputFieldNep
             label="Full Name(NP)"
@@ -68,7 +68,7 @@ const FamilyMember = () => {
       <div>
         <div>
           <h2 id={styles.ititle}>Identifications</h2>
-          <div className="flex flex-row">
+          <div className="flex flex-row flex-wrap justify-between">
             <div>
               <InputField
                 label="Citizenship Number"
@@ -92,7 +92,7 @@ const FamilyMember = () => {
               />
             </div>
           </div>
-          <div className="flex flex-row justify-between m-10">
+          <div className="flex flex-row justify-between gap-10 flex-wrap">
             <div>
               <FileInput
                 title="Drop Font-Side Citizenship"

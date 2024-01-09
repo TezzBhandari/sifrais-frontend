@@ -20,7 +20,7 @@ const InputFieldNep: React.FC<TInputNepali> = ({
   type,
 }) => {
   return (
-    <div className={`flex flex-col m-3 mx-20 ${styles.inputField}`}>
+    <div className={`flex flex-col m-3 mx-5 ${styles.inputField}`}>
       <label style={{ color: "#ACB1C6", fontSize: "12px" }}>
         {label.charAt(0).toUpperCase() + label.slice(1)}
       </label>

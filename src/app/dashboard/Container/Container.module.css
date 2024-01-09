@@ -1,10 +1,16 @@
 .containerBody {
-    height: 1000px;
+    height: auto;
     position: absolute;
     z-index: -1;
     top: 90px;
-    color: red;
-    background-color: rebeccapurple;
-    transition: left 0.3s ease-in-out;
+    background-color: #DDE4EE;
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+
+@media screen and (max-width: 768px) {
+    .containerBody {
+        color: red !important;
+    }
 }
 

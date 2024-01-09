@@ -23,6 +23,7 @@ const page = async () => {
   });
 
   // handling errors
+  console.log("Helloworld")
   if (userList.code === "error") {
     console.log("status code from server: ", userList.statusCode);
     return (
@@ -115,3 +116,4 @@ const page = async () => {
 };
 
 export default page;
+
