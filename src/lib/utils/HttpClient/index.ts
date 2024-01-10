@@ -10,7 +10,7 @@ const PublicHttpClient = axios.create({
 
 // for using auth route
 const PrivateHttpClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL: "https://www.sifaris.ktmserver.com/backend/",
   headers: {
     "Content-Type": "application/json",
     Authorization:

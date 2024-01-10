@@ -1,5 +1,6 @@
 import ItNagar from "../components/ItNagar";
 
+
 const page = () => {
   return (
     <>
@@ -9,3 +10,4 @@ const page = () => {
 };
 
 export default page;
+

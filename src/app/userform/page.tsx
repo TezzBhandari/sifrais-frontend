@@ -2,7 +2,6 @@
 import React, {useState} from 'react'
 import FamilyProfile from './components/AllDetails/FamilyProfile'
 import FamilyMemberDocument from './components/AllDetails/FamilyMemberDocument'
-import { formLists } from './components/TrackForm/CrumbsData';
 import TrackForm from './components/TrackForm/TrackForm';
 import FamilyDocument from './components/AllDetails/FamilyDocument';
 import FamilyMember from './components/AllDetails/FamilyMember';
@@ -12,6 +11,17 @@ import styles from "./components/userForm.module.css";
 const page = () => {
 
   const [selectedID, setSelectedID] = useState<number>(1);
+
+
+  const handlePreviousClick = () => {
+    setSelectedID((prev) => (prev > 1 ? prev - 1 : prev));
+  };
+  
+  const handleNextClick = () => {
+    setSelectedID((prev) => (prev < 5 ? prev + 1 : prev));
+  };
+
+
   
   let trackComponent;
   switch(selectedID){
@@ -43,8 +53,9 @@ const page = () => {
         }
 
         { trackComponent }
-        <div className='flex justify-end'>
-        <button onClick={()=>setSelectedID((prev) => prev + 1 )} className={styles.userformButton}>Next</button>
+        <div className='flex justify-end mt-10'>
+        <button onClick={handlePreviousClick} style={{display: `${selectedID == 1 ? "none" : ""}`}} className={styles.userformButton}>Previous</button>
+        <button onClick={handleNextClick} style={{display: `${selectedID == 5 ? "none" : ""}`}} className={styles.userformButton}>Next</button>
         </div>
         </>
   )

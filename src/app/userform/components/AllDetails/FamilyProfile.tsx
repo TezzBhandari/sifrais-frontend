@@ -6,10 +6,10 @@ import { province } from '../../Data'
 
 const FamilyProfile = () => {
   return (
-    <>
+    <div>
     {/* Basic Information */}
     <div>
-        <div>
+        <div style={{backgroundColor: "white"}}>
         <h1 id={styles.ititle}>Basic Information</h1>
         <br></br>
         </div>
@@ -40,8 +40,8 @@ const FamilyProfile = () => {
         <h1 id={styles.ititle}>Temporary Address</h1>
         <br></br>
         </div>
-        <div className="flex  justify-between flex-row flex-wrap">
-        <SelectField label='Province' name='temporaryProvince'options={province} />
+        <div className="flex justify-between flex-row flex-wrap">
+        <SelectField label='Province' name='temporaryProvince'options={province}/>
         <InputField label="district" type="text" name="temporaryDistrict" placeholder="District"/>
         <InputField label="Local Level" type="text" name="temoraryLocalLevel" placeholder="Local Level"/>
         <InputField label="Ward Number" type="text" name="temproraryWard" placeholder="Ward Number"/>
@@ -49,7 +49,7 @@ const FamilyProfile = () => {
         </div>
 
     </div>
-    </>
+    </div>
   )
 }
 
