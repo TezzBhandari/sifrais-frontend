@@ -1,12 +1,35 @@
 import React from 'react'
-import DummyTable from '../DummyTable'
+import DataTable from '@/components/table'
 
 const FamilyMemberDocument = () => {
-  return (
+  const columns = [
+    {
+        Header: 'Name',
+        accessor: 'name',
+    },
+    {
+        Header: 'Relationship',
+        accessor: 'relationship',
+    },
+    {
+        Header: 'To',
+        accessor: 'to',
+    }
+]
+
+const data =  [
+    {name:"Ram Bahadur",relationship:"Father", to: "Shyam Bahadur"},
+    {name:"Sujan Regmi",relationship:"Brother", to: "Shyam Bahadur"},
+    {name:"Sita Bahadur",relationship:"Mother", to: "Shyam Bahadur"},
+
+]
+
+return (
+
     <div>
-        <DummyTable />
+        <DataTable columns={columns} data={data} />
     </div>
-  )
+)
 }
 
 export default FamilyMemberDocument
