@@ -1,12 +1,4 @@
-import {
-  AxiosError,
-  AxiosHeaders,
-  AxiosRequestHeaders,
-  AxiosResponse,
-  HeadersDefaults,
-  RawAxiosRequestHeaders,
-  isAxiosError,
-} from "axios";
+import { AxiosError, AxiosResponse, isAxiosError } from "axios";
 
 // TYPE: BASE REQUEST COFIGURATION TYPE
 interface BaseRequestConfig<TBody = {}, TParams = {}> {
@@ -66,11 +58,11 @@ const RequestHandler =
       };
     } catch (err) {
       if (isAxiosError(err)) {
-        console.log("\n\nrequest handler  \n\n", err);
+        console.log("\naxios error logged in request handler:\n", err);
 
         if (err.response) {
           console.log(
-            "\n\nrequest handler axios error, response: ,  \n\n",
+            "\nerror from the server; logged inr request handler; responseObject: \n",
             err.response
           );
 
@@ -84,7 +76,7 @@ const RequestHandler =
         }
         if (err.request) {
           console.log(
-            "\n\nrequest handler axios error, request: ,  \n\n",
+            "\nrequest was made but no response was receieved;  requestObject: \n",
             err.request
           );
           return {
@@ -94,13 +86,17 @@ const RequestHandler =
             error: err.request,
           };
         }
+        console.log(
+          "Something happened in setting up the request that triggered an Error",
+          err
+        );
         return {
           code: "error",
           errorName: "Unknown Error",
           errorMessage: "Something Went Wrong. Try Again!",
         };
       } else {
-        console.log("\n\nrequest handler not an axios error: ,  \n\n", err);
+        console.log("\nnot an axios error : ,  \n\n", err);
         return {
           code: "error",
           errorName: "Unknown Error",

@@ -5,7 +5,7 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   console.log("middlware:  ", request.url, request.nextUrl);
   console.log("clone in middleware: ", request.nextUrl.clone());
-  return NextResponse.redirect(new URL("/signup", request.url));
+  return NextResponse.redirect(new URL("/admin/dashboard", request.url));
 }
 
 // See "Matching Paths" below to learn more
@@ -15,5 +15,5 @@ export function middleware(request: NextRequest) {
 
 // custom code
 export const config = {
-  matcher: ["/"],
+  matcher: ["/admin"],
 };

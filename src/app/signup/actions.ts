@@ -206,6 +206,7 @@ export const signUpUser = async (
 // };
 
 export const OtpVerification = async (data: { otp: string; uid: string }) => {
+  console.log("from otp verification", data);
   return await verifyOtp({
     url: "/api/signup/complete",
     httpMethod: "post",

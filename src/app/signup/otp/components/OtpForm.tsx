@@ -92,10 +92,14 @@ const OtpForm = () => {
 
       // STORING REFRESH TOKEN IN LOCAL STORAGE FOR REFRESHING ACCESS TOKEN
       // parsing refresh token in json format to store in local storage
-      const refreshTokenInJsonFormat = JSON.stringify(
-        response.data.refresh_token
-      );
-      localStorage.setItem("refresh_token", refreshTokenInJsonFormat);
+      // const refreshTokenInJsonFormat = JSON.stringify(
+      //   response.data.refresh_token
+      // );
+      // const accessTokenInJsonFormat = JSON.stringify(
+      //   response.data.access_token
+      // );
+      localStorage.setItem("accessToken", response.data.access_token);
+      localStorage.setItem("refreshToken", response.data.refresh_token);
       toast.success("Verification Successful", {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -165,7 +169,7 @@ const OtpForm = () => {
                 shouldAutoFocus
                 numInputs={6}
                 containerStyle="flex gap-2 mt-1"
-                inputStyle="w-9 h-9 text-[#003878] font-normal text-center border border-gray-700 rounded-sm border-[#969696] placeholder:border-[#969696] focus:outline focus:border-none focus:outline-[#0062D1]"
+                inputStyle="w-9 h-9 text-[#003878] bg-transparent font-normal text-center border border-gray-700 rounded-sm border-[#969696] placeholder:border-[#969696] focus:outline focus:border-none focus:outline-[#0062D1]"
                 // renderSeparator={<span>-</span>}
                 renderInput={(props) => <input {...props} placeholder="_" />}
               />

@@ -14,7 +14,7 @@ const PrivateHttpClient = axios.create({
   headers: {
     "Content-Type": "application/json",
     Authorization:
-      "Bearer eyJpdiI6Im4rQnloU1Z0cElnZUJWRi91YitUaEE9PSIsInZhbHVlIjoiKzkwbSt1aERYcGRDeVVBaE44WlFhUT09IiwibWFjIjoiMDcwYTQyYTY2NGJlOTNmNTUxN2M1MTQ0ZTExY2NlZmE0NGFmYzAxODBlMWU4ZjhlNTRkNjBlMjU1ZDc3MzEyZCIsInRhZyI6IiJ9",
+      "Bearer eyJpdiI6Im9leTl2dWdyR0FjMVZGNHdxTVJ6dlE9PSIsInZhbHVlIjoiLzlDNmZsWmVSK09RR1lrYU5aZURBQT09IiwibWFjIjoiZDViZjgwMmM4Njk3M2RhYTYzMGY1YjE3ZDA0NzMyZjhhOWMxM2Y0YjRjZjIxZjhkYzMzZGNiZmJiZDNhNjk3NiIsInRhZyI6IiJ9",
   },
 });
 

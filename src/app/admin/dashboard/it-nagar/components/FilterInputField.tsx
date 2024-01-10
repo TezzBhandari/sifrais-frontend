@@ -5,6 +5,8 @@ import { RxCross2 } from "react-icons/rx";
 
 import { useTableFilterInputStore } from "@/store/tableFilterInputStore";
 
+// export FilterInputField
+
 const FilterInputField = () => {
   const { filtering, setFiltering, resetFilter } = useTableFilterInputStore();
   return (
