@@ -11,6 +11,7 @@ const PublicQuery = <TData, TError = AxiosError, TBody = {}, TParams = {}>() =>
     PublicHttpClient<TData>({
       url: requestConfig.url,
       method: requestConfig.httpMethod,
+      data: requestConfig.body,
       headers: requestConfig.headers,
       params: requestConfig.params,
     })
@@ -25,6 +26,7 @@ const PrivateQuery = <TData, TError = AxiosError, TBody = {}, TParams = {}>() =>
     PrivateHttpClient<TData>({
       url: requestConfig.url,
       method: requestConfig.httpMethod,
+      data: requestConfig.body,
       headers: requestConfig.headers,
       params: requestConfig.params,
     })
