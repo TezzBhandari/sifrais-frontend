@@ -60,22 +60,22 @@ const DataTable: React.FC<TableProps> = ({ columns, data }) => {
                 <input
                     type="text"
                     placeholder="Search..."
-                    className="border border-gray-300 rounded p-2 w-full"
+                    className="border border-gray-300 rounded-lg p-2 w-full bg-white"
                     value={globalFilter}
                     onChange={(e) => setGlobalFilter(e.target.value)}
                 />
             </div>
 
             {/* Table */}
-            <table {...getTableProps()} className="w-full border border-collapse">
+            <table {...getTableProps()} className="w-full border border-collapse " style={{borderRadius: "10px"}}>
                 {/* Table header */}
-                <thead className="bg-gray-200 text-gray-700">
+                <thead className=" text-gray-700">
                     {headerGroups.map((headerGroup) => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
+                        <tr {...headerGroup.getHeaderGroupProps()} className='rounded-md' >
                             {headerGroup.headers.map((column) => (
                                 <th
                                     {...column.getHeaderProps(column.getSortByToggleProps())}
-                                    className="px-4 py-3 text-left font-semibold"
+                                    className="px-4 py-3 text-left font-semibold" style={{color: "#9291A5"}}
                                 >
                                     <div className="flex items-center">
                                         {column.render('Header')}

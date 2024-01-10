@@ -11,11 +11,15 @@ const DummyTable = () => {
             Header: 'Province NP',
             accessor: 'provincenp',
         },
+        {
+            Header: 'Family',
+            accessor: 'family',
+        }
     ]
     
     const data =  [
-        {provinceen:"Lumbini",provincenp:"लुम्बिनी"},
-        {provinceen:"Bagmati",provincenp:"बागमती"}
+        {provinceen:"Lumbini",provincenp:"लुम्बिनी", famiy: "family"},
+
     ]
 
     return (

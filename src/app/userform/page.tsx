@@ -12,7 +12,6 @@ const page = () => {
 
   const [selectedID, setSelectedID] = useState<number>(1);
 
-
   const handlePreviousClick = () => {
     setSelectedID((prev) => (prev > 1 ? prev - 1 : prev));
   };
@@ -48,6 +47,7 @@ const page = () => {
   return (
         <>
         <TrackForm selectedID={selectedID} setSelectedID={setSelectedID}/>
+        
         {/* <FamilyProfile />
         <FamilyMemberDocument /> */
         }
