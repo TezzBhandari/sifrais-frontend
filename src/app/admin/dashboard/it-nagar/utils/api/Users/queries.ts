@@ -8,9 +8,9 @@ export type UserSuccessResponse = {
   data: Array<User>;
 };
 const fetchUser = async (): Promise<UserSuccessResponse["data"]> => {
-  console.log("face");
+  alert("Initiating user request to fetch user");
   const response = await authHttpClient.get<UserSuccessResponse>("/api/users");
-  console.log(response);
+  // console.log(response);
   return response.data.data;
 };
 const useUsersQuery = () => {

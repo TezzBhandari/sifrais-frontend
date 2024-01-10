@@ -46,6 +46,9 @@ const ItNagar = () => {
       </div>
     );
   }
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
 
   return (
     <>
