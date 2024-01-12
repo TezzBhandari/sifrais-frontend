@@ -61,7 +61,7 @@ const Button: React.FC<ButtonProps> = ({
       break;
 
     case "primary":
-      defaultStyles += " bg-indigo-700";
+      defaultStyles += " bg-indigo-900";
       break;
 
     case "error":

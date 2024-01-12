@@ -7,6 +7,7 @@ import FamilyDocument from './components/AllDetails/FamilyDocument';
 import FamilyMember from './components/AllDetails/FamilyMember';
 import FamilyRelationship from './components/AllDetails/FamilyRelationship';
 import styles from "./components/userForm.module.css";
+import FilterInputField from '@/components/MainTable/FilterInputField';
 
 const page = () => {
 
@@ -20,8 +21,6 @@ const page = () => {
     setSelectedID((prev) => (prev < 5 ? prev + 1 : prev));
   };
 
-
-  
   let trackComponent;
   switch(selectedID){
     case 1: 
@@ -46,17 +45,18 @@ const page = () => {
 
   return (
         <>
-        <TrackForm selectedID={selectedID} setSelectedID={setSelectedID}/>
-        
+        <div className='my-5'>
+        <TrackForm selectedID={selectedID} setSelectedID={setSelectedID} />  
+        </div>
         {/* <FamilyProfile />
         <FamilyMemberDocument /> */
         }
-
         { trackComponent }
         <div className='flex justify-end mt-10'>
         <button onClick={handlePreviousClick} style={{display: `${selectedID == 1 ? "none" : ""}`}} className={styles.userformButton}>Previous</button>
         <button onClick={handleNextClick} style={{display: `${selectedID == 5 ? "none" : ""}`}} className={styles.userformButton}>Next</button>
         </div>
+  
         </>
   )
 }

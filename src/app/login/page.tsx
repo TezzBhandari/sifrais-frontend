@@ -47,7 +47,7 @@ const page = () => {
         console.log(data);
 
         //Check the Login Status
-        if (data.email && data.status == 409) {
+        if (data.email && data.status == 200) {
           emailCheck({ email: data.email });
         }
       } catch (error) {

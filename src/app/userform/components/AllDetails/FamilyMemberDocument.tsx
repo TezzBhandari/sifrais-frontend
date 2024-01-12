@@ -1,33 +1,50 @@
+import FilterInputField from '@/components/MainTable/FilterInputField'
 import React from 'react'
-import DataTable from '@/components/table'
+import MainTable from '@/components/MainTable/MainTable'
+import { columnFamilyMemberDocument } from './TableProperties/FamilyProfileColumn'
+ 
 
 const FamilyMemberDocument = () => {
-  const columns = [
-    {
-        Header: 'Name',
-        accessor: 'name',
-    },
-    {
-        Header: 'Relationship',
-        accessor: 'relationship',
-    },
-    {
-        Header: 'To',
-        accessor: 'to',
+
+
+    interface IFamilyMemberDocument {
+        sn: number,
+        fullname: string,
+        documentname: string
+
     }
-]
 
-const data =  [
-    {name:"Ram Bahadur",relationship:"Father", to: "Shyam Bahadur"},
-    {name:"Sujan Regmi",relationship:"Brother", to: "Shyam Bahadur"},
-    {name:"Sita Bahadur",relationship:"Mother", to: "Shyam Bahadur"},
-
-]
-
+    const data = [
+        {
+            sn: 1,
+            fullname: "John Cena",
+            documentname: "Passport"
+        },
+        {
+            sn: 2,
+            fullname: "Batista Cena",
+            documentname: "Citizenship"
+        },
+        {
+            sn: 3,
+            fullname: "Rey Cena",
+            documentname: "Birth Certificate"
+        },
+        {
+            sn: 4,
+            fullname: "Shawn Cena",
+            documentname: "Passport"
+        },
+    ]
 return (
 
     <div>
-        <DataTable columns={columns} data={data} />
+    <div className='my-5'>
+        <FilterInputField title="Family Member Document" buttonName='ADD DOCUMENT'/>      
+    </div>
+    <div>
+        <MainTable<IFamilyMemberDocument> tableColumns={columnFamilyMemberDocument} tableData={data} />
+    </div>
     </div>
 )
 }

@@ -13,10 +13,11 @@ import SelectInput from "./SelectInput";
 import Image from "next/image";
 
 import { useTableFilterInputStore } from "@/store/tableFilterInputStore";
-import PaginationFirstPageNavigation from "../../../../../../public/assets/logo/PaginationFirstPageNavigation.svg";
-import PaginationPreviousPage from "../../../../../../public/assets/logo/PaginationPreviousPage.svg";
-import PaginationNextPage from "../../../../../../public/assets/logo/PaginationNextPage.svg";
-import PaginationLastPage from "../../../../../../public/assets/logo/PaginationLastPage.svg";
+import PaginationFirstPageNavigation from "../../../public/assets/logo/PaginationFirstPageNavigation.svg";
+import PaginationPreviousPage from "../../../public/assets/logo/PaginationPreviousPage.svg";
+import PaginationNextPage from "../../../public/assets/logo/PaginationNextPage.svg";
+import PaginationLastPage from "../../../public/assets/logo/PaginationLastPage.svg";
+
 
 // Props Definition
 interface DataTableProps<TData, TValue> {
@@ -29,7 +30,7 @@ interface DataTableProps<TData, TValue> {
  * @param DataTable Props - contain table column and data to be displayed
  * @returns React JSX
  */
-function UserList<TData, TValue = any>({
+function MainTable<TData, TValue = any>({
   tableColumns,
   tableData,
 }: DataTableProps<TData, TValue>) {
@@ -58,7 +59,6 @@ function UserList<TData, TValue = any>({
     onGlobalFilterChange: setFiltering,
   });
 
-  console.log(table.getHeaderGroups());
   
   // page size slect handler
   function SelectChangeHandler(value: string) {
@@ -71,10 +71,10 @@ function UserList<TData, TValue = any>({
         {/* TABLE HEADER  */}
         <thead className="border-b border-[#F0F0F2]">
   {table.getHeaderGroups().map((headerGroup) => (
-    <tr key={headerGroup.id}>
+    <tr key={headerGroup.id} >
       {headerGroup.headers.map((header) => (
         <th
-          className="text-left text-[#9291A5] text-sm font-medium py-3 uppercase"
+          className="text-left text-[#9291A5] text-xs font-medium py-3 uppercas"
           key={header.id}
         >
           {header.isPlaceholder
@@ -191,4 +191,4 @@ function UserList<TData, TValue = any>({
   );
 }
 
-export default UserList;
+export default MainTable;
