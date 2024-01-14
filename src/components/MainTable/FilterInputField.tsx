@@ -5,6 +5,7 @@ import { RxCross2 } from "react-icons/rx";
 import Add from "../../../public/assets/icons/Add.svg"
 import { useTableFilterInputStore } from "@/store/tableFilterInputStore";
 import Button from "../Button"
+import DynamicRouteHeader from "../DynamicRouteHeader";
 
 // export FilterInputField
 interface IFilterInputField {
@@ -20,7 +21,8 @@ const FilterInputField: React.FC<IFilterInputField> = ({title, buttonName, btnFu
   return (
     <div className="flex flex-row justify-between items-center my-5">
       <div>
-        <h1 className="text-xl font-bold" >{title}</h1>
+        {/* <DynamicRouteHeader pageHeader="User" delimeter=">" /> */}
+        <h1>{title}</h1>
       </div>
     <div className="flex items-center" >
       <input

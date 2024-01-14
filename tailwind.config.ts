@@ -19,6 +19,9 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      fontFamily: {
+        sans: ['DM Sans','sans-serif'],
+      },
     },
   },
   plugins: [require("daisyui")],
