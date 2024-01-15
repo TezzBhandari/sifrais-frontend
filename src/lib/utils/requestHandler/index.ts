@@ -1,18 +1,39 @@
-import { AxiosError, AxiosResponse, isAxiosError } from "axios";
+import {
+  AxiosError,
+  AxiosHeaders,
+  AxiosResponse,
+  HeadersDefaults,
+  RawAxiosRequestHeaders,
+  isAxiosError,
+} from "axios";
+
+export enum HttpMethod {
+  GET = "get",
+  POST = "post",
+  PUT = "put",
+  PATCH = "patch",
+  DELETE = "delete",
+  OPTIONS = "options",
+}
 
 // TYPE: BASE REQUEST COFIGURATION TYPE
-interface BaseRequestConfig<TBody = {}, TParams = {}> {
+interface BaseRequestConfig<THeaders = {}, TBody = {}, TParams = {}> {
   url: string;
-  httpMethod: "get" | "post" | "put" | "patch" | "delete" | "options";
+  httpMethod: HttpMethod;
   params?: TParams;
   // headers?: RawAxiosRequestHeaders | AxiosHeaders | Partial<HeadersDefaults>;
-  headers?: any;
+  headers?:
+    | THeaders
+    | RawAxiosRequestHeaders
+    | AxiosHeaders
+    | Partial<HeadersDefaults>
+    | any;
   body?: TBody;
 }
 
 // TYPE: BASE REQUEST
-type BaseRequest<TData, TBody = {}, TParams = {}> = (
-  requestConfig: BaseRequestConfig<TBody, TParams>
+type BaseRequest<TData, THeaders = {}, TBody = {}, TParams = {}> = (
+  requestConfig: BaseRequestConfig<THeaders, TBody, TParams>
 ) => Promise<AxiosResponse<TData>>;
 
 // SUCCESS RESPONSE TYPE
@@ -43,11 +64,11 @@ const BaseResponse = Promise;
  * @returns (requestConfig: BaseRequestCofig) => BaseResponse<TData, TError>
  */
 const RequestHandler =
-  <TData, TError = AxiosError, TBody = {}, TParams = {}>(
-    request: BaseRequest<TData, TBody, TParams>
+  <TData, TError = AxiosError, THeaders = {}, TBody = {}, TParams = {}>(
+    request: BaseRequest<TData, THeaders, TBody, TParams>
   ) =>
   async (
-    requestCofig: BaseRequestConfig<TBody, TParams>
+    requestCofig: BaseRequestConfig<THeaders, TBody, TParams>
   ): BaseResponse<TData, TError> => {
     try {
       const response = await request(requestCofig);

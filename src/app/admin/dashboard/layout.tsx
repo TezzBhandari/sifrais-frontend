@@ -16,8 +16,10 @@ export default function RootLayout({
     <>
       <Navbar />
       <Sidebar />
-      <main className="md:ml-52 border border-r-emerald-500 mt-24">
-        {children}
+      <main className="md:ml-52 mt-24">
+        <div className="bg-[#dde4ee] min-h-[calc(100vh-6rem)] border border-red-400 overflow-hidden px-4 py-6">
+          {children}
+        </div>
       </main>
     </>
   );
