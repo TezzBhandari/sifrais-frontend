@@ -11,6 +11,13 @@
   color: black;
 
 }
+@font-face {
+  font-family: 'DMSans';
+  src: url('../../public/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 .font-sign{
  color: #002147;
@@ -40,8 +47,7 @@
   color: #153668;
 }
 
-.link-grey{
-}
+
 .link-grey:hover{
   color: rgb(167, 159, 159);
 }

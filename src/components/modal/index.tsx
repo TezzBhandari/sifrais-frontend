@@ -12,7 +12,7 @@ const Modal: FC<ModalProps> = ({ isOpen, closeModal, children }) => {
 
     return (
         <div className="modal-overlay">
-            <div className="modal-content">
+            <div className="modal-content" style={{width: "900px"}}>
                 <div className="flex justify-between mb-5">
                     <h1 className='font-semibold text-3xl'>Header</h1>
                     <div>
@@ -20,7 +20,9 @@ const Modal: FC<ModalProps> = ({ isOpen, closeModal, children }) => {
                         </button>
                     </div>
                 </div>
+                <div className='bg-red-300'>
                 {children}
+                </div>
             </div>
         </div>
     );
