@@ -5,6 +5,7 @@ import { UserSignupSchema } from "./types";
 import { axiosInstance } from "../lib/axios/axiosApi";
 import axios, { isAxiosError } from "axios";
 import verifyOtp from "./otp/utils/verifyOtp";
+import { HttpMethod } from "@/lib/utils/requestHandler";
 
 // Infering type from zod schema for user register fields;
 type UserSignupType = z.infer<typeof UserSignupSchema>;
@@ -209,7 +210,7 @@ export const OtpVerification = async (data: { otp: string; uid: string }) => {
   console.log("from otp verification", data);
   return await verifyOtp({
     url: "/api/signup/complete",
-    httpMethod: "post",
+    httpMethod: HttpMethod.POST,
     body: data,
   });
 };

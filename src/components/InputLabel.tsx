@@ -11,7 +11,10 @@ const InputLabel = React.forwardRef<HTMLLabelElement, InputProps>(
   ({ className, labelName, ...props }, ref) => {
     return (
       <label
-        className={cn("text-[#ACB1C6] font-normal text-sm", className)}
+        className={cn(
+          "text-[#ACB1C6] capitalize font-normal text-sm",
+          className
+        )}
         ref={ref}
         {...props}
       >

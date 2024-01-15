@@ -99,7 +99,7 @@ const OtpForm = () => {
       //   response.data.access_token
       // );
       localStorage.setItem("accessToken", response.data.access_token);
-      // localStorage.setItem("refreshToken", response.data.refresh_token);
+      localStorage.setItem("refreshToken", response.data.refresh_token);
       toast.success("Verification Successful", {
         position: toast.POSITION.TOP_CENTER,
       });

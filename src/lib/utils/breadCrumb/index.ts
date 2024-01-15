@@ -15,7 +15,7 @@ const GetBreadCrumb = (path: string) => {
           : `/${part}`,
     };
   });
-  return breadCrums;
+  return [{ pathLabel: "home", url: "/" }, ...breadCrums];
 };
 
 export { GetBreadCrumb };

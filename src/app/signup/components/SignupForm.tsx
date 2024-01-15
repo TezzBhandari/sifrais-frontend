@@ -46,6 +46,8 @@ const SignupForm = () => {
     },
   });
 
+  console.log(register("email"));
+
   // FORM SUBMIT  HANDLER
   const formSubmitHandler = handleSubmit(async (formData) => {
     const response = await signUpUser(formData);
