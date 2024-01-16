@@ -1,0 +1,16 @@
+.sidebarSubheading {
+    display: flex;
+    justify-content: start;
+    border-radius: 5px;
+    width: 200px;
+    height: 40px;
+    align-items: center;
+    margin: 10px 0px;
+    padding: 0px 10px;
+    color: rgb(217, 217, 217);
+}
+
+.sidebarSubheading:hover{
+    color: #FFFF;
+    cursor: pointer;
+}

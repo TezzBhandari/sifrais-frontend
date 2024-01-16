@@ -1,0 +1,36 @@
+
+.loginContainer {
+    background-color: white;
+    height: 600px;
+    width: 445px;
+    box-shadow: 4px 2px 4px #151617 ;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/assets/images/form_white.png");
+    background-position:top;
+    background-repeat: no-repeat;
+    background-size: 485px 750px;
+
+}
+.loginContainer .formStyles{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.loginContainer .formStyles input {
+    border-radius: 4px;
+    outline: none;
+    width: 315px;
+    height: 40px;
+    background-color: #FFFFFF;
+    border: 1px solid #AEAEAE;
+    font-size: 12px;
+
+    
+}
+.formBox {
+    margin-top:40px;
+}
+

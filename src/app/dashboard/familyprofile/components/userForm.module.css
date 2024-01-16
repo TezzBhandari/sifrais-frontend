@@ -1,0 +1,81 @@
+.inputField input{
+    outline: none ;
+    background-color: #ffff;
+}
+
+ #ititle {
+    font-weight: 700;
+}
+
+.inputField input:focus  {
+    border: 1px solid #5570F1;
+}
+
+.inputField select{
+    outline: none;
+}
+
+.inputField  select:focus  {
+    border: 1px solid #5570F1;
+}
+
+.inputField option{
+    background-color: #ffff;
+}
+
+/* TrackForm file */
+
+
+.titleBox {
+    text-align: center;
+    width: 200px;
+    height: 40px;
+    margin: 0px 10px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    color: #ACB1C6;
+    border: 1px solid #DDE4EE !important;
+}
+
+.titleBox:hover{
+    color: #FFFF !important;
+    background-color: #1C2955 !important; 
+    cursor: pointer;
+}
+.titleBox:active{
+    color: #FFFF;
+}
+
+.userformButton {
+    background-color: #002147;
+    width: 120px;
+    height: 40px;
+    color: white;
+    border-radius: 10px;
+}
+.userformButton:hover {
+    border: 2px solid blue;
+}
+
+.userformImage {
+    border: 1px dotted grey;
+    border-radius: 10px;
+}
+
+.userformImage:hover {
+    border: 1px dotted #5570F1;
+    cursor: pointer;
+}
+
+.fileInput:hover {
+    border: 2px dotted #5570F1 !important;
+}
+
+@media screen and (max-width: 620px){
+    .titleBox {
+        font-size: 10px;
+    }
+}

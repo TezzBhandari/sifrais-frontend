@@ -1,0 +1,8 @@
+.formBanner{
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -100px;
+}

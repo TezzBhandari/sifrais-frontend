@@ -1,0 +1,17 @@
+.formInputComponent input {
+    border: none;
+    border-style: none;
+    outline: none;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 5px;
+
+}
+.formInputComponent option {
+
+}
+.formInputComponent input:focus{
+    border: none;
+   
+}

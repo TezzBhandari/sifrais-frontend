@@ -6,11 +6,13 @@ export interface UserIdState {
 
 export interface UserIdAction {
   setUserId: (uid: UserIdState["uid"]) => void;
+  revokeUserId: () => void;
 }
 
 export const useSignUpUserIdStore = create<UserIdState & UserIdAction>()(
   (set) => ({
     uid: "",
     setUserId: (userId) => set(() => ({ uid: userId })),
+    revokeUserId: () => set(() => ({ uid: "" })),
   })
 );

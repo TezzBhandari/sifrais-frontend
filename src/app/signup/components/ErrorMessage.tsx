@@ -7,11 +7,11 @@ export type ErrorMessageProps = {
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
   return (
-    <p className="flex text-sm items-center gap-1 text-[#d93025] w-full">
-      <span>
+    <p className="flex-wrap overflow-hidden flex text-sm items-center gap-1 text-[#d93025]">
+      <span className={`${message === "" ? "invisible" : ""}`}>
         <MdError />
       </span>
-      {message}
+      <span className="">{message}</span>
     </p>
   );
 };

@@ -1,0 +1,52 @@
+.formNav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 5px
+}
+
+.personalInfo {
+    margin-top: 5px;
+}
+
+.textField p{
+    width: 150px;
+}
+.personalInfo p{
+    font-weight: 300;
+}
+
+.personalInfo h2{
+    width: 150px;
+}
+
+.personalInfo select{
+    background-color: white;
+    outline: none;
+}
+.citizenshipInfo h2{
+    width: 150px;
+}
+.citizenshipInfo p{
+    text-align: center;
+    width: 100px;
+    font-weight: 300;
+}
+.citizenshipInfo h1{
+    width: 100px;
+}
+#ctitle {
+    width: 200px !important;
+    font-weight: 600;
+}
+.generalInfo {
+    flex-wrap: wrap;
+}
+.generalInfo h1{
+    width: 150px;
+}
+.generalInfo p{
+    width: 150px;
+    font-weight: 300;
+}

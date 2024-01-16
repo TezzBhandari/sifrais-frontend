@@ -31,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   //Default styles for the button
   let defaultStyles =
-    "text-black rounded-full border border-slate-300 hover:border-blue-300 hover:bg-blue-300 px-8 py-3";
+    "text-black px-8 py-3";
 
   // This switch case applies css styles based on the specified variant
   switch (variant) {
@@ -61,7 +61,7 @@ const Button: React.FC<ButtonProps> = ({
       break;
 
     case "primary":
-      defaultStyles += " bg-indigo-700";
+      defaultStyles += " bg-indigo-900";
       break;
 
     case "error":
