@@ -1,8 +1,21 @@
 "use client";
 
 import ProvinceFilter from "@/app/admin/dashboard/it-nagar/components/ProvinceFilter";
-import { ColumnDef } from "@tanstack/react-table";
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import ClearIcon from "@/../../public/assets/Clear_Logo.svg";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./Table";
 
 interface DataTableProps<TData, TValue> {
   columns: Array<ColumnDef<TData, TValue>>;
@@ -10,9 +23,30 @@ interface DataTableProps<TData, TValue> {
 }
 
 function DataTable<TData, TValue>({
-  columns,
-  data,
+  columns: tableColumns,
+  data: tableData,
 }: DataTableProps<TData, TValue>) {
+  // create table instance
+  const table = useReactTable<TData>({
+    data: tableData,
+    columns: tableColumns,
+    // state of the table
+    // state: {
+    //   // filtering input synchornization with the tanstack table
+    //   globalFilter: filtering,
+    // },
+
+    // to get the model data
+    getCoreRowModel: getCoreRowModel(),
+    // added for enabling pagination features
+    // getPaginationRowModel: getPaginationRowModel(),
+
+    // // added for enabling filters
+    // getFilteredRowModel: getFilteredRowModel(),
+    // // synchronizing the input filter state to filter inside the table
+    // onGlobalFilterChange: setFiltering,
+  });
+
   return (
     <div className="space-y-4   ">
       {/* FILTER SECTION BASED ON PROVINCES DISTRICT */}
@@ -51,7 +85,58 @@ function DataTable<TData, TValue>({
         </div>
       </div>
       <div className="table bg-[#fff] rounded-[20px] p-6 container">
-        data table
+        {/* TABLE HEADER  */}
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id} colSpan={header.colSpan}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  );
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+
+          {/* TABLE BODY  */}
+
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={tableColumns.length}
+                  className="h-24 text-center"
+                >
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );
