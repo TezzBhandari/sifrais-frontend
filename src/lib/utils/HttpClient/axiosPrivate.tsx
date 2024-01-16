@@ -6,7 +6,6 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 const setBearerToken = () => {
   let accessToken = "";
   if (typeof window !== undefined) {
-    console.log(window);
     accessToken = localStorage.getItem("accessToken") as string;
   }
   return `Bearer ${accessToken}`;

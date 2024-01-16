@@ -59,7 +59,7 @@ function UserList<TData, TValue = any>({
   });
 
   console.log(table.getHeaderGroups());
-  
+
   // page size slect handler
   function SelectChangeHandler(value: string) {
     table.setPageSize(Number(value));
@@ -70,19 +70,22 @@ function UserList<TData, TValue = any>({
       <table className="w-full">
         {/* TABLE HEADER  */}
         <thead className="border-b border-[#F0F0F2]">
-  {table.getHeaderGroups().map((headerGroup) => (
-    <tr key={headerGroup.id}>
-      {headerGroup.headers.map((header) => (
-        <th
-          className="text-left text-[#9291A5] text-sm font-medium py-3 uppercase"
-          key={header.id}
-        >
-          {header.isPlaceholder
-            ? null
-            : flexRender(header.column.columnDef.header, header.getContext())}
-        </th>
-      ))}
-    </tr>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th
+                  className="text-left text-[#9291A5] text-sm font-medium py-3 uppercase"
+                  key={header.id}
+                >
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </th>
+              ))}
+            </tr>
           ))}
         </thead>
 
