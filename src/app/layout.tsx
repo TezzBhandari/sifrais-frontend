@@ -10,11 +10,9 @@ const mukta = Mukta({
   subsets: ["latin", "devanagari"],
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
-const DMSans = DM_Sans(
-  {
-    subsets: ["latin"]
-  }
-)
+const DMSans = DM_Sans({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Sifaris",

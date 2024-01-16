@@ -1,7 +1,7 @@
-import React from "react";
+import OfficeTypeTable from "./components/OfficeTypeTable";
 
-const page = () => {
-  return <div>office crud operation</div>;
+const page = async () => {
+  return <OfficeTypeTable />;
 };
 
 export default page;
