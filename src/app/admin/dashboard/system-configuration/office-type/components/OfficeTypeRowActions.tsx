@@ -1,16 +1,30 @@
+"use client";
 import Image from "next/image";
 import { OfficeType } from "../types";
 
 import EditIcon from "../../../../../../../public/assets/logo/EditIcon.svg";
 import DeleteIcon from "../../../../../../../public/assets/logo/DeleteIcon.svg";
 import ViewIcon from "../../../../../../../public/assets/logo/ViewIcon.svg";
+import { Modal } from "@/components/Modal";
+import { useState } from "react";
+import OfficeTypeDeleteModal from "./OfficeTypeDeleteModal";
 
 interface OfficeTypeRowActionsProps {
   officeType: OfficeType;
 }
 
 const OfficeTypeRowActions = ({ officeType }: OfficeTypeRowActionsProps) => {
-  console.log(officeType);
+  const [IsDeleteOpen, setIsDeleteOpen] = useState(false);
+  // opens delete modal
+  const setDeleteOpen = () => {
+    setIsDeleteOpen(true);
+  };
+
+  // close delete modal
+  const setDeleteClose = () => {
+    setIsDeleteOpen(false);
+  };
+
   return (
     <div>
       <div className="flex items-center justify-start space-x-1">
@@ -18,9 +32,9 @@ const OfficeTypeRowActions = ({ officeType }: OfficeTypeRowActionsProps) => {
           <Image src={ViewIcon} alt={"view Icon"} />
         </span>
         <span
-          // onClick={() => {
-          //   openModal(info.row.original);
-          // }}
+          onClick={() => {
+            setDeleteOpen();
+          }}
           className="cursor-pointer p-1 hover:bg-red-300 hover:text-red-400 rounded-md text-gray-600 "
         >
           <Image src={DeleteIcon} alt={"Delete Icon"} />
@@ -44,6 +58,14 @@ const OfficeTypeRowActions = ({ officeType }: OfficeTypeRowActionsProps) => {
           <Image src={EditIcon} alt={"edit Icon"} />
         </span>
       </div>
+      {/* DELETE MODAL  */}
+
+      <OfficeTypeDeleteModal
+        isOpen={IsDeleteOpen}
+        onClose={setDeleteClose}
+        onOpen={setDeleteOpen}
+        officeType={officeType}
+      />
     </div>
   );
 };

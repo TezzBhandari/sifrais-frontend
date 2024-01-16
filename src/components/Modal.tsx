@@ -23,7 +23,7 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
       <>
         <Transition appear show={isOpen} as={React.Fragment}>
           {/* BACKDROP OVERLAY  */}
-          <div className="w-full">
+          <div className="w-full bg-red-400">
             <Transition.Child
               as={React.Fragment}
               enter="ease-out duration-300"
@@ -50,7 +50,7 @@ const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
                 {...props}
                 onBlur={() => onClose()}
                 className={cn(
-                  "bg-white w-full rounded-lg shadow-lg fixed top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 p-4",
+                  "bg-white w-full max-w-lg rounded-lg shadow-lg fixed top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 p-4",
                   className,
                   "z-[1000]"
                 )}

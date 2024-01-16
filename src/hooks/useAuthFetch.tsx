@@ -1,91 +1,94 @@
 "use client";
-import { useAccessTokenStore } from "@/store/accessTokenStore";
-import axios, {
-  AxiosError,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from "axios";
 
-const useAuthHttpClient = () => {
-  const { setAccessToken, accessToken } = useAccessTokenStore();
+import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
-  // auth client
+interface RefreshTokenSuccessResponseType {
+  token_type: string;
+  expires_in: string;
+  access_token: string;
+  refresh_token: string;
+  status: number;
+  message: string;
+}
+
+const useAuthFetch = () => {
+  // Returns Bearer Token; also solve the srr issues that localstorage is not defined
+  const setBearerToken = () => {
+    let accessToken = "";
+    if (typeof window !== undefined) {
+      accessToken = localStorage.getItem("accessToken") as string;
+    }
+    return `Bearer ${accessToken}`;
+  };
+
+  const setRefreshToken = () => {
+    let refreshToken = "";
+
+    if (typeof window !== undefined) {
+      refreshToken = localStorage.getItem("refreshToken") as string;
+    }
+    return refreshToken;
+  };
+
+  // base auth client instance
   const authHttpClient = axios.create({
-    baseURL:
-      process.env.NEXT_PUBLIC_BASE_URL ||
-      "https://sifaris.ktmserver.com/backend",
+    baseURL: "https://sifaris.ktmserver.com/backend",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      withCredentials: true,
+      Authorization: setBearerToken(),
     },
   });
 
-  // refresh token function
-  const refreshToken = async () => {
-    const refreshToken = localStorage.getItem("refreshToken") as string;
-    const response = await axios.post<{
-      token_type: string;
-      expires_in: string;
-      access_token: string;
-      refresh_token: string;
-      status: number;
-      message: string;
-    }>(
-      "/api/refreshtoken",
-      {},
-      {
-        headers: {
-          Refreshtoken: refreshToken,
-        },
-      }
-    );
-    setAccessToken(response.data.access_token);
-    return response.data.access_token;
-  };
-
-  //   request interceptor  adds access token in the header
-  authHttpClient.interceptors.request.use(
-    function (config) {
-      if (
-        !config.headers.Authorization ||
-        config.headers.Authorization === ""
-      ) {
-        config.headers.Authorization = `Bearer ${accessToken}`;
-      }
-
-      return config;
-    },
-    function (error) {
-      return Promise.reject(error);
-    }
-  );
-
-  // adds reponse interceptor
+  // refresh acesstoken if access token it invalid first time.
   authHttpClient.interceptors.response.use(
-    (response: AxiosResponse) => response,
-    async (error: AxiosError) => {
-      const previousReqeust =
-        error.config as InternalAxiosRequestConfig<any> & {
-          _retry: boolean;
-        };
+    (response) => response,
+    async (err: AxiosError) => {
+      const originalConfig = err.config as InternalAxiosRequestConfig<any> & {
+        _retry: boolean;
+      };
 
-      if (error.response?.status === 401 && !previousReqeust._retry) {
-        previousReqeust._retry = true;
-        // Access token has been expired on there is no access token
-        // if the refresh token doesnot existsin the local storage , we need to logout the user and navigate to login page
-        // TODO
-        // we check for the refresh token; if it exists in the localstorage we get new acess token; no need to logout the user;
-        // refresh access token using refresh token
-        const accessToken = await refreshToken();
-        previousReqeust.headers.Authorization = `Bearer ${accessToken}`;
-        return authHttpClient(previousReqeust);
+      if (err.response) {
+        // Access Token was expired
+        if (err.response.status === 401 && !originalConfig._retry) {
+          originalConfig._retry = true;
+
+          try {
+            const res = await axios.post<RefreshTokenSuccessResponseType>(
+              "https://sifaris.ktmserver.com/backend/api/refreshtoken",
+              {},
+              {
+                headers: {
+                  Refreshtoken: setRefreshToken(),
+                },
+              }
+            );
+
+            const accessToken = res.data.access_token;
+            const refreshToken = res.data.refresh_token;
+
+            // updating the new access and refresh token
+            localStorage.setItem("accessToken", accessToken);
+            localStorage.setItem("refreshToken", refreshToken);
+            originalConfig.headers.Authorization = `Bearer ${accessToken}`;
+
+            return authHttpClient(originalConfig);
+          } catch (_error) {
+            // Logging out the user by removing all the tokens from local
+            localStorage.removeItem("accessToken");
+            localStorage.removeItem("refreshToken");
+            // Redirecting the user to the landing page
+            window.location.href = window.location.origin;
+            return Promise.reject(_error);
+          }
+        }
       }
-      return Promise.reject(error);
+
+      return Promise.reject(err);
     }
   );
 
   return authHttpClient;
 };
 
-export default useAuthHttpClient;
+export default useAuthFetch;
