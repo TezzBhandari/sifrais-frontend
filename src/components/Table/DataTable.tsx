@@ -1,13 +1,15 @@
 "use client";
 
-import ProvinceFilter from "@/app/admin/dashboard/it-nagar/components/ProvinceFilter";
 import {
   ColumnDef,
+  ColumnFiltersState,
+  Table as TableType,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import ClearIcon from "@/../../public/assets/Clear_Logo.svg";
+
 import {
   Table,
   TableBody,
@@ -17,24 +19,40 @@ import {
   TableRow,
 } from "./Table";
 
+import ProvinceFilter from "@/app/admin/dashboard/it-nagar/components/ProvinceFilter";
+import React from "react";
+
 interface DataTableProps<TData, TValue> {
   columns: Array<ColumnDef<TData, TValue>>;
   data: Array<TData>;
+  dataTableToolBar?: (table: TableType<TData>) => React.ReactNode;
+  dataTablePagination?: (table: TableType<TData>) => React.ReactNode;
 }
 
 function DataTable<TData, TValue>({
   columns: tableColumns,
   data: tableData,
+  dataTableToolBar,
+  dataTablePagination,
 }: DataTableProps<TData, TValue>) {
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
   // create table instance
   const table = useReactTable<TData>({
     data: tableData,
     columns: tableColumns,
+    state: {
+      columnFilters,
+    },
+    onColumnFiltersChange: setColumnFilters,
     // state of the table
     // state: {
     //   // filtering input synchornization with the tanstack table
     //   globalFilter: filtering,
     // },
+
+    getFilteredRowModel: getFilteredRowModel(),
 
     // to get the model data
     getCoreRowModel: getCoreRowModel(),
@@ -50,7 +68,7 @@ function DataTable<TData, TValue>({
   return (
     <div className="space-y-4   ">
       {/* FILTER SECTION BASED ON PROVINCES DISTRICT */}
-      <div className="filter-container bg-white rounded-lg px-6 py-4 grid grid-cols-[1fr_max-content]">
+      <div className="filter-container mx-auto container  bg-white rounded-lg px-6 py-4 grid grid-cols-[1fr_max-content]">
         {/* FILTER OPTIONS SECTION  */}
         <div className="filter-otions-wrapper flex items-center px-12 flex-wrap justify-between">
           <div className="province-filter">
@@ -84,7 +102,12 @@ function DataTable<TData, TValue>({
           </div>
         </div>
       </div>
-      <div className="table bg-[#fff] rounded-[20px] p-6 container">
+      <div className="container mx-auto bg-[#fff] rounded-[20px] p-6">
+        {/* TABLE TOOLBAR  */}
+
+        {dataTableToolBar === undefined ? null : dataTableToolBar(table)}
+
+        {/* TABLE  */}
         {/* TABLE HEADER  */}
         <Table>
           <TableHeader>
@@ -137,6 +160,8 @@ function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
+        {/* TABLE PAGINATION  */}
+        {dataTablePagination === undefined ? null : dataTablePagination(table)}
       </div>
     </div>
   );

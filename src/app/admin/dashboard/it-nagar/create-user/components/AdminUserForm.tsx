@@ -20,7 +20,7 @@ const AdminUserForm: React.FC<AdminUserFormProps> = ({
   localLevels,
 }) => {
   return (
-    <>
+    <form>
       {/* PERSONAL INFORMATION FORM SECTION  */}
       <PersonalInformation gender={genders} />
       {/* PERMANENT DETAILS FORM SECTION  */}
@@ -47,7 +47,7 @@ const AdminUserForm: React.FC<AdminUserFormProps> = ({
           Save
         </button>
       </div>
-    </>
+    </form>
   );
 };
 
