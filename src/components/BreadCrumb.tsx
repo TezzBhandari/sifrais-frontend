@@ -7,6 +7,7 @@ import { GetBreadCrumb } from "@/lib/utils/breadCrumb";
 
 const BreadCrumb = ({ delimeter }: { delimeter: React.ReactNode }) => {
   const currentPath = usePathname();
+
   // generates breadcrumb with it's corresponding url
   const breadCrums = GetBreadCrumb(currentPath);
 

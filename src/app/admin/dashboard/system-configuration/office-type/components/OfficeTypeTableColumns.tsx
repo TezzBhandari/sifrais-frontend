@@ -4,10 +4,6 @@ import OfficeTypeRowActions from "./OfficeTypeRowActions";
 
 const columnHelper = createColumnHelper<OfficeType>();
 
-const RowActions = () => {
-  return;
-};
-
 // S.N COLUMN
 const idColumnn = columnHelper.accessor((row) => row.id, {
   id: "id",
