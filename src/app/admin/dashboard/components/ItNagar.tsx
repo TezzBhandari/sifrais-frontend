@@ -92,8 +92,6 @@ const ItNagar = () => {
           </div>
         </div>
       </div>
-      {/* User Delete Modal  */}
-      {/* <UserDeleteConfirmationModal /> */}
     </>
   );
 };

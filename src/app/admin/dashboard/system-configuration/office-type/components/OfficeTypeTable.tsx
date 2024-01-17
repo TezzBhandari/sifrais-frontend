@@ -4,6 +4,7 @@ import QueryOfficeType from "../../../it-nagar/create-user/utils/api/QueryOffice
 import { OfficeType } from "../types";
 import DataTableSkeleton from "@/components/Table/DataTableSkeleton";
 import { officeTypeTableColumns } from "./OfficeTypeTableColumns";
+import OfficeTypeDataTableToolBar from "./OfficeTypeDataTableToolBar";
 
 const OfficeTypeTable = () => {
   const { isLoading, data: officeTypes, isError } = QueryOfficeType();
@@ -14,7 +15,13 @@ const OfficeTypeTable = () => {
   if (officeTypes === undefined || isError) {
     return <div>invalid data or failed to fetchdata</div>;
   }
-  return <DataTable columns={officeTypeTableColumns} data={officeTypes} />;
+  return (
+    <DataTable
+      dataTableToolBar={(table) => <OfficeTypeDataTableToolBar table={table} />}
+      columns={officeTypeTableColumns}
+      data={officeTypes}
+    />
+  );
 };
 
 export default OfficeTypeTable;
