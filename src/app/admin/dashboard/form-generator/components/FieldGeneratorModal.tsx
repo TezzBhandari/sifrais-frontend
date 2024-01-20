@@ -1,11 +1,7 @@
 "use client";
 import * as crypto from "crypto";
 
-import { Modal } from "@/components/Modal";
 import React, { useState } from "react";
-import Button from "@/components/Button";
-import { InputField } from "@/components/InputField";
-import { InputLabel } from "@/components/InputLabel";
 import {
   Controller,
   Field,
@@ -13,48 +9,61 @@ import {
   useForm,
   useFormContext,
 } from "react-hook-form";
-import { FieldSchema } from "./types";
+
+// INTERNAL API OR RESOURCE IMPORT
+import { EditModalData, Field, FieldSchema } from "./types";
 import ListBox from "@/components/ListBox";
 import { CreateForm } from "./CreateFrom";
+import { Modal } from "@/components/Modal";
+import Button from "@/components/Button";
+import { InputField } from "@/components/InputField";
+import { InputLabel } from "@/components/InputLabel";
 
+// interfaces type
 export interface FieldGeneratorModalProps {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
+  editData: EditModalData | null;
 }
 
+// random id generator
 function generateRandomUuid(): string {
   // built-in Node.js crypto module to generate a random UUID
   return crypto.randomBytes(16).toString("hex");
 }
 
-const FieldGeneratorModal = ({ isOpen, onClose }: FieldGeneratorModalProps) => {
-  const { control: formCreatorControl } = useFormContext<CreateForm>();
+// COMPONENT
+const FieldGeneratorModal = ({
+  isOpen,
+  onClose,
+  editData,
+}: FieldGeneratorModalProps) => {
+  console.log("editData: ", editData);
+
   const [randomId, setRandomId] = useState(() => generateRandomUuid());
-  const { fields, append, prepend, remove, swap, move, insert } =
+
+  // form create form context accessor
+  const { control: formCreatorControl } = useFormContext<CreateForm>();
+  // dynmic input field
+  const { append, prepend, remove, swap, move, insert } =
     useFieldArray<CreateForm>({
       control: formCreatorControl, // control props comes from useForm (optional: if you are using FormContext)
       name: "formFields", // unique name for your Field Array
     });
 
-  // it's for the input modal
-  const { register, reset, control, handleSubmit } = useForm<{
-    type: FieldSchema["type"];
-    name: string;
-    id: string;
-    label: string;
-    required: boolean;
-    placeholder?: string;
-  }>({
+  // react-hook form configuaration for the input modal
+  const { register, reset, control, handleSubmit } = useForm<Field>({
     defaultValues: {
-      type: "text",
-      name: "",
-      id: randomId,
-      label: "",
-      required: false,
+      type: editData === null ? "text" : editData.inputFieldEditData.text,
+      name: editData === null ? "" : editData.inputFieldEditData.name,
+      id: editData === null ? "" : editData.inputFieldEditData.id,
+      label: editData === null ? "" : editData.inputFieldEditData.label,
+      required: editData === null ? false : editData.inputFieldEditData.required,
     },
   });
 
+  // data to show in type dropdown list
   const InputTypeList: FieldSchema["type"][] = [
     "text",
     "date",
@@ -70,6 +79,9 @@ const FieldGeneratorModal = ({ isOpen, onClose }: FieldGeneratorModalProps) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <form
           onSubmit={handleSubmit((data) => {
+
+            
+
             append({
               id: data.id,
               label: data.label,

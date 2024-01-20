@@ -1,31 +1,25 @@
 "use client";
 
 // LIBRARY IMPORTS
-import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { FormProvider, set, useFieldArray, useForm } from "react-hook-form";
 import { IoSettingsOutline } from "react-icons/io5";
 import { useState } from "react";
 
 // INTERNAL API IMPORTS
 import FieldGeneratorModal from "./FieldGeneratorModal";
 import Form from "./Form";
-import { FormProps } from "./types";
+import { EditModalData, FieldSchema, FormProps } from "./types";
 
 // FORM FIELDS TYPE
 export interface CreateForm {
   formName: string;
-  formFields: Array<{
-    type: string;
-    name: string;
-    label: string;
-    id: string;
-    placeholder: string;
-    required: boolean;
-  }>;
+  formFields: Array<FormField>;
 }
 
 const CreateFrom = () => {
   // KEEPS TRACK OF OPEN/CLOSE STATE OF  INPUT FORM MODAL
   const [isOpen, setOpen] = useState(false);
+  const [editData, setEditData] = useState<EditModalData | null>(null);
 
   const onOpen = () => {
     setOpen(true);
@@ -33,6 +27,17 @@ const CreateFrom = () => {
 
   const onClose = () => {
     setOpen(false);
+
+  };
+  // reset editformdata
+  const resetEditData = () => {
+    setEditData(null);
+  };
+
+  // for using same model as edit form
+  const openEditFieldModal = (editData: EditModalData) => {
+    setEditData(editData);
+    onOpen();
   };
 
   // REACT HOOK FORM CONFIGURATION
@@ -81,6 +86,7 @@ const CreateFrom = () => {
           fields={watchFormFields as FormProps["fields"]}
           previewForm={{
             preview: "true",
+            openEditModal: openEditFieldModal,
           }}
         />
 
@@ -98,7 +104,12 @@ const CreateFrom = () => {
         <button>Generate form</button>
       </form>
       {/* TO FIX HYDRATION ERROR WE PLACED FIELD FORM MODAL OUTSIDE THE FORM TAG  */}
-      <FieldGeneratorModal isOpen={isOpen} onClose={onClose} onOpen={onOpen} />
+      <FieldGeneratorModal
+        editData={editData}
+        isOpen={isOpen}
+        onClose={onClose}
+        onOpen={onOpen}
+      />
     </FormProvider>
   );
 };

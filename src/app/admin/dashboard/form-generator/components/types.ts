@@ -39,8 +39,16 @@ export type Field =
 
 export type Fields = Record<string, Field>;
 
+export interface EditModalData {
+  inputFieldEditData: Field;
+  inputFieldIndex: number;
+}
+
 export type FormPreview =
-  | { preview: "true" }
+  | {
+    preview: "true";
+    openEditModal: (editData: EditModalData) => void;
+  }
   | { preview: "false"; onSubmit: SubmitHandler<FieldValues> };
 
 export interface FormProps {
