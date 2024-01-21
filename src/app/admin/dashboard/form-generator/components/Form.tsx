@@ -11,16 +11,16 @@ import {
 } from "react-hook-form";
 
 // INTERNAL API AND RESOURCE IMPORTS
-import { Field, FormProps } from "./types";
+import { Field, FormProps, InputFormFieldType } from "./types";
 import TextField from "./InputFields/TextField";
 import NumberField from "./InputFields/NumberField";
 import EmailField from "./InputFields/EmailField";
 import DateField from "./InputFields/DateField";
-
+import { FormCreatorFieldType } from "./types";
 import DeleteIcon from "@/../public/assets/logo/DeleteIcon.svg";
 import EditIcon from "@/../public/assets/logo/EditIcon.svg";
 
-import { type CreateForm } from "./CreateFrom";
+// import { type CreateForm } from "./CreateFrom";
 
 function renderField([name, fieldAttribute]: [string, Field]) {
   if (fieldAttribute.type === "text") {
@@ -46,9 +46,9 @@ const Form = ({ fields, previewForm }: FormProps) => {
   const form = useForm();
 
   // this one is to add delete and move field functionality
-  const { control: formCreatorControl } = useFormContext<CreateForm>();
+  const { control: formCreatorControl } = useFormContext<FormCreatorFieldType>();
   const { append, prepend, remove, swap, move, insert, update, replace } =
-    useFieldArray<CreateForm>({
+    useFieldArray<FormCreatorFieldType>({
       control: formCreatorControl, // control props comes from useForm (optional: if you are using FormContext)
       name: "formFields", // unique name for your Field Array
     });
@@ -59,10 +59,10 @@ const Form = ({ fields, previewForm }: FormProps) => {
         <form onSubmit={form.handleSubmit(previewForm.onSubmit)}>
           {Array.isArray(fields)
             ? fields
-                .map((field) => {
-                  return [field.name as string, field] as [string, Field];
-                })
-                .map(renderField)
+              .map((field) => {
+                return [field.name as string, field] as [string, Field];
+              })
+              .map(renderField)
             : Object.entries(fields).map(renderField)}
           <button type="submit">submit</button>
         </form>
@@ -70,44 +70,44 @@ const Form = ({ fields, previewForm }: FormProps) => {
         <div>
           {Array.isArray(fields)
             ? fields
-                .map((field) => {
-                  return [field.name as string, field] as [string, Field];
-                })
-                .map(([name, fieldAttribute], fieldIndex) => {
-                  return (
-                    <div
-                      key={fieldAttribute.id}
-                      className="flex items-center gap-4"
-                    >
-                      <div className="flex-1">
-                        {renderField([name, fieldAttribute])}
-                      </div>
-                      <span
-                        className="p-1 border cursor-pointer"
-                        onClick={() => {
-                          previewForm.openEditModal({
-                            inputFieldIndex: fieldIndex,
-                            inputFieldEditData: fieldAttribute,
-                          });
-                        }}
-                      >
-                        <Image
-                          src={EditIcon}
-                          alt={"Edit Icon for editing field"}
-                        />
-                      </span>
-                      <span
-                        className="p-1 border cursor-pointer"
-                        onClick={() => remove(fieldIndex)}
-                      >
-                        <Image
-                          src={DeleteIcon}
-                          alt={"Delete Icon for deleting field"}
-                        />
-                      </span>
+              .map((field) => {
+                return [field.name as string, field] as [string, Field];
+              })
+              .map(([name, fieldAttribute], fieldIndex) => {
+                return (
+                  <div
+                    key={fieldAttribute.id}
+                    className="flex items-center gap-4"
+                  >
+                    <div className="flex-1">
+                      {renderField([name, fieldAttribute])}
                     </div>
-                  );
-                })
+                    <span
+                      className="p-1 border cursor-pointer"
+                      onClick={() => {
+                        previewForm.openEditModal({
+                          inputFieldIndex: fieldIndex,
+                          inputFieldEditData: fieldAttribute as InputFormFieldType,
+                        });
+                      }}
+                    >
+                      <Image
+                        src={EditIcon}
+                        alt={"Edit Icon for editing field"}
+                      />
+                    </span>
+                    <span
+                      className="p-1 border cursor-pointer"
+                      onClick={() => remove(fieldIndex)}
+                    >
+                      <Image
+                        src={DeleteIcon}
+                        alt={"Delete Icon for deleting field"}
+                      />
+                    </span>
+                  </div>
+                );
+              })
             : Object.entries(fields).map(renderField)}
         </div>
       )}

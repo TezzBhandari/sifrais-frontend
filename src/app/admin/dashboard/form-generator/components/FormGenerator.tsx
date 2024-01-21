@@ -35,7 +35,8 @@ const FormGenerator = () => {
         // isSubmittable={false}
         fields={fields}
         previewForm={{
-          preview: "true",
+          preview: "false",
+          onSubmit: (data) => console.log(data)
         }}
       />
     </>

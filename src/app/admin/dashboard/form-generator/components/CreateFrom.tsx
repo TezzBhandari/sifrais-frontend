@@ -8,31 +8,31 @@ import { useState } from "react";
 // INTERNAL API IMPORTS
 import FieldGeneratorModal from "./FieldGeneratorModal";
 import Form from "./Form";
-import { EditModalData, FieldSchema, FormProps } from "./types";
+import { EditModalData, FieldSchema, FormCreatorFieldType, FormProps } from "./types";
 
-// FORM FIELDS TYPE
-export interface CreateForm {
-  formName: string;
-  formFields: Array<FormField>;
-}
+
 
 const CreateFrom = () => {
   // KEEPS TRACK OF OPEN/CLOSE STATE OF  INPUT FORM MODAL
   const [isOpen, setOpen] = useState(false);
+
+  // if the state has data that means we are editing existing input filed otherwise we are creating new one
   const [editData, setEditData] = useState<EditModalData | null>(null);
 
+  // opens the modal
   const onOpen = () => {
     setOpen(true);
   };
 
+  // close the modal
   const onClose = () => {
     setOpen(false);
+    // resets edit form
+    setEditData(null);
 
   };
-  // reset editformdata
-  const resetEditData = () => {
-    setEditData(null);
-  };
+
+ 
 
   // for using same model as edit form
   const openEditFieldModal = (editData: EditModalData) => {
@@ -41,7 +41,7 @@ const CreateFrom = () => {
   };
 
   // REACT HOOK FORM CONFIGURATION
-  const formCreator = useForm<CreateForm>({
+  const formCreator = useForm<FormCreatorFieldType>({
     defaultValues: {
       formName: "Form Name",
       // formFields: [
@@ -83,6 +83,7 @@ const CreateFrom = () => {
 
         {/* FORM PREVIEW  */}
         <Form
+        // this type casting is necessary because the type for creating field is subset of type of generating field(it contains a lot of default value which we don't need during input field creation)
           fields={watchFormFields as FormProps["fields"]}
           previewForm={{
             preview: "true",
@@ -92,7 +93,10 @@ const CreateFrom = () => {
 
         {/* ADD FIELD BUTTON  */}
         <div
-          onClick={onOpen}
+          onClick={() => {
+            console.log("opening a modal to create a form");
+            onOpen()
+          }}
           className="p-8 border-2 hover:cursor-pointer hover:bg-gray-300 border-dashed m-1 rounded-xl border-red-400"
         >
           <p className="flex items-center justify-center gap-4">

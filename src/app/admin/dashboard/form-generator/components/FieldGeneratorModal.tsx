@@ -4,16 +4,15 @@ import * as crypto from "crypto";
 import React, { useState } from "react";
 import {
   Controller,
-  Field,
   useFieldArray,
   useForm,
   useFormContext,
 } from "react-hook-form";
+import { useEffect } from "react";
 
 // INTERNAL API OR RESOURCE IMPORT
-import { EditModalData, Field, FieldSchema } from "./types";
+import { EditModalData, FieldSchema, FormCreatorFieldType, InputFormFieldType } from "./types";
 import ListBox from "@/components/ListBox";
-import { CreateForm } from "./CreateFrom";
 import { Modal } from "@/components/Modal";
 import Button from "@/components/Button";
 import { InputField } from "@/components/InputField";
@@ -33,35 +32,58 @@ function generateRandomUuid(): string {
   return crypto.randomBytes(16).toString("hex");
 }
 
+
 // COMPONENT
 const FieldGeneratorModal = ({
   isOpen,
   onClose,
   editData,
 }: FieldGeneratorModalProps) => {
+  // only on debug mode
   console.log("editData: ", editData);
 
-  const [randomId, setRandomId] = useState(() => generateRandomUuid());
+  const [randomId, setRandomId] = useState(generateRandomUuid());
+
+  // this use effect should run everytime we open modal for creating new form 
+  // it creates unique id for input field
+  // useEffect(() => {
+  //   setRandomId(generateRandomUuid())
+  // }, [])
 
   // form create form context accessor
-  const { control: formCreatorControl } = useFormContext<CreateForm>();
+  const formCreator = useFormContext<FormCreatorFieldType>();
   // dynmic input field
   const { append, prepend, remove, swap, move, insert } =
-    useFieldArray<CreateForm>({
-      control: formCreatorControl, // control props comes from useForm (optional: if you are using FormContext)
+    useFieldArray<FormCreatorFieldType>({
+      control: formCreator.control, // control props comes from useForm (optional: if you are using FormContext)
       name: "formFields", // unique name for your Field Array
     });
 
   // react-hook form configuaration for the input modal
-  const { register, reset, control, handleSubmit } = useForm<Field>({
+  const { register,setValue, reset, control, handleSubmit } = useForm<InputFormFieldType>({
     defaultValues: {
-      type: editData === null ? "text" : editData.inputFieldEditData.text,
-      name: editData === null ? "" : editData.inputFieldEditData.name,
-      id: editData === null ? "" : editData.inputFieldEditData.id,
-      label: editData === null ? "" : editData.inputFieldEditData.label,
-      required: editData === null ? false : editData.inputFieldEditData.required,
+      type: "text",
+      name:  "",
+      label: "",
+      id: randomId,
+      required: false,
+      placeholder:  ""
     },
   });
+  
+  if (editData !== null ) {
+    setValue("id", editData.inputFieldEditData.id)
+    setValue("name", editData.inputFieldEditData.name)
+    setValue("label", editData.inputFieldEditData.label)
+    setValue("placeholder", editData.inputFieldEditData.placeholder)
+    setValue("required", editData.inputFieldEditData.required)
+    setValue("type", editData.inputFieldEditData.type)
+
+  } else {
+    console.log('we are creating not editing')
+  }
+
+  
 
   // data to show in type dropdown list
   const InputTypeList: FieldSchema["type"][] = [
@@ -79,9 +101,7 @@ const FieldGeneratorModal = ({
       <Modal isOpen={isOpen} onClose={onClose}>
         <form
           onSubmit={handleSubmit((data) => {
-
-            
-
+            if (editData === null) {
             append({
               id: data.id,
               label: data.label,
@@ -90,6 +110,15 @@ const FieldGeneratorModal = ({
               placeholder: data.placeholder as string,
               type: data.type,
             });
+          } else {
+            console.log('about to edit form', editData)
+            formCreator.setValue( `formFields.${editData.inputFieldIndex}.id`, editData.inputFieldEditData.id)
+            formCreator.setValue( `formFields.${editData.inputFieldIndex}.name`,  data.name)
+            formCreator.setValue( `formFields.${editData.inputFieldIndex}.label`,  data.label)
+            formCreator.setValue( `formFields.${editData.inputFieldIndex}.placeholder`,  data.placeholder)
+            formCreator.setValue( `formFields.${editData.inputFieldIndex}.required`,  data.required)
+            formCreator.setValue( `formFields.${editData.inputFieldIndex}.type`,  data.type)
+          }
             reset();
             onClose();
           })}
@@ -158,7 +187,10 @@ const FieldGeneratorModal = ({
             {/* CANCEL BUTTON  */}
             <Button
               type="button"
-              onClick={() => onClose()}
+              onClick={() => {
+                onClose()
+                reset()
+              }}
               className=" rounded-md text-[#002147] text-[14px] font-medium border border-[#002147]"
             >
               Cancel
