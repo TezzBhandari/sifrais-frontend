@@ -6,7 +6,7 @@ import FormGenerator from "./components/FormGenerator";
 const page = () => {
   return (
     <>
-      <FormGenerator />
+      <CreateFrom />
     </>
   );
 };

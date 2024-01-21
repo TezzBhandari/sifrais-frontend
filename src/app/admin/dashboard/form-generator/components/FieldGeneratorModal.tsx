@@ -42,7 +42,7 @@ const FieldGeneratorModal = ({
   // only on debug mode
   console.log("editData: ", editData);
 
-  const [randomId, setRandomId] = useState(generateRandomUuid());
+  // const [randomId, setRandomId] = useState(generateRandomUuid());
 
   // this use effect should run everytime we open modal for creating new form 
   // it creates unique id for input field
@@ -65,7 +65,7 @@ const FieldGeneratorModal = ({
       type: "text",
       name:  "",
       label: "",
-      id: randomId,
+      id: generateRandomUuid(),
       required: false,
       placeholder:  ""
     },
@@ -155,6 +155,7 @@ const FieldGeneratorModal = ({
             <div>
               <InputLabel labelName={"Input Name"} />
               <InputField {...register("name", { required: true })} />
+              <p className="text-xs">Note: This will map as a input field in the form submission</p>
             </div>
 
             {/* LABEL OF THE INPUT FIELD  */}
