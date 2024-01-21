@@ -14,20 +14,20 @@ const FormGenerator = () => {
   //     },
   //   };
   const fields: FormProps["fields"] = [
-    // {
-    //   name: "fullname",
-    //   label: "Full Name",
-    //   type: "text",
-    //   id: "fullname",
-    //   required: true,
-    // },
-    // {
-    //   name: "email",
-    //   label: "Email",
-    //   type: "email",
-    //   id: "email",
-    //   required: true,
-    // },
+    {
+      name: "fullname",
+      label: "Full Name",
+      type: "text",
+      id: "fullname",
+      required: true,
+    },
+    {
+      name: "email",
+      label: "Email",
+      type: "email",
+      id: "email",
+      required: true,
+    },
   ];
   return (
     <>
@@ -36,7 +36,7 @@ const FormGenerator = () => {
         fields={fields}
         previewForm={{
           preview: "false",
-          onSubmit: (data) => console.log(data)
+          onSubmit: (data) => alert(JSON.stringify(data))
         }}
       />
     </>
