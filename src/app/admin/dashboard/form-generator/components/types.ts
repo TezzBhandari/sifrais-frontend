@@ -37,13 +37,16 @@ export type Field =
   | EmailFieldProps
   | DateFieldProps;
 
+  // this type is used for generating input field
 export type Fields = Record<string, Field>;
 
+// this one is for edit modal form; just to clear we are using the same form for updation and creation
 export interface EditModalData {
-  inputFieldEditData: Field;
+  inputFieldEditData: InputFormFieldType;
   inputFieldIndex: number;
 }
 
+// we need this type coz we're using the same generator for previewing as well as submitting
 export type FormPreview =
   | {
     preview: "true";
@@ -51,7 +54,28 @@ export type FormPreview =
   }
   | { preview: "false"; onSubmit: SubmitHandler<FieldValues> };
 
+
+  // generator form props: it generates input field based on the data provided;
 export interface FormProps {
   fields: Fields | Array<Field>;
   previewForm: FormPreview;
+}   
+
+// this one is for the input field form
+// beacuse we can't use generator fields type: "Field" cuz it has default property which we might not need in the form
+export interface InputFormFieldType {
+  type: FieldSchema["type"];
+  id: string;
+  name: string;
+  label: string;
+  required: boolean;
+  placeholder: string;
 }
+
+// this type is form creator form input fields type
+export interface FormCreatorFieldType {
+   formName: string;
+   formFields: Array<InputFormFieldType>
+}
+
+
