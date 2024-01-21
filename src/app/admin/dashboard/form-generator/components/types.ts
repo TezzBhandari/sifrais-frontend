@@ -1,5 +1,5 @@
 import { HTMLInputTypeAttribute, InputHTMLAttributes } from "react";
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { FieldValues, SubmitHandler, UseFieldArrayRemove } from "react-hook-form";
 
 //schema indicates what type the field is
 export interface FieldSchema {
@@ -51,6 +51,7 @@ export type FormPreview =
   | {
     preview: "true";
     openEditModal: (editData: EditModalData) => void;
+    remove: UseFieldArrayRemove
   }
   | { preview: "false"; onSubmit: SubmitHandler<FieldValues> };
 

@@ -46,12 +46,14 @@ const Form = ({ fields, previewForm }: FormProps) => {
   const form = useForm();
 
   // this one is to add delete and move field functionality
-  const { control: formCreatorControl } = useFormContext<FormCreatorFieldType>();
-  const { append, prepend, remove, swap, move, insert, update, replace } =
-    useFieldArray<FormCreatorFieldType>({
-      control: formCreatorControl, // control props comes from useForm (optional: if you are using FormContext)
-      name: "formFields", // unique name for your Field Array
-    });
+  // we had to pass this one from form creator beacause if we use say component for generation use can't access these hooks coz there is no provider during generation
+
+  // const { control: formCreatorControl } = useFormContext<FormCreatorFieldType>();
+  // const { append, prepend, remove, swap, move, insert, update, replace } =
+  //   useFieldArray<FormCreatorFieldType>({
+  //     control: formCreatorControl, // control props comes from useForm (optional: if you are using FormContext)
+  //     name: "formFields", // unique name for your Field Array
+  //   });
 
   return (
     <FormProvider {...form}>
@@ -98,7 +100,7 @@ const Form = ({ fields, previewForm }: FormProps) => {
                     </span>
                     <span
                       className="p-1 border cursor-pointer"
-                      onClick={() => remove(fieldIndex)}
+                      onClick={() => previewForm.remove(fieldIndex)}
                     >
                       <Image
                         src={DeleteIcon}

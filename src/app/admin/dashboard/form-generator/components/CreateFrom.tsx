@@ -61,6 +61,13 @@ const CreateFrom = () => {
   // BASED ON THIS NEW FIELD IS PREVIEWED
   const watchFormFields = formCreator.watch("formFields", []);
 
+  // this one is to for deleting the generated input field
+  const {  remove } =
+    useFieldArray<FormCreatorFieldType>({
+      control: formCreator.control, // control props comes from useForm (optional: if you are using FormContext)
+      name: "formFields", // unique name for your Field Array
+    });
+
   return (
     <FormProvider {...formCreator}>
       {/* FORM TO CREATE FIELD/FORM  */}
@@ -86,6 +93,7 @@ const CreateFrom = () => {
         // this type casting is necessary because the type for creating field is subset of type of generating field(it contains a lot of default value which we don't need during input field creation)
           fields={watchFormFields as FormProps["fields"]}
           previewForm={{
+            remove: remove,
             preview: "true",
             openEditModal: openEditFieldModal,
           }}
