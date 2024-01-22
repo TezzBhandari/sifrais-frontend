@@ -14,6 +14,7 @@ import ErrorMessage from "./ErrorMessage";
 import { useSignUpUserIdStore } from "@/store/signUpUserIdStore";
 import { toast } from "react-toastify";
 import { SignUpInput } from "./SignUpInput";
+import { error } from "console";
 
 // User Signup Field Type. Infered using zod library
 type UserSignupInputType = z.infer<typeof UserSignupSchema>;
@@ -46,10 +47,10 @@ const SignupForm = () => {
     },
   });
 
-  console.log(register("email"));
 
   // FORM SUBMIT  HANDLER
   const formSubmitHandler = handleSubmit(async (formData) => {
+    alert('initiating request')
     const response = await signUpUser(formData);
     if (response.code === "success" && response.statusCode === 201) {
       // reset();
@@ -66,6 +67,7 @@ const SignupForm = () => {
       router.push("/signup/otp");
     } else {
       if (response.code === "erorr") {
+        alert(JSON.stringify(response.error))
         if (response.statusCode === 422) {
           toast.error(response.error.message, {
             position: toast.POSITION.TOP_CENTER,
