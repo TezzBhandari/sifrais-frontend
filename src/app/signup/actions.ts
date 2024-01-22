@@ -71,7 +71,7 @@ export const signUpUser = async (
     };
   } catch (error) {
     if (isAxiosError(error)) {
-      console.log("server axios error: ", error);
+      console.log("\n\n error", error);
       if (error.response) {
         return {
           code: "erorr",
