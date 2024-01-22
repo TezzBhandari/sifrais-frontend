@@ -57,7 +57,7 @@ const CreateFrom = () => {
     },
   });
 
-  // two rerender on initial render is beacuse of watch. expected render
+  // to rerender on initial render is beacuse of watch. expected render
   // BASED ON THIS NEW FIELD IS PREVIEWED
   const watchFormFields = formCreator.watch("formFields", []);
 
