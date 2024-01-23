@@ -19,7 +19,7 @@ const TextField = ({ fieldAttribute, name, className }: TextFieldProps) => {
   const { id, label, type, required, ...rest } = fieldAttribute;
   return (
     <>
-      <div className={cn("", className)}>
+      <div className={cn("w-full", className)}>
         <InputLabel htmlFor={id} labelName={label} />
         {required ? <span className="text-red-500">{"*"}</span> : null}
         <InputField

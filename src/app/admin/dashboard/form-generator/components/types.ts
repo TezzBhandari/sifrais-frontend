@@ -1,5 +1,10 @@
 import { HTMLInputTypeAttribute, InputHTMLAttributes } from "react";
-import { FieldValues, SubmitHandler, UseFieldArrayRemove } from "react-hook-form";
+import {
+  FieldValues,
+  SubmitHandler,
+  UseFieldArrayRemove,
+} from "react-hook-form";
+import { string } from "zod";
 
 //schema indicates what type the field is
 export interface FieldSchema {
@@ -37,7 +42,7 @@ export type Field =
   | EmailFieldProps
   | DateFieldProps;
 
-  // this type is used for generating input field
+// this type is used for generating input field
 export type Fields = Record<string, Field>;
 
 // this one is for edit modal form; just to clear we are using the same form for updation and creation
@@ -49,18 +54,17 @@ export interface EditModalData {
 // we need this type coz we're using the same generator for previewing as well as submitting
 export type FormPreview =
   | {
-    preview: "true";
-    openEditModal: (editData: EditModalData) => void;
-    remove: UseFieldArrayRemove
-  }
+      preview: "true";
+      openEditModal: (editData: EditModalData) => void;
+      remove: UseFieldArrayRemove;
+    }
   | { preview: "false"; onSubmit: SubmitHandler<FieldValues> };
 
-
-  // generator form props: it generates input field based on the data provided;
+// generator form props: it generates input field based on the data provided;
 export interface FormProps {
   fields: Fields | Array<Field>;
   previewForm: FormPreview;
-}   
+}
 
 // this one is for the input field form
 // beacuse we can't use generator fields type: "Field" cuz it has default property which we might not need in the form
@@ -73,10 +77,28 @@ export interface InputFormFieldType {
   placeholder: string;
 }
 
-// this type is form creator form input fields type
-export interface FormCreatorFieldType {
-   formName: string;
-   formFields: Array<InputFormFieldType>
+// grouping fields
+export interface InputGroup {
+  groupName: string;
+  inputRows: [
+    {
+      inputFields: Array<Field> | Fields;
+    }
+  ];
 }
 
+export interface FormGenProps {
+  fields: Array<InputGroup>;
+  previewForm: FormPreview;
+}
 
+// this type is form creator form input fields type
+export interface FormCreatorFieldType {
+  formName: string;
+  formFields: Array<InputFormFieldType>;
+}
+
+export interface CreateFieldType {
+  formName: string;
+  formFields: Array<InputGroup>;
+}
