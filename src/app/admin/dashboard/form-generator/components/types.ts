@@ -87,7 +87,7 @@ export interface InputGroup {
   ];
 }
 
-export interface FormGenprops {
+export interface FormGenProps {
   fields: Array<InputGroup>;
   previewForm: FormPreview;
 }

@@ -15,6 +15,7 @@ import {
   FormCreatorFieldType,
   FormProps,
 } from "./types";
+import FormGen from "./FormGen";
 
 const Create = () => {
   // KEEPS TRACK OF OPEN/CLOSE STATE OF  INPUT FORM MODAL
@@ -45,6 +46,7 @@ const Create = () => {
   const formCreator = useForm<CreateFieldType>({
     defaultValues: {
       formName: "Form Name",
+      formFields: [],
       // formFields: [
       //   {
       //     type: "",
@@ -62,8 +64,8 @@ const Create = () => {
   // BASED ON THIS NEW FIELD IS PREVIEWED
   const watchFormFields = formCreator.watch("formFields", []);
 
-  // this one is to for deleting the generated input field
-  const { remove } = useFieldArray<FormCreatorFieldType>({
+  // this one is to for deleting the generated inp ut field
+  const { remove } = useFieldArray<CreateFieldType>({
     control: formCreator.control, // control props comes from useForm (optional: if you are using FormContext)
     name: "formFields", // unique name for your Field Array
   });
@@ -89,14 +91,13 @@ const Create = () => {
         </div>
 
         {/* FORM PREVIEW  */}
-        <Form
-          // this type casting is necessary because the type for creating field is subset of type of generating field(it contains a lot of default value which we don't need during input field creation)
-          fields={watchFormFields as FormProps["fields"]}
+        <FormGen
           previewForm={{
             remove: remove,
             preview: "true",
             openEditModal: openEditFieldModal,
           }}
+          fields={watchF} // fields={[]}
         />
 
         {/* ADD FIELD BUTTON  */}

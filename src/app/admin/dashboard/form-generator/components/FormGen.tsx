@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FormProvider, useForm } from "react-hook-form";
 
 // INTERNAL API AND RESOURCE IMPORTS
-import { Field, FormGenprops, FormProps, InputFormFieldType } from "./types";
+import { Field, FormGenProps, FormProps, InputFormFieldType } from "./types";
 import TextField from "./InputFields/TextField";
 import NumberField from "./InputFields/NumberField";
 import EmailField from "./InputFields/EmailField";
@@ -34,7 +34,7 @@ function renderField([name, fieldAttribute]: [string, Field]) {
   return <div>Unknown Type</div>;
 }
 
-const FormGen = ({ fields, previewForm }: FormGenprops) => {
+const FormGen = ({ fields, previewForm }: FormGenProps) => {
   // hook form configuration. this one is for dynamic form
   const generatedForm = useForm();
 

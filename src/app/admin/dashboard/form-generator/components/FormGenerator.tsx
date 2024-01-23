@@ -52,6 +52,13 @@ const FormGenerator = () => {
               id: "email",
               required: true,
             },
+            {
+              name: "email",
+              label: "Email",
+              type: "email",
+              id: "email",
+              required: true,
+            },
           ],
         },
       ],
