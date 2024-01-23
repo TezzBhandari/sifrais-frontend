@@ -1,7 +1,9 @@
 "use client";
 
+import { string } from "zod";
 import Form from "./Form";
-import { FormProps } from "./types";
+import { FormProps, InputGroup } from "./types";
+import FormGen from "./FormGen";
 
 const FormGenerator = () => {
   //   const fields: FormProps["fields"] = {
@@ -13,30 +15,56 @@ const FormGenerator = () => {
   //       required: false,
   //     },
   //   };
-  const fields: FormProps["fields"] = [
+  // const fields: FormProps["fields"] = [
+  //   {
+  //     name: "fullname",
+  //     label: "Full Name",
+  //     type: "text",
+  //     id: "fullname",
+  //     required: true,
+  //   },
+  //   {
+  //     name: "email",
+  //     label: "Email",
+  //     type: "email",
+  //     id: "email",
+  //     required: true,
+  //   },
+  // ];
+
+  const fields: Array<InputGroup> = [
     {
-      name: "fullname",
-      label: "Full Name",
-      type: "text",
-      id: "fullname",
-      required: true,
-    },
-    {
-      name: "email",
-      label: "Email",
-      type: "email",
-      id: "email",
-      required: true,
+      groupName: "group-1",
+      inputRows: [
+        {
+          inputFields: [
+            {
+              name: "fullname",
+              label: "Full Name",
+              type: "text",
+              id: "fullname",
+              required: true,
+            },
+            {
+              name: "email",
+              label: "Email",
+              type: "email",
+              id: "email",
+              required: true,
+            },
+          ],
+        },
+      ],
     },
   ];
+
   return (
     <>
-      <Form
-        // isSubmittable={false}
+      <FormGen
         fields={fields}
         previewForm={{
           preview: "false",
-          onSubmit: (data) => alert(JSON.stringify(data))
+          onSubmit: (data) => alert(JSON.stringify(data)),
         }}
       />
     </>
