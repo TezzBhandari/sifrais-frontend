@@ -8,9 +8,14 @@ import { sidebarElements } from "./sidebarData";
 import ArrowUpDown from "./Components/ArrowUpDown";
 import SideDashboard from "./Components/SideDashboard";
 import SideEmployee from "./Components/SideEmployee";
-import { TSidebar } from "../types";
+import useSidebarToggle from "../store/store"
 
-const Sidebar: React.FC<TSidebar> = ({ isSidebarOpen, setSidebarOpen }) => {
+const Sidebar: React.FC = () => {
+
+  //Importing zustand state from store file.
+  const { isSidebarOpen, setSidebarOpen } = useSidebarToggle();
+
+  //Title to be listed on the sidebar.
   const data = [
     {
       id: 1,
@@ -29,9 +34,13 @@ const Sidebar: React.FC<TSidebar> = ({ isSidebarOpen, setSidebarOpen }) => {
     },
   ];
 
+  //Implemented to check sidebar subtitle.
   const [isArrowDown, setArrowDown] = useState(false);
+
+  //Changing the arrow of icon in the subtitle.
   const [clickedArrow, setClickedArrow] = useState(0);
 
+  //Changing the state on sidebar on Click.
   const handleBurger = () => {
     setSidebarOpen(!isSidebarOpen);
   };
@@ -39,7 +48,7 @@ const Sidebar: React.FC<TSidebar> = ({ isSidebarOpen, setSidebarOpen }) => {
   return (
     <nav
       className={`text-white min-h-screen ${styles.sidebarMain}`}
-      style={{ width: `${isSidebarOpen ? "90px" : "300px"}` }}
+      style={{ width: `${isSidebarOpen ? "6%" : "22%"}` }}
     >
       <div className="p-4">
         <div className="flex justify-end">
