@@ -2,9 +2,9 @@
 
 import { createColumnHelper } from "@tanstack/react-table";
 import { MdAdd, MdDelete } from "react-icons/md";
-import DeleteIcon from "../../../../../../public/assets/logo/DeleteIcon.svg";
-import EditIcon from "../../../../../../public/assets/logo/EditIcon.svg";
-import ViewIcon from "../../../../../../public/assets/logo/ViewIcon.svg";
+import DeleteIcon from "@/../public/assets/logo/DeleteIcon.svg";
+import EditIcon from "@/../public/assets/logo/EditIcon.svg";
+import ViewIcon from "@/../public/assets/logo/ViewIcon.svg";
 
 import { User } from "../types";
 import Image from "next/image";

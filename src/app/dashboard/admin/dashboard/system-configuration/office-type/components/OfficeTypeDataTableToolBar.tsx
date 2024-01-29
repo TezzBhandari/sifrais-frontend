@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Table } from "@tanstack/react-table";
 
-import AddIcon from "../../../../../../../public/assets/Add_Icon.svg";
+import AddIcon from "../@/../public/assets/Add_Icon.svg";
 
 interface OfficeTypeDataTableToolBarProps<TData> {
   table: Table<TData>;

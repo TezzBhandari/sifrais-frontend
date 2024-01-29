@@ -1,7 +1,7 @@
 import ItNagar from "../components/ItNagar";
 import Image from "next/image";
 import ProvinceFilter from "./components/ProvinceFilter";
-import ClearIcon from "../../../../../public/assets/Clear_Logo.svg";
+import ClearIcon from "@/../public/assets/Clear_Logo.svg";
 
 const page = () => {
   return (

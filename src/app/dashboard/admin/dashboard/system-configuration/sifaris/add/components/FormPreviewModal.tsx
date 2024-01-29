@@ -56,72 +56,6 @@ const FormPreviewModal = ({ isOpen, onClose }: PreviewModalProps) => {
   console.log('form preiew data: ', formPreviewData);
 
 
-  // const formPreviewData: CreateSifarisForm = {
-  //   formName: 'User Form',
-  //   inputGroups:
-  //     [
-  //       {
-  //         groupName: "group-1",
-  //         inputRows: [
-  //           {
-  //             inputfields: [
-  //               {
-  //                 name: "fullname",
-  //                 label: "Full Name",
-  //                 type: "text",
-  //                 id: "fulsdfsdfsdlname",
-  //                 required: true,
-  //               },
-  //               {
-  //                 name: "email",
-  //                 label: "Email",
-  //                 type: "text",
-  //                 id: "emdsfsetrrtwail",
-  //                 required: true,
-  //               },
-  //               {
-  //                 name: "email",
-  //                 label: "Email",
-  //                 type: "text",
-  //                 id: "emadsfsdfweril",
-  //                 required: true,
-  //               },
-  //             ],
-  //           },
-  //         ],
-  //       },
-  //       {
-  //         groupName: "group-2",
-  //         inputRows: [
-  //           {
-  //             inputfields: [
-  //               {
-  //                 name: "fullname",
-  //                 label: "Full Name",
-  //                 type: "text",
-  //                 id: "skflskdf",
-  //                 required: true,
-  //               },
-  //               {
-  //                 name: "email",
-  //                 label: "Email",
-  //                 type: "text",
-  //                 id: "email",
-  //                 required: true,
-  //               },
-  //               {
-  //                 name: "email",
-  //                 label: "Email",
-  //                 type: "text",
-  //                 id: "emsdkfjlskdjfkail",
-  //                 required: true,
-  //               },
-  //             ],
-  //           },
-  //         ],
-  //       },
-  //     ]
-  // }
 
   const previewModalForm = useForm()
 
@@ -140,7 +74,7 @@ const FormPreviewModal = ({ isOpen, onClose }: PreviewModalProps) => {
               formPreviewData.inputGroups.map((inputGroup, inputGroupIndex) => {
 
                 // rendering group
-                return <fieldset key={inputGroupIndex} className='border-2 px-2 pt-2 pb-4 rounded-lg'>
+                return <fieldset key={inputGroupIndex} className={`${inputGroup.groupName ? "border-2" : ""} px-2 pt-2 pb-4 rounded-lg `}>
                   <legend className="text-xl font-semibold capitalize">{inputGroup.groupName}</legend>
                   {/* rendering column */}
                   {
@@ -177,7 +111,6 @@ const FormPreviewModal = ({ isOpen, onClose }: PreviewModalProps) => {
                       </div>
                     })
                   }
-
 
                 </fieldset>
               })
