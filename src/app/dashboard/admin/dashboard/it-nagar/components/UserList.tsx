@@ -13,10 +13,10 @@ import SelectInput from "./SelectInput";
 import Image from "next/image";
 
 import { useTableFilterInputStore } from "@/store/tableFilterInputStore";
-import PaginationFirstPageNavigation from "../../../../../../public/assets/logo/PaginationFirstPageNavigation.svg";
-import PaginationPreviousPage from "../../../../../../public/assets/logo/PaginationPreviousPage.svg";
-import PaginationNextPage from "../../../../../../public/assets/logo/PaginationNextPage.svg";
-import PaginationLastPage from "../../../../../../public/assets/logo/PaginationLastPage.svg";
+import PaginationFirstPageNavigation from "@/../public/assets/logo/PaginationFirstPageNavigation.svg";
+import PaginationPreviousPage from "@/../public/assets/logo/PaginationPreviousPage.svg";
+import PaginationNextPage from "@/../public/assets/logo/PaginationNextPage.svg";
+import PaginationLastPage from "@/../public/assets/logo/PaginationLastPage.svg";
 
 // Props Definition
 interface DataTableProps<TData, TValue> {
@@ -80,9 +80,9 @@ function UserList<TData, TValue = any>({
                   {header.isPlaceholder
                     ? null
                     : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
                 </th>
               ))}
             </tr>

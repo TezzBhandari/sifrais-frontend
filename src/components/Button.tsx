@@ -1,7 +1,7 @@
 "use client";
 
+import { cn } from "@/lib/utils/classnames";
 import React, { HTMLAttributes } from "react";
-import classNames from "classnames";
 
 //Component props for custom button
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
@@ -100,7 +100,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       {...rest}
       type={type}
-      className={classNames(className, defaultStyles)}
+      className={cn(className, defaultStyles)}
     >
       {children}
     </button>

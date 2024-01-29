@@ -3,7 +3,7 @@ import React from "react";
 // import UserList from "./components/UserList";
 import Image from "next/image";
 
-import AddIcon from "../../../../../public/assets/Add_Icon.svg";
+import AddIcon from "@/../public/assets/Add_Icon.svg";
 // import ProvinceFilter from "./components/ProvinceFilter";
 // import UserColumns from "./components/UserColumn";
 // import FilterInputField from "./components/FilterInputField";

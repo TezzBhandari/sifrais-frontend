@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import { GoArrowRight } from "react-icons/go";
 import { IFormData } from "./types";
 
-const BASE_URL = "https://sifaris.ktmserver.com/backend";
+const BASE_URL = "https://sifarisold.ktmserver.com/backend";
 
 const page = () => {
   const router = useRouter();

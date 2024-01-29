@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import SearchIcon from "../../../../../../public/assets/logo/SearchIcon.svg";
+import SearchIcon from "@/../public/assets/logo/SearchIcon.svg";
 import { RxCross2 } from "react-icons/rx";
 
 import { useTableFilterInputStore } from "@/store/tableFilterInputStore";
