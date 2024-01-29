@@ -2,11 +2,11 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import EditIcon from "../../../../../../public/assets/logo/EditIcon.svg";
-import DeleteIcon from "../../../../../../public/assets/logo/DeleteIcon.svg";
-import ViewIcon from "../../../../../../public/assets/logo/ViewIcon.svg";
-import AddIcon from "../../../../../../public/assets/Add_Icon.svg"
-import {  SifarisTableRowActionsProps } from "../types";
+import EditIcon from "@/../public/assets/logo/EditIcon.svg"
+import DeleteIcon from "@/../public/assets/logo/DeleteIcon.svg"
+import ViewIcon from "@/../public/assets/logo/ViewIcon.svg"
+import AddIcon from "@/../public/assets/Add_Icon.svg"
+import { SifarisTableRowActionsProps } from "../types";
 import Link from "next/link";
 
 
