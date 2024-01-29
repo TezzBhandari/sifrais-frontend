@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 import { GoArrowRight } from "react-icons/go";
 import { IFormData } from "./types";
 
-const BASE_URL = "https://sifarisold.ktmserver.com/backend";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL as string;
 
 const page = () => {
   const router = useRouter();
@@ -44,7 +44,6 @@ const page = () => {
           toast.error("Username doesn't exist.");
         }
         const data = await response.json();
-        console.log(data);
 
         //Check the Login Status
         if (data.email && data.status == 200) {
@@ -85,9 +84,9 @@ const page = () => {
         //Passing the loggedIN data received from the server to userLogin function to loginAuth.ts file to store in Zustand.
         if (data.message == "Success" && data.status == 200) {
           userLogin(data);
-          localStorage.setItem("access_token", data.access_token);
+          localStorage.setItem("accessToken", data?.access_token);
+          localStorage.setItem("refreshToken", data?.refresh_token)
           router.push("/dashboard");
-          console.log(data);
         }
       } catch (error) {
         // Handle network errors or other exceptions

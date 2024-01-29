@@ -1,8 +1,6 @@
 .sidebarMain{
     transition: width 0.3s ease-in-out;
     background-color: #002147;
-    position: fixed;
-    top: 90px;
 }
 .sidebox {
     background-color: rgba(217, 217, 217, 0.08);

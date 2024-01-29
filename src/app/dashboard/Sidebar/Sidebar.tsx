@@ -5,13 +5,13 @@ import styles from "./Sidebar.module.css";
 import Image from "next/image";
 import SideSifaris from "./Components/SideSifaris";
 import { sidebarDashboard, sidebarElements } from "./sidebarData";
-import ArrowUpDown from "./Components/ArrowUpDown";
 import SideDashboard from "./Components/SideDashboard";
 import SideEmployee from "./Components/SideEmployee";
 import useSidebarToggle from "../store/store"
 import { DropdownMenu } from "@/components/DropdownMenu";
 import MMenu from "@/components/SystemCofigurationMenu";
 import DashboardMenu from "@/components/DashboardMenu";
+import DownArrow from "@/../public/assets/logo/DownArrow.svg"
 
 const Sidebar: React.FC = () => {
 
@@ -39,10 +39,10 @@ const Sidebar: React.FC = () => {
   ];
 
   //Implemented to check sidebar subtitle.
-  const [isArrowDown, setArrowDown] = useState(false);
+  // const [isArrowDown, setArrowDown] = useState(false);
 
   //Changing the arrow of icon in the subtitle.
-  const [clickedArrow, setClickedArrow] = useState(0);
+  // const [clickedArrow, setClickedArrow] = useState(0);
 
   //Changing the state on sidebar on Click.
   const handleBurger = () => {
@@ -51,8 +51,8 @@ const Sidebar: React.FC = () => {
 
   return (
     <nav
-      className={`text-white min-h-screen ${styles.sidebarMain}`}
-      style={{ width: `${isSidebarOpen ? "6%" : "22%"}` }}
+      className={`text-white min-h-screen fixed left-0 top-[90px] ${styles.sidebarMain}`}
+      style={{ width: `${isSidebarOpen ? "6%" : "18%"}` }}
     >
       <div className="p-4">
         <div className="flex justify-end">
@@ -68,7 +68,7 @@ const Sidebar: React.FC = () => {
             />{" "}
           </button>
         </div>
-        <div className="sidebarelements" style={{ marginTop: "10px" }}>
+        <div className="sidebarelements flex flex-col gap-1" style={{ marginTop: "10px" }}>
           {/* {sidebarElements.map((sideelement, idxValue) => {
             return (
               <React.Fragment key={idxValue}>
@@ -126,29 +126,32 @@ const Sidebar: React.FC = () => {
               </React.Fragment>
             );
           })} */}
-          <DashboardMenu />
-          <MMenu />
-          {/* {
+
+          {
             sidebarElements.map((sidebarElement, index) => {
               return <React.Fragment key={sidebarElement.id}>
                 <div className="">
-                  <div
-                  >
-
-                    <DropdownMenu buttonContent={(isOpen: boolean) => {
-                      return <Image
-                        src={sidebarElement.icon}
-                        width={24}
-                        height={24}
-                        alt={sidebarElement.name}
-                        className={styles.sidebaricon}
-                      />
-                    }} dropMenuLinks={sidebarElement.dropDownLinks} />
-                  </div>
+                  <DropdownMenu buttonContent={(isOpen: boolean) => {
+                    return <div className={` ${isOpen ? "bg-[#D9D9D914] opacity-80" : ""} flex justify-between items-center px-4 py-1  text-sm rounded-[10px] font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75`}>
+                      <div className="flex items-center gap-4">
+                        <Image
+                          src={sidebarElement.icon}
+                          width={24}
+                          height={24}
+                          alt={sidebarElement.name}
+                          className={styles.sidebaricon}
+                        />
+                        <span className={`${isSidebarOpen ? "hidden" : "block"}`}>{sidebarElement.name}</span>
+                      </div>
+                      <span className={`${isOpen ? "" : "transform -rotate-90"} ${isSidebarOpen ? "hidden" : "block"}`}>
+                        <Image className="text-white font-[900]" width={15} height={16} src={DownArrow} alt={"dropdown icon"} />
+                      </span>
+                    </div>
+                  }} dropMenuLinks={!isSidebarOpen ? sidebarElement.dropDownLinks : []} />
                 </div>
               </React.Fragment>
             })
-          } */}
+          }
         </div>
       </div>
     </nav>
