@@ -2,7 +2,6 @@
 import { cn } from "@/lib/utils/classnames";
 import { Dialog, Transition } from "@headlessui/react";
 import React from "react";
-import ReactDom from "react-dom";
 
 export interface ModalProps
   extends React.DetailedHTMLProps<
@@ -24,7 +23,7 @@ const Modal = ({
     <>
       <Transition appear show={isOpen} as={React.Fragment}>
         {/* BACKDROP OVERLAY  */}
-        <Dialog as="div" onClose={onClose} className="w-full bg-red-400">
+        <Dialog as="div" onClose={onClose} className="w-full">
           <Transition.Child
             as={React.Fragment}
             enter="ease-out duration-300"
@@ -34,7 +33,7 @@ const Modal = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="overlay fixed inset-0 bg-black/30" />
+            <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
           </Transition.Child>
           {/* Modal  */}
           <Transition.Child
