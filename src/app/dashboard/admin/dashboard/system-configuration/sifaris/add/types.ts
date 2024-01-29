@@ -66,8 +66,15 @@ interface EditModalData {
   inputFieldEditData: Field;
 }
 
+interface PreviewModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
 export type {
   FieldSchema,
+  PreviewModalProps,
+  InputGroup,
   TextField,
   EmailField,
   DateField,

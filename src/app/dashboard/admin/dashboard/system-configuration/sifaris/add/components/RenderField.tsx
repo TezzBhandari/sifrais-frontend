@@ -13,7 +13,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 
 
 // renders input field
-function renderField([name, fieldAttribute]: [string, Field]) {
+export function renderField([name, fieldAttribute]: [string, Field]) {
   if (fieldAttribute.type === "text") {
     return (
       <TextField

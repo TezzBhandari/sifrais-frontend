@@ -4,11 +4,14 @@ import React, { useState } from "react";
 import styles from "./Sidebar.module.css";
 import Image from "next/image";
 import SideSifaris from "./Components/SideSifaris";
-import { sidebarElements } from "./sidebarData";
+import { sidebarDashboard, sidebarElements } from "./sidebarData";
 import ArrowUpDown from "./Components/ArrowUpDown";
 import SideDashboard from "./Components/SideDashboard";
 import SideEmployee from "./Components/SideEmployee";
 import useSidebarToggle from "../store/store"
+import { DropdownMenu } from "@/components/DropdownMenu";
+import MMenu from "@/components/SystemCofigurationMenu";
+import DashboardMenu from "@/components/DashboardMenu";
 
 const Sidebar: React.FC = () => {
 
@@ -20,18 +23,19 @@ const Sidebar: React.FC = () => {
     {
       id: 1,
       name: "dashboard",
+      dropDownContent: sidebarDashboard,
       component: <SideDashboard />,
     },
-    {
-      id: 2,
-      name: "sifaris",
-      component: <SideSifaris />,
-    },
-    {
-      id: 3,
-      name: "employee",
-      component: <SideEmployee />,
-    },
+    // {
+    //   id: 2,
+    //   name: "sifaris",
+    //   component: <SideSifaris />,
+    // },
+    // {
+    //   id: 3,
+    //   name: "employee",
+    //   component: <SideEmployee />,
+    // },
   ];
 
   //Implemented to check sidebar subtitle.
@@ -55,9 +59,8 @@ const Sidebar: React.FC = () => {
           <button onClick={handleBurger}>
             {" "}
             <Image
-              src={`/assets/icons/sidebar/${
-                isSidebarOpen ? "arrowright" : "arrowleft"
-              }.svg`}
+              src={`/assets/icons/sidebar/${isSidebarOpen ? "arrowright" : "arrowleft"
+                }.svg`}
               width={12}
               height={12}
               alt="Arrow"
@@ -66,7 +69,7 @@ const Sidebar: React.FC = () => {
           </button>
         </div>
         <div className="sidebarelements" style={{ marginTop: "10px" }}>
-          {sidebarElements.map((sideelement, idxValue) => {
+          {/* {sidebarElements.map((sideelement, idxValue) => {
             return (
               <React.Fragment key={idxValue}>
                 <div className="flex flex-row justify-center">
@@ -113,7 +116,7 @@ const Sidebar: React.FC = () => {
                 !isSidebarOpen ? (
                   <div className="flex justify-center">
                     <div className={`flex justify-center ${styles.sidebox}`}>
-                      {/* If arrow is down in specific Bar, checking which Component to show based on click. */}
+                      // {/* If arrow is down in specific Bar, checking which Component to show based on click. 
                       {data[clickedArrow - 1].component}
                     </div>
                   </div>
@@ -122,7 +125,30 @@ const Sidebar: React.FC = () => {
                 )}
               </React.Fragment>
             );
-          })}
+          })} */}
+          <DashboardMenu />
+          <MMenu />
+          {/* {
+            sidebarElements.map((sidebarElement, index) => {
+              return <React.Fragment key={sidebarElement.id}>
+                <div className="">
+                  <div
+                  >
+
+                    <DropdownMenu buttonContent={(isOpen: boolean) => {
+                      return <Image
+                        src={sidebarElement.icon}
+                        width={24}
+                        height={24}
+                        alt={sidebarElement.name}
+                        className={styles.sidebaricon}
+                      />
+                    }} dropMenuLinks={sidebarElement.dropDownLinks} />
+                  </div>
+                </div>
+              </React.Fragment>
+            })
+          } */}
         </div>
       </div>
     </nav>

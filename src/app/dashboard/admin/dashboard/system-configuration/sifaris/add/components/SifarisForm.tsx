@@ -1,10 +1,20 @@
 "use client";
-
+import React from 'react';
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import type { CreateSifarisForm } from "../types";
 import InputRowList from "./InputRowList";
+import FormPreviewModal from "./FormPreviewModal";
 
 const SifarisForm = () => {
+  const [previewModal, setPreviewModal] = React.useState(false);
+
+  const openPreviewModal = () => {
+    setPreviewModal(true)
+  }
+
+  const closePreviewModal = () => {
+    setPreviewModal(false)
+  }
 
   const sifarisFormCreator = useForm<CreateSifarisForm>({
     defaultValues: {
@@ -116,6 +126,11 @@ const SifarisForm = () => {
         {/* FORM SUBMISSION BUTTON  */}
         <button type="submit">submit</button>
       </form>
+      <button className="px-4 py-3 border" onClick={(e) => {
+        e.preventDefault();
+        openPreviewModal();
+      }}>Preview</button>
+      <FormPreviewModal isOpen={previewModal} onClose={closePreviewModal} />
     </FormProvider>
   );
 };
