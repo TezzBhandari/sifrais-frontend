@@ -1,6 +1,5 @@
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { Sifaris } from "../types";
-import OfficeTypeRowActions from "../../system-configuration/office-type/components/OfficeTypeRowActions";
 import SifarisTableRowActions from "./SifarisTableRowActions";
 // import OfficeTypeRowActions from "./OfficeTypeRowActions";
 
