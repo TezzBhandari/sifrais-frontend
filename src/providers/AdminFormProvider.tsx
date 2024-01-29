@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   AdminUserMutationSchema,
   AdminUserMutationType,
-} from "@/app/admin/dashboard/it-nagar/create-user/types";
+} from "@/app/dashboard/admin/dashboard/it-nagar/create-user/types";
 
 const AdminFormProvider = ({ children }: { children: React.ReactNode }) => {
   const adminUserForm = useForm<AdminUserMutationType>({

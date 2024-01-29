@@ -1,4 +1,4 @@
-import UserList from '@/app/admin/dashboard/it-nagar/components/UserList'
+import UserList from '@/app/dashboard/admin/dashboard/it-nagar/components/UserList'
 import React from 'react'
 import Image from 'next/image'
 import { columnFamilyRelationship } from './TableProperties/FamilyProfileColumn'
@@ -32,8 +32,8 @@ const FamilyRelationship = () => {
 
   return (
     <>
-    <FilterInputField title="Family Relationship" buttonName='ADD RELATION' />
-    <MainTable<IFRDATA> tableColumns={columnFamilyRelationship} tableData={frData} /> 
+      <FilterInputField title="Family Relationship" buttonName='ADD RELATION' />
+      <MainTable<IFRDATA> tableColumns={columnFamilyRelationship} tableData={frData} />
     </>
   )
 }

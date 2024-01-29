@@ -19,7 +19,7 @@ import {
   TableRow,
 } from "./Table";
 
-import ProvinceFilter from "@/app/admin/dashboard/it-nagar/components/ProvinceFilter";
+import ProvinceFilter from "@/app/dashboard/admin/dashboard/it-nagar/components/ProvinceFilter";
 import React from "react";
 
 interface DataTableProps<TData, TValue> {
@@ -119,9 +119,9 @@ function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}
