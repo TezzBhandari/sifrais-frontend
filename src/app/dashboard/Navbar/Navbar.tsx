@@ -1,7 +1,6 @@
 // NavBar.tsx
 "use client";
 import React from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 import styles from "./Navbar.module.css";
 import Searchbar from "./Components/Searchbar";
@@ -12,7 +11,7 @@ const Navbar = () => {
   const { email } = userEmailCheck();
 
   return (
-    <div className={`${styles.navbarMain} fixed  `}>
+    <div className={`${styles.navbarMain} fixed h-[90px] `}>
       <div className="flex flex-row items-center">
         <Image
           src="/assets/logo/mainlogo.svg"

@@ -1,5 +1,5 @@
 .navbarMain {
-    max-height: 90px;
+    /* max-height: 90px; */
     display: flex;
     align-items: center;
     border: 2px solid darkgray;

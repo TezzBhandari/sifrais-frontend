@@ -1,4 +1,3 @@
-
 import React from 'react';
 import type { Metadata } from "next";
 import Navbar from "./Navbar/Navbar";
@@ -18,9 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <div>
-    <Navbar />
-    <Sidebar/>
-    <SidebarProvider>{children}</SidebarProvider>
+      <Navbar />
+      <Sidebar />
+      <SidebarProvider>{children}</SidebarProvider>
     </div>
   );
 }
