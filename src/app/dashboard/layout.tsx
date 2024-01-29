@@ -16,10 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <>
       <Navbar />
       <Sidebar />
-      <SidebarProvider>{children}</SidebarProvider>
-    </div>
+      <SidebarProvider>
+        <main className='p-8 min-h-[calc(100vh-90px)] overflow-hidden overflow-y-scroll bg-[#dde4ee]'>{children}</main>
+      </SidebarProvider>
+    </>
   );
 }

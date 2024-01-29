@@ -11,7 +11,7 @@ const Navbar = () => {
   const { email } = userEmailCheck();
 
   return (
-    <div className={`${styles.navbarMain} fixed h-[90px] `}>
+    <div className={`${styles.navbarMain} fixed h-[90px] left-0 top-0 `}>
       <div className="flex flex-row items-center">
         <Image
           src="/assets/logo/mainlogo.svg"

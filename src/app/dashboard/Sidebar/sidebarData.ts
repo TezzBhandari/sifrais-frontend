@@ -47,14 +47,14 @@ export const systemConfiguration = [
     id: 1,
     // label: "ढाचा सिर्जना",
     label: "office",
-    href: "/",
+    href: "/dashboard/admin/dashboard/system-configuration/office",
     disabled: false,
   },
   {
     id: 2,
     // label: "सिफारिसको प्रकार",
     label: "office type",
-    href: "/",
+    href: "/dashboard/admin/dashboard/system-configuration/office-type",
     disabled: false,
   },
   {
@@ -66,7 +66,7 @@ export const systemConfiguration = [
   {
     id: 4,
     label: "sifaris type",
-    href: "/",
+    href: "/dashboard/admin/dashboard/system-configuration/sifaris",
     disabled: false,
   },
   {

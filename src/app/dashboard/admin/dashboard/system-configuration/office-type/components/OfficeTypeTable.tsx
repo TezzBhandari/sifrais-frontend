@@ -1,7 +1,6 @@
 "use client";
 import DataTable from "@/components/Table/DataTable";
 import QueryOfficeType from "../../../it-nagar/create-user/utils/api/QueryOfficeType";
-import { OfficeType } from "../types";
 import DataTableSkeleton from "@/components/Table/DataTableSkeleton";
 import { officeTypeTableColumns } from "./OfficeTypeTableColumns";
 import OfficeTypeDataTableToolBar from "./OfficeTypeDataTableToolBar";

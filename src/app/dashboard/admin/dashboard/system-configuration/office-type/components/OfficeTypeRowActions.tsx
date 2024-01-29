@@ -2,9 +2,9 @@
 import Image from "next/image";
 import { OfficeType } from "../types";
 
-import EditIcon from "../@/../public/assets/logo/EditIcon.svg";
-import DeleteIcon from "../@/../public/assets/logo/DeleteIcon.svg";
-import ViewIcon from "../@/../public/assets/logo/ViewIcon.svg";
+import EditIcon from "@/../public/assets/logo/EditIcon.svg";
+import DeleteIcon from "@/../public/assets/logo/DeleteIcon.svg";
+import ViewIcon from "@/../public/assets/logo/ViewIcon.svg";
 import { useState } from "react";
 import OfficeTypeDeleteModal from "./OfficeTypeDeleteModal";
 

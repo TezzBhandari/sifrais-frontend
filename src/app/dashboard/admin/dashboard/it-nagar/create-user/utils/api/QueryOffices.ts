@@ -4,7 +4,7 @@ import { OfficeType } from "./QueryOfficeType";
 import { Province } from "./QueryProvinces";
 
 interface Office {
-  id: 1;
+  id: number;
   office_name: string;
   office_address: string;
   office_phone: string;

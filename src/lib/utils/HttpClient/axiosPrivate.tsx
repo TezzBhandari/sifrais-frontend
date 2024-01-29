@@ -20,8 +20,10 @@ const setRefreshToken = () => {
   return refreshToken;
 };
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL as string
+
 const authHttpClient = axios.create({
-  baseURL: "https://sifarisold.ktmserver.com/backend",
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -75,7 +77,7 @@ authHttpClient.interceptors.response.use(
 
         try {
           const res = await axios.post<RefreshTokenSuccessResponseType>(
-            "https://sifarisold.ktmserver.com/backend/api/refreshtoken",
+            `${BASE_URL}/api/refreshtoken`,
             {},
             {
               headers: {
