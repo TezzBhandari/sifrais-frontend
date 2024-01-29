@@ -1,12 +1,12 @@
 import React from 'react'
 import DummyTable from '../DummyTable'
-import UserList from '@/app/admin/dashboard/it-nagar/components/UserList'
+import UserList from '@/app/dashboard/admin/dashboard/it-nagar/components/UserList'
 import { columnFamilyDocument } from './TableProperties/FamilyProfileColumn'
 import MainTable from '@/components/MainTable/MainTable'
 import FilterInputField from '@/components/MainTable/FilterInputField'
 
 interface IFamilyDocument {
-  sn: number, 
+  sn: number,
   documentname: string,
   deadline: string,
 }
@@ -38,8 +38,8 @@ const FDdata = [
 const FamilyDocument = () => {
   return (
     <>
-    <FilterInputField title="Family Document" buttonName='ADD DOCUMENT'/>
-    <MainTable<IFamilyDocument> tableColumns={columnFamilyDocument} tableData={FDdata}/>
+      <FilterInputField title="Family Document" buttonName='ADD DOCUMENT' />
+      <MainTable<IFamilyDocument> tableColumns={columnFamilyDocument} tableData={FDdata} />
     </>
   )
 }

@@ -1,6 +1,6 @@
 .sidebarSubheading {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     border-radius: 5px;
     width: 200px;
     height: 40px;
