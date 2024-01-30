@@ -83,6 +83,35 @@ export const systemConfiguration = [
   },
 ];
 
+export const userConfiguration = [
+  {
+    id: 1,
+    // label: "ढाचा सिर्जना",
+    label: "users",
+    href: "/dashboard/admin/dashboard/user-configuration/users",
+    disabled: false,
+  },
+  {
+    id: 2,
+    // label: "सिफारिसको प्रकार",
+    label: "roles",
+    href: "/dashboard/admin/dashboard/user-configuration/roles",
+    disabled: false,
+  },
+  {
+    id: 3,
+    label: "permissions",
+    href: "/dashboard/admin/dashboard/user-configuration/permissions",
+    disabled: false,
+  },
+  {
+    id: 4,
+    label: "public users",
+    href: "/dashboard/admin/dashboard/user-configuration/public-users",
+    disabled: false,
+  },
+];
+
 export const sidebarElements = [
   {
     id: 1,
@@ -99,12 +128,12 @@ export const sidebarElements = [
   {
     id: 3,
     // name: "सिफारिस",
-    name: "Sifaris",
+    name: "user configuration",
     icon: "/assets/icons/sidebar/sifaris.svg",
-    dropDownLinks: sidebarSifaris,
+    dropDownLinks: userConfiguration,
   },
   {
-    id: 3,
+    id: 4,
     // name: "सिफारिस",
     name: "Sifaris",
     icon: "/assets/icons/sidebar/sifaris.svg",
