@@ -88,7 +88,7 @@ export const userConfiguration = [
     id: 1,
     // label: "ढाचा सिर्जना",
     label: "users",
-    href: "/dashboard/admin/dashboard/user-configuration/users",
+    href: "/dashboard/admin/dashboard/it-nagar",
     disabled: false,
   },
   {
@@ -107,7 +107,7 @@ export const userConfiguration = [
   {
     id: 4,
     label: "public users",
-    href: "/dashboard/admin/dashboard/user-configuration/public-users",
+    href: "/dashboard/familyprofile",
     disabled: false,
   },
 ];

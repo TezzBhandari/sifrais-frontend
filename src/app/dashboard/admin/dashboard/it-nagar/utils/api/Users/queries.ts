@@ -1,6 +1,6 @@
-import useAuthFetch from "@/hooks/useAuthFetch";
 import { User } from "../../../types";
 import { useQuery } from "@tanstack/react-query";
+import authHttpClient from "@/lib/utils/HttpClient/axiosPrivate";
 
 export type UserSuccessResponse = {
   status: number;
@@ -8,7 +8,6 @@ export type UserSuccessResponse = {
 };
 
 const useUsersQuery = () => {
-  const authHttpClient = useAuthFetch();
   const fetchUser = async (): Promise<UserSuccessResponse["data"]> => {
     const response = await authHttpClient.get<UserSuccessResponse>(
       "/api/users"

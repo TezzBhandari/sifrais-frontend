@@ -93,7 +93,13 @@ const CreateOfficeModalForm = ({
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} className="rounded-2xl px-6">
+      <Modal isOpen={isOpen} onClose={onClose} className="rounded-2xl px-6 border border-green-400 max-w-5xl overflow-x-hidden">
+        {/* FORM HEADING  */}
+        <div className="">
+          <h1 className="not-italic text-2xl font-bold leading-6 mb-4 mt-1">
+            Create Office
+          </h1>
+        </div>
         <form
           onSubmit={handleSubmit((data) => {
             // TODO: IMPLEMENT POST FUNCTION
@@ -101,112 +107,338 @@ const CreateOfficeModalForm = ({
           })}
           className="form"
         >
-          {/* FORM HEADING  */}
-          <div>
-            <h1 className="not-italic text-2xl font-bold leading-6 mb-4 mt-1">
-              Create Office
-            </h1>
-          </div>
-          <div className="form-content flex gap-12 flex-col mb-2">
-            {/*  office name input field  */}
-            <div className="flex flex-col gap-2">
-              <InputLabel
-                className="font-normal text-sm not-italic leading-normal"
-                labelName={"office name"}
-                fieldRequired={true}
-              />
 
-              {/* input field + error message */}
-              <div>
-                <InputField
-                  placeholder="Enter Sifaris Type"
-                  className="h-11 rounded-lg text-base font-normal"
-                  {...register("office_name")}
+          <div className="form-content flex gap-6 flex-col mb-2">
+            {/*  office name input field  */}
+
+            {/* PROVINCE AND DISTRCTS ROW  */}
+            <div className="flex gap-4">
+
+              {/* PROVINCE  */}
+              <div className="flex-1">
+                <InputLabel htmlFor="" labelName="province" />
+                <Controller
+                  control={control}
+                  render={({ field: { name, onChange, value } }) => (
+                    <ListBox<Province, number>
+                      className="shadow-none h-11"
+                      labelExtractor={(item) => item.province_np}
+                      valueExtractor={(item) => item.id}
+                      labelExtractorByValue={(value, options) =>
+                        options.find((option) => option.id === value)
+                          ?.province_np || "select a province"
+                      }
+                      options={provinces}
+                      value={value}
+                      onChange={onChange}
+                      name={name}
+                    />
+                  )}
+                  name={"province_id"}
                 />
-                <span className="text-red-500 text-xs tracking-wide">
-                  {errors.office_name !== undefined
-                    ? errors.office_name.message
-                    : null}
-                </span>
+              </div>
+              {/* DISTRICT  */}
+              <div className="flex-1">
+                <InputLabel htmlFor="" labelName="district" />
+                <Controller
+                  control={control}
+                  render={({ field: { name, onChange, value } }) => (
+                    <ListBox<District, number>
+                      className="shadow-none h-11"
+                      labelExtractor={(item) => item.district_np}
+                      valueExtractor={(item) => item.id}
+                      labelExtractorByValue={(value, options) =>
+                        options.find((option) => option.id === value)
+                          ?.district_np || "select a district"
+                      }
+                      options={districtsState}
+                      value={value}
+                      onChange={onChange}
+                      name={name}
+                    />
+                  )}
+                  name={"district_id"}
+                />
+              </div>
+
+            </div>
+
+            <div className="flex gap-4">
+              {/* Local level  */}
+              <div className="flex-1">
+                <InputLabel htmlFor="" labelName="Local Level" />
+                <Controller
+                  control={control}
+                  render={({ field: { name, onChange, value } }) => (
+                    <ListBox<LocalLevel, number>
+                      className="shadow-none h-11"
+                      labelExtractor={(item) => item.lgname_np}
+                      valueExtractor={(item) => item.id}
+                      labelExtractorByValue={(value, options) =>
+                        options.find((option) => option.id === value)
+                          ?.lgname_np || "select a local level"
+                      }
+                      options={localLevelState}
+                      value={value}
+                      onChange={onChange}
+                      name={name}
+                    />
+                  )}
+                  name={"lg_id"}
+                />
+              </div>
+
+              <div className="flex-1">
+                <InputLabel htmlFor="" labelName="Local Level" />
+                <Controller
+                  control={control}
+                  render={({ field: { name, onChange, value } }) => (
+                    <ListBox<LocalLevel, number>
+                      className="shadow-none h-11"
+                      labelExtractor={(item) => item.lgname_np}
+                      valueExtractor={(item) => item.id}
+                      labelExtractorByValue={(value, options) =>
+                        options.find((option) => option.id === value)
+                          ?.lgname_np || "select a local level"
+                      }
+                      options={localLevelState}
+                      value={value}
+                      onChange={onChange}
+                      name={name}
+                    />
+                  )}
+                  name={"lg_id"}
+                />
+              </div>
+            </div>
+
+            {/* // office name  */}
+            <div className="flex gap-4">
+              <div className="flex flex-col flex-1 gap-2">
+                <InputLabel
+                  className="font-normal text-sm not-italic leading-normal"
+                  labelName={"office name"}
+                  fieldRequired={true}
+                />
+
+                {/* input field + error message */}
+                <div className="">
+                  <InputField
+                    placeholder="Enter Sifaris Type"
+                    className="h-11 rounded-lg text-base font-normal"
+                    {...register("office_name")}
+                  />
+                  <span className="text-red-500 text-xs tracking-wide">
+                    {errors.office_name !== undefined
+                      ? errors.office_name.message
+                      : null}
+                  </span>
+                </div>
+              </div>
+
+              {/* // office name  
+            */}
+              <div className="flex flex-col flex-1 gap-2">
+                <InputLabel
+                  className="font-normal text-sm not-italic leading-normal"
+                  labelName={"office name"}
+                  fieldRequired={true}
+                />
+
+                {/* input field + error message */}
+                <div>
+                  <InputField
+                    placeholder="Enter Sifaris Type"
+                    className="h-11 rounded-lg text-base font-normal"
+                    {...register("office_name")}
+                  />
+                  <span className="text-red-500 text-xs tracking-wide">
+                    {errors.office_name !== undefined
+                      ? errors.office_name.message
+                      : null}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex flex-col flex-1 gap-2">
+                <InputLabel
+                  className="font-normal text-sm not-italic leading-normal"
+                  labelName={"office name"}
+                  fieldRequired={true}
+                />
+
+                {/* input field + error message */}
+                <div className="">
+                  <InputField
+                    placeholder="Enter Sifaris Type"
+                    className="h-11 rounded-lg text-base font-normal"
+                    {...register("office_name")}
+                  />
+                  <span className="text-red-500 text-xs tracking-wide">
+                    {errors.office_name !== undefined
+                      ? errors.office_name.message
+                      : null}
+                  </span>
+                </div>
+              </div>
+
+              {/* // office name  
+            */}
+              <div className="flex flex-col flex-1 gap-2">
+                <InputLabel
+                  className="font-normal text-sm not-italic leading-normal"
+                  labelName={"office name"}
+                  fieldRequired={true}
+                />
+
+                {/* input field + error message */}
+                <div>
+                  <InputField
+                    placeholder="Enter Sifaris Type"
+                    className="h-11 rounded-lg text-base font-normal"
+                    {...register("office_name")}
+                  />
+                  <span className="text-red-500 text-xs tracking-wide">
+                    {errors.office_name !== undefined
+                      ? errors.office_name.message
+                      : null}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div className="flex flex-col flex-1 gap-2">
+                <InputLabel
+                  className="font-normal text-sm not-italic leading-normal"
+                  labelName={"office name"}
+                  fieldRequired={true}
+                />
+
+                {/* input field + error message */}
+                <div className="">
+                  <InputField
+                    placeholder="Enter Sifaris Type"
+                    className="h-11 rounded-lg text-base font-normal"
+                    {...register("office_name")}
+                  />
+                  <span className="text-red-500 text-xs tracking-wide">
+                    {errors.office_name !== undefined
+                      ? errors.office_name.message
+                      : null}
+                  </span>
+                </div>
+              </div>
+
+              {/* // office name  
+            */}
+              <div className="flex flex-col flex-1 gap-2">
+                <InputLabel
+                  className="font-normal text-sm not-italic leading-normal"
+                  labelName={"office name"}
+                  fieldRequired={true}
+                />
+
+                {/* input field + error message */}
+                <div>
+                  <InputField
+                    placeholder="Enter Sifaris Type"
+                    className="h-11 rounded-lg text-base font-normal"
+                    {...register("office_name")}
+                  />
+                  <span className="text-red-500 text-xs tracking-wide">
+                    {errors.office_name !== undefined
+                      ? errors.office_name.message
+                      : null}
+                  </span>
+                </div>
               </div>
             </div>
 
 
+            <div className="flex gap-4">
+              <div className="flex flex-col gap-2 flex-1">
+                <InputLabel
+                  className="font-normal text-sm not-italic leading-normal"
+                  labelName={"office name"}
+                  fieldRequired={true}
+                />
 
-            {/* PROVINCE  */}
-            <div>
-              <InputLabel htmlFor="" labelName="province" />
-              <Controller
-                control={control}
-                render={({ field: { name, onChange, value } }) => (
-                  <ListBox<Province, number>
-                    className="shadow-none h-11"
-                    labelExtractor={(item) => item.province_np}
-                    valueExtractor={(item) => item.id}
-                    labelExtractorByValue={(value, options) =>
-                      options.find((option) => option.id === value)
-                        ?.province_np || "select a province"
-                    }
-                    options={provinces}
-                    value={value}
-                    onChange={onChange}
-                    name={name}
+                {/* input field + error message */}
+                <div className="">
+                  <InputField
+                    placeholder="Enter Sifaris Type"
+                    className="h-11 rounded-lg text-base font-normal"
+                    {...register("office_name")}
                   />
-                )}
-                name={"province_id"}
-              />
+                  <span className="text-red-500 text-xs tracking-wide">
+                    {errors.office_name !== undefined
+                      ? errors.office_name.message
+                      : null}
+                  </span>
+                </div>
+
+              </div>
+              {/* //just to make sure the first input take half of the width  */}
+              <div className="flex-1 invisible" />
             </div>
 
-            {/* Local level  */}
-            <div>
-              <InputLabel htmlFor="" labelName="Local Level" />
-              <Controller
-                control={control}
-                render={({ field: { name, onChange, value } }) => (
-                  <ListBox<LocalLevel, number>
-                    className="shadow-none h-11"
-                    labelExtractor={(item) => item.lgname_np}
-                    valueExtractor={(item) => item.id}
-                    labelExtractorByValue={(value, options) =>
-                      options.find((option) => option.id === value)
-                        ?.lgname_np || "select a local level"
-                    }
-                    options={localLevels}
-                    value={value}
-                    onChange={onChange}
-                    name={name}
-                  />
-                )}
-                name={"lg_id"}
-              />
-            </div>
 
-            {/* DISTRICT  */}
-            <div>
-              <InputLabel htmlFor="" labelName="district" />
-              <Controller
-                control={control}
-                render={({ field: { name, onChange, value } }) => (
-                  <ListBox<District, number>
-                    className="shadow-none h-11"
-                    labelExtractor={(item) => item.district_np}
-                    valueExtractor={(item) => item.id}
-                    labelExtractorByValue={(value, options) =>
-                      options.find((option) => option.id === value)
-                        ?.district_np || "select a district"
-                    }
-                    options={districts}
-                    value={value}
-                    onChange={onChange}
-                    name={name}
+            <div className="flex gap-4">
+              <div className="flex flex-col gap-2 flex-1">
+                <InputLabel
+                  className="font-normal text-sm not-italic leading-normal"
+                  labelName={"office name"}
+                  fieldRequired={true}
+                />
+
+                {/* input field + error message */}
+                <div className="">
+                  <InputField
+                    placeholder="Enter Sifaris Type"
+                    className="h-11 rounded-lg text-base font-normal"
+                    {...register("office_name")}
                   />
-                )}
-                name={"district_id"}
-              />
+                  <span className="text-red-500 text-xs tracking-wide">
+                    {errors.office_name !== undefined
+                      ? errors.office_name.message
+                      : null}
+                  </span>
+                </div>
+
+              </div>
+              {/* //just to make sure the first input take half of the width  */}
+              <div className="flex-1 invisible" />
+            </div><div className="flex gap-4">
+              <div className="flex flex-col gap-2 flex-1">
+                <InputLabel
+                  className="font-normal text-sm not-italic leading-normal"
+                  labelName={"office name"}
+                  fieldRequired={true}
+                />
+
+                {/* input field + error message */}
+                <div className="">
+                  <InputField
+                    placeholder="Enter Sifaris Type"
+                    className="h-11 rounded-lg text-base font-normal"
+                    {...register("office_name")}
+                  />
+                  <span className="text-red-500 text-xs tracking-wide">
+                    {errors.office_name !== undefined
+                      ? errors.office_name.message
+                      : null}
+                  </span>
+                </div>
+
+              </div>
+              {/* //just to make sure the first input take half of the width  */}
+              <div className="flex-1 invisible" />
             </div>
 
             {/* FORM SUBMIT OR CANCEL BUTTONS  */}
-            <div className="flex  gap-5">
+            <div className="flex gap-5">
               <button
                 className=" flex-1 bg-transparent border-solid border border-[#002147] text-[#002147] py-3 px-4 capitalize font-medium text-sm gap-2 rounded-lg "
                 onClick={(e) => {
