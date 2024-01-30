@@ -5,12 +5,13 @@ import DataTable from "@/components/Table/DataTable";
 import { SifarisTableColumns } from "./SifarisTableColumns";
 import { table } from "console";
 import DataTablePagination from "@/components/Table/DataTablePagination";
+import DataTableSkeleton from "@/components/Table/DataTableSkeleton";
 
 const SifarisList = () => {
   const sifarisTypes = useFetchSifaris();
 
   if (sifarisTypes.isPending) {
-    return <div>loading...</div>;
+    return <><DataTableSkeleton /></>;
   }
 
   if (sifarisTypes.isError) {
@@ -36,7 +37,7 @@ const SifarisList = () => {
         // dataTableToolBar={(table) => (
         //   <OfficeTypeDataTableToolBar table={table} />
         // )}
-        dataTablePagination={(table => <DataTablePagination table={table} />)}
+        // dataTablePagination={(table => <DataTablePagination table={table} />)}
         columns={SifarisTableColumns}
         data={sifarisTypes.data}
       />
