@@ -22,6 +22,7 @@ import {
 
 import ProvinceFilter from "@/app/dashboard/admin/dashboard/it-nagar/components/ProvinceFilter";
 import React from "react";
+import DataTablePagination from "./DataTablePagination";
 
 interface DataTableProps<TData, TValue> {
   columns: Array<ColumnDef<TData, TValue>>;
@@ -164,7 +165,7 @@ function DataTable<TData, TValue>({
           </TableBody>
         </Table>
         {/* TABLE PAGINATION  */}
-        {dataTablePagination === undefined ? null : dataTablePagination(table)}
+        {dataTablePagination === undefined ? <DataTablePagination table={table} /> : dataTablePagination(table)}
       </div>
     </div>
   );

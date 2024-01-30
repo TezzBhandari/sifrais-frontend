@@ -37,6 +37,14 @@ const CreateOfficeModalForm = ({
     reset,
     formState: { errors },
   } = useForm<OfficeFormType>({
+    defaultValues: {
+      office_address: "",
+      office_email: "",
+      office_name: "",
+      office_phone: "",
+      longitude: "",
+      latitude: "",
+    },
     resolver: zodResolver(OfficeFormSchema),
   });
 
@@ -122,6 +130,8 @@ const CreateOfficeModalForm = ({
                 </span>
               </div>
             </div>
+
+
 
             {/* PROVINCE  */}
             <div>
