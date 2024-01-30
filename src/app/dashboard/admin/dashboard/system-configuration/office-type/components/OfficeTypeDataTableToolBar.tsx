@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Table } from "@tanstack/react-table";
 
-import AddIcon from "../@/../public/assets/Add_Icon.svg";
+import AddIcon from "@/../public/assets/Add_Icon.svg";
 
 interface OfficeTypeDataTableToolBarProps<TData> {
   table: Table<TData>;
@@ -18,7 +18,7 @@ function OfficeTypeDataTableToolBar<TData>({
     <>
       <div className="flex items-center ">
         {/* header  */}
-        <DynamicRouteHeader pageHeader={"Office Type"} show={false} />
+        <DynamicRouteHeader pageHeader={"Office Type"} showBreadCrumb={false} />
         {/* input filter  */}
         <div className="flex-1 flex justify-center">
           <FilterInput

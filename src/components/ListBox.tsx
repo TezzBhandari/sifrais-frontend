@@ -88,8 +88,7 @@ function ListBox<
                   `${cn(
                     "relative cursor-default select-none py-2 pl-10 pr-4",
                     dropDownItemStyle
-                  )} ${
-                    active ? "bg-amber-100 text-amber-900" : "text-gray-900"
+                  )} ${active ? "bg-amber-100 text-amber-900" : "text-gray-900"
                   }`
                 }
                 key={
@@ -102,9 +101,8 @@ function ListBox<
                 {({ selected }) => (
                   <>
                     <span
-                      className={`block truncate ${
-                        selected ? "font-medium" : "font-normal"
-                      }`}
+                      className={`block truncate ${selected ? "font-medium" : "font-normal"
+                        }`}
                     >
                       {labelExtractor(option) as string}
                     </span>

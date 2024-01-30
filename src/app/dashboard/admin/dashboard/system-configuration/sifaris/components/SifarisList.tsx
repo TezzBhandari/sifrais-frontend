@@ -3,6 +3,8 @@ import React from "react";
 import useFetchSifaris from "../utils/api/useFetchSifaris";
 import DataTable from "@/components/Table/DataTable";
 import { SifarisTableColumns } from "./SifarisTableColumns";
+import { table } from "console";
+import DataTablePagination from "@/components/Table/DataTablePagination";
 
 const SifarisList = () => {
   const sifarisTypes = useFetchSifaris();
@@ -24,9 +26,9 @@ const SifarisList = () => {
     }
   }
 
-//   const transformedData = sifarisTypes.data.map(sifaris => {
-//     return {id: sifaris.id, sifarisName: sifaris.name}
-//   });
+  //   const transformedData = sifarisTypes.data.map(sifaris => {
+  //     return {id: sifaris.id, sifarisName: sifaris.name}
+  //   });
 
   return (
     <div>
@@ -34,6 +36,7 @@ const SifarisList = () => {
         // dataTableToolBar={(table) => (
         //   <OfficeTypeDataTableToolBar table={table} />
         // )}
+        dataTablePagination={(table => <DataTablePagination table={table} />)}
         columns={SifarisTableColumns}
         data={sifarisTypes.data}
       />
