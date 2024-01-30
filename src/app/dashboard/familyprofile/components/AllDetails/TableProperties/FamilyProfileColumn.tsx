@@ -1,15 +1,15 @@
 import React from 'react'
 import { createColumnHelper } from '@tanstack/react-table'
 import { MdAdd, MdDelete } from 'react-icons/md';
-import folder from "../@/../public/assets/icons/folder.svg"
-import phone from "../@/../public/assets/icons/phone.svg"
-import calendar from "../@/../public/assets/icons/calendar.svg"
-import User from "../@/../public/assets/icons/User.svg"
-import relationship from "../@/../public/assets/icons/relationship.svg"
-import actions from "../@/../public/assets/icons/actions.svg"
-import Bin from "../@/../public/assets/icons/Bin.svg"
-import View from "../@/../public/assets/icons/View.svg"
-import Edit from "../@/../public/assets/icons/Edit.svg"
+import folder from "@/../public/assets/icons/folder.svg"
+import phone from "@/../public/assets/icons/phone.svg"
+import calendar from "@/../public/assets/icons/calendar.svg"
+import User from "@/../public/assets/icons/User.svg"
+import relationship from "@/../public/assets/icons/relationship.svg"
+import actions from "@/../public/assets/icons/actions.svg"
+import Bin from "@/../public/assets/icons/Bin.svg"
+import View from "@/../public/assets/icons/View.svg"
+import Edit from "@/../public/assets/icons/Edit.svg"
 import Image from 'next/image';
 //Creating Column for Family Document Table & FamilyMemberDocument : 
 
