@@ -7,14 +7,13 @@ import SideSifaris from "./Components/SideSifaris";
 import { sidebarDashboard, sidebarElements } from "./sidebarData";
 import SideDashboard from "./Components/SideDashboard";
 import SideEmployee from "./Components/SideEmployee";
-import useSidebarToggle from "../store/store"
+import useSidebarToggle from "../store/store";
 import { DropdownMenu } from "@/components/DropdownMenu";
 import MMenu from "@/components/SystemCofigurationMenu";
 import DashboardMenu from "@/components/DashboardMenu";
-import DownArrow from "@/../public/assets/logo/DownArrow.svg"
+import DownArrow from "@/../public/assets/logo/DownArrow.svg";
 
 const Sidebar: React.FC = () => {
-
   //Importing zustand state from store file.
   const { isSidebarOpen, setSidebarOpen } = useSidebarToggle();
 
@@ -59,8 +58,9 @@ const Sidebar: React.FC = () => {
           <button onClick={handleBurger}>
             {" "}
             <Image
-              src={`/assets/icons/sidebar/${isSidebarOpen ? "arrowright" : "arrowleft"
-                }.svg`}
+              src={`/assets/icons/sidebar/${
+                isSidebarOpen ? "arrowright" : "arrowleft"
+              }.svg`}
               width={12}
               height={12}
               alt="Arrow"
@@ -68,7 +68,10 @@ const Sidebar: React.FC = () => {
             />{" "}
           </button>
         </div>
-        <div className="sidebarelements flex flex-col gap-1" style={{ marginTop: "10px" }}>
+        <div
+          className="sidebarelements flex flex-col gap-1"
+          style={{ marginTop: "10px" }}
+        >
           {/* {sidebarElements.map((sideelement, idxValue) => {
             return (
               <React.Fragment key={idxValue}>
@@ -127,31 +130,59 @@ const Sidebar: React.FC = () => {
             );
           })} */}
 
-          {
-            sidebarElements.map((sidebarElement, index) => {
-              return <React.Fragment key={sidebarElement.id}>
+          {sidebarElements.map((sidebarElement, index) => {
+            return (
+              <React.Fragment key={sidebarElement.id}>
                 <div className="">
-                  <DropdownMenu buttonContent={(isOpen: boolean) => {
-                    return <div className={` ${isOpen ? "bg-[#D9D9D914] opacity-80" : ""} flex justify-between items-center px-4 py-1  text-sm rounded-[10px] font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75`}>
-                      <div className="flex items-center gap-4">
-                        <Image
-                          src={sidebarElement.icon}
-                          width={24}
-                          height={24}
-                          alt={sidebarElement.name}
-                          className={styles.sidebaricon}
-                        />
-                        <span className={`${isSidebarOpen ? "hidden" : "block"}`}>{sidebarElement.name}</span>
-                      </div>
-                      <span className={`${isOpen ? "" : "transform -rotate-90"} ${isSidebarOpen ? "hidden" : "block"}`}>
-                        <Image className="text-white font-[900]" width={15} height={16} src={DownArrow} alt={"dropdown icon"} />
-                      </span>
-                    </div>
-                  }} dropMenuLinks={!isSidebarOpen ? sidebarElement.dropDownLinks : []} />
+                  <DropdownMenu
+                    buttonContent={(isOpen: boolean) => {
+                      return (
+                        <div
+                          className={` ${
+                            isOpen ? "bg-[#D9D9D914] opacity-80" : ""
+                          } flex justify-between items-center px-4 py-1  text-sm rounded-[10px] font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75`}
+                        >
+                          <div className="flex items-center gap-4">
+                            <Image
+                              src={sidebarElement.icon}
+                              width={24}
+                              height={24}
+                              alt={sidebarElement.name}
+                              className={styles.sidebaricon}
+                            />
+                            <span
+                              className={`${
+                                isSidebarOpen ? "hidden" : "block"
+                              }`}
+                            >
+                              {sidebarElement.name}
+                            </span>
+                          </div>
+                          <span
+                            className={`${
+                              isOpen ? "" : "transform -rotate-90"
+                            } ${isSidebarOpen ? "hidden" : "block"}`}
+                          >
+                            <Image
+                              className="text-white font-[900]"
+                              width={15}
+                              height={16}
+                              src={DownArrow}
+                              alt={"dropdown icon"}
+                              style={{ filter: "brightness(0) invert(1)" }}
+                            />
+                          </span>
+                        </div>
+                      );
+                    }}
+                    dropMenuLinks={
+                      !isSidebarOpen ? sidebarElement.dropDownLinks : []
+                    }
+                  />
                 </div>
               </React.Fragment>
-            })
-          }
+            );
+          })}
         </div>
       </div>
     </nav>
