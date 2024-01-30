@@ -7,6 +7,7 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -51,6 +52,8 @@ function DataTable<TData, TValue>({
     //   // filtering input synchornization with the tanstack table
     //   globalFilter: filtering,
     // },
+    // added for enabling pagination features
+    getPaginationRowModel: getPaginationRowModel(),
 
     getFilteredRowModel: getFilteredRowModel(),
 

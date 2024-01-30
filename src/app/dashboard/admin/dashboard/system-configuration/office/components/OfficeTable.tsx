@@ -1,12 +1,13 @@
 "use client";
+
 import DataTable from "@/components/Table/DataTable";
 import DataTableSkeleton from "@/components/Table/DataTableSkeleton";
 import useQueryOffice from "../utils/api/useQueryOffice";
-// import { officeTypeTableColumns } from "./OfficeTypeTableColumns";
-// import OfficeTypeDataTableToolBar from "./OfficeTypeDataTableToolBar";
+import { OfficeTableColumns } from "./OfficeTableColumns";
+import OfficeTableToolbar from "./OfficeTableToolbar";
+import DataTablePagination from "@/components/Table/DataTablePagination";
 
 const OfficeTable = () => {
-
 
     const officeRes = useQueryOffice();
 
@@ -27,11 +28,14 @@ const OfficeTable = () => {
         }
     }
     return (
-        <DataTable
-            // dataTableToolBar={(table) => <OfficeTypeDataTableToolBar table={table} />}
-            columns={officeTypeTableColumns}
-            data={officeRes.data}
-        />
+        <>
+            <DataTable
+                dataTableToolBar={(table) => <OfficeTableToolbar table={table} />}
+                dataTablePagination={(table => <DataTablePagination table={table} />)}
+                columns={OfficeTableColumns}
+                data={officeRes.data}
+            />
+        </>
     );
 };
 

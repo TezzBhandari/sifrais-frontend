@@ -5,18 +5,18 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 // Returns Bearer Token; also solve the srr issues that localstorage is not defined
 const setBearerToken = () => {
   let accessToken = "";
-  if (typeof window !== undefined) {
-    accessToken = localStorage.getItem("accessToken") as string;
-  }
+  // if (typeof window !== undefined) {
+  accessToken = global?.localStorage?.getItem("accessToken") as string || "";
+  // }
   return `Bearer ${accessToken}`;
 };
 
 const setRefreshToken = () => {
   let refreshToken = "";
 
-  if (typeof window !== undefined) {
-    refreshToken = localStorage.getItem("refreshToken") as string;
-  }
+  // if (typeof window !== undefined) {
+  refreshToken = global?.localStorage?.getItem("refreshToken") as string || "";
+  // }
   return refreshToken;
 };
 

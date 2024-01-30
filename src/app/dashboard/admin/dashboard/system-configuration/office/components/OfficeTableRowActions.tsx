@@ -6,11 +6,11 @@ import EditIcon from "@/../public/assets/logo/EditIcon.svg"
 import DeleteIcon from "@/../public/assets/logo/DeleteIcon.svg"
 import ViewIcon from "@/../public/assets/logo/ViewIcon.svg"
 import type { OfficeTableRowActionsProps } from "../types";
-import OfficeDeleteModal from "./OfficeTypeDeleteModal";
+import OfficeDeleteModal from "./OfficeDeleteModal";
 
 
 
-const OfficeTableRowActions = ({ offices }: OfficeTableRowActionsProps) => {
+const OfficeTableRowActions = ({ office }: OfficeTableRowActionsProps) => {
     const [IsDeleteOpen, setIsDeleteOpen] = useState(false);
     // opens delete modal
     const setDeleteOpen = () => {
@@ -50,7 +50,7 @@ const OfficeTableRowActions = ({ offices }: OfficeTableRowActionsProps) => {
                 isOpen={IsDeleteOpen}
                 onClose={setDeleteClose}
                 onOpen={setDeleteOpen}
-                office={offices}
+                office={office}
             />
         </div>
     );

@@ -5,10 +5,12 @@ import { cn } from "@/lib/utils/classnames";
 export interface InputProps
   extends React.LabelHTMLAttributes<HTMLLabelElement> {
   labelName: React.ReactNode;
+  fieldRequired?: boolean;
+
 }
 
 const InputLabel = React.forwardRef<HTMLLabelElement, InputProps>(
-  ({ className, labelName, ...props }, ref) => {
+  ({ className, labelName, fieldRequired = false, ...props }, ref) => {
     return (
       <label
         className={cn(
@@ -18,7 +20,8 @@ const InputLabel = React.forwardRef<HTMLLabelElement, InputProps>(
         ref={ref}
         {...props}
       >
-        {labelName}
+        <span>{labelName}</span>
+        {fieldRequired ? <span className="text-red-500">{"*"}</span> : null}
       </label>
     );
   }

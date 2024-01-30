@@ -18,7 +18,7 @@ function OfficeTypeDataTableToolBar<TData>({
     <>
       <div className="flex items-center ">
         {/* header  */}
-        <DynamicRouteHeader pageHeader={"Office Type"} show={false} />
+        <DynamicRouteHeader pageHeader={"Office Type"} showBreadCrumb={false} />
         {/* input filter  */}
         <div className="flex-1 flex justify-center">
           <FilterInput

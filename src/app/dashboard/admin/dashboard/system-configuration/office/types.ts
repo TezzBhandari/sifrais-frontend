@@ -1,5 +1,7 @@
+import { z } from "zod";
 import { Province } from "../../it-nagar/create-user/utils/api/QueryProvinces";
 import { OfficeType } from "../office-type/types";
+import validator from "validator";
 
 interface Office {
   id: number;
@@ -51,7 +53,7 @@ interface DeleteOfficeSuccessResponse {
 
 // components props
 interface OfficeTableRowActionsProps {
-  offices: Array<Office>;
+  office: Office;
 }
 
 interface OfficeDeleteModalProps {
@@ -61,12 +63,35 @@ interface OfficeDeleteModalProps {
   office: Office;
 }
 
+// office form schema
+const OfficeFormSchema = z.object({
+  office_type_id: z.number(),
+  province_id: z.number(),
+  district_id: z.number(),
+  lg_id: z.number(),
+  office_name: z.string().min(1, { message: "office name required" }),
+  office_address: z.string(),
+  office_phone: z
+    .string()
+    .refine(validator.isMobilePhone, { message: "invalid phone number" }),
+  office_email: z.string().email({ message: "invalid email" }),
+  latitude: z.string(),
+  longitude: z.string(),
+  is_active: z.boolean(),
+});
+
+type OfficeFormType = z.infer<typeof OfficeFormSchema>;
+
 export type {
   Office,
   OfficeDeleteModalProps,
+  OfficeFormType,
   //   DeleteOfficeErrorResponse,
   DeleteOfficeSuccessResponse,
   OfficeTableRowActionsProps,
   QueryOfficeSuccessResponse,
   QueryOfficeErrorResponse,
 };
+
+// schemas
+export { OfficeFormSchema };
