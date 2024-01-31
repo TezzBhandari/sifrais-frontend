@@ -21,9 +21,9 @@ const SelectField: React.FC<IInputField>= ( { label, name, options, customStyles
     <select style={customStylesInput} id={name} className='w-[400px] h-10 px-4 py-2 bg-white rounded-lg border border-stone-300 justify-between items-center inline-flex'>
        <option value={label} disabled >{label}</option>
         {
-            options.map((value)=>{
+            options.map((value, vauleIndex)=>{
                 return (
-                    <option value={value}>{value}</option>
+                    <option key={vauleIndex} value={value}>{value}</option>
                 )
             })
         }
