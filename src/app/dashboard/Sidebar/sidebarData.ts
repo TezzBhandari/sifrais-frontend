@@ -72,7 +72,7 @@ export const systemConfiguration = [
   {
     id: 5,
     label: "document",
-    href: "/",
+    href: "/dashboard/admin/dashboard/system-configuration/documents",
     disabled: false,
   },
   {
