@@ -1,16 +1,12 @@
 // SideBar.tsx
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Sidebar.module.css";
 import Image from "next/image";
-import SideSifaris from "./Components/SideSifaris";
 import { sidebarDashboard, sidebarElements } from "./sidebarData";
 import SideDashboard from "./Components/SideDashboard";
-import SideEmployee from "./Components/SideEmployee";
 import useSidebarToggle from "../store/store";
 import { DropdownMenu } from "@/components/DropdownMenu";
-import MMenu from "@/components/SystemCofigurationMenu";
-import DashboardMenu from "@/components/DashboardMenu";
 import DownArrow from "@/../public/assets/logo/DownArrow.svg";
 
 const Sidebar: React.FC = () => {
@@ -50,17 +46,24 @@ const Sidebar: React.FC = () => {
 
   return (
     <nav
-      className={`text-white min-h-screen fixed left-0 top-[90px] ${styles.sidebarMain}`}
+      onScroll={(e) => {
+        e.stopPropagation()
+        if (e.isPropagationStopped()) {
+          alert('progate not stoped')
+        } else {
+          alert('propagation stopped')
+        }
+      }}
+      className={`text-white min-h-[calc(100vh-90px)] fixed left-0 top-[90px] ${styles.sidebarMain}`}
       style={{ width: `${isSidebarOpen ? "6%" : "18%"}` }}
     >
-      <div className="p-4">
+      <div className="p-4 max-h-[calc(100vh-90px)]  scrollbar-thin scrollbar-thumb-[#ACB1C6] scrollbar-track-white scroll-smooth  overflow-x-hidden overflow-y-auto">
         <div className="flex justify-end">
           <button onClick={handleBurger}>
             {" "}
             <Image
-              src={`/assets/icons/sidebar/${
-                isSidebarOpen ? "arrowright" : "arrowleft"
-              }.svg`}
+              src={`/assets/icons/sidebar/${isSidebarOpen ? "arrowright" : "arrowleft"
+                }.svg`}
               width={12}
               height={12}
               alt="Arrow"
@@ -138,9 +141,8 @@ const Sidebar: React.FC = () => {
                     buttonContent={(isOpen: boolean) => {
                       return (
                         <div
-                          className={` ${
-                            isOpen ? "bg-[#D9D9D914] opacity-80" : ""
-                          } flex justify-between items-center px-4 py-1  text-sm rounded-[10px] font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75`}
+                          className={` ${isOpen ? "bg-[#D9D9D914] opacity-80" : ""
+                            } flex justify-between items-center px-4 py-1  text-sm rounded-[10px] font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75`}
                         >
                           <div className="flex items-center gap-4">
                             <Image
@@ -151,17 +153,15 @@ const Sidebar: React.FC = () => {
                               className={styles.sidebaricon}
                             />
                             <span
-                              className={`${
-                                isSidebarOpen ? "hidden" : "block"
-                              }`}
+                              className={`${isSidebarOpen ? "hidden" : "block"
+                                }`}
                             >
                               {sidebarElement.name}
                             </span>
                           </div>
                           <span
-                            className={`${
-                              isOpen ? "" : "transform -rotate-90"
-                            } ${isSidebarOpen ? "hidden" : "block"}`}
+                            className={`${isOpen ? "" : "transform -rotate-90"
+                              } ${isSidebarOpen ? "hidden" : "block"}`}
                           >
                             <Image
                               className="text-white font-[900]"

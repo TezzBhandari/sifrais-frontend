@@ -60,7 +60,7 @@ export const systemConfiguration = [
   {
     id: 3,
     label: "designation",
-    href: "/",
+    href: "/dashboard/admin/dashboard/system-configuration/designation",
     disabled: false,
   },
   {
