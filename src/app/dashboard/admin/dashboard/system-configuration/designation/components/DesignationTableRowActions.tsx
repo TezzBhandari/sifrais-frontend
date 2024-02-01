@@ -7,6 +7,7 @@ import DeleteIcon from "@/../public/assets/logo/DeleteIcon.svg"
 import ViewIcon from "@/../public/assets/logo/ViewIcon.svg"
 import { DesignationTableRowActionsProps } from "../types";
 import DesignationDeleteModal from "./DesignationDeleteModal";
+import UpdateDesignationModalForm from "./UpdateDesignationModalForm";
 
 
 
@@ -20,6 +21,17 @@ const DesignationTableRowActions = ({ designation }: DesignationTableRowActionsP
     // close delete modal
     const setDeleteClose = () => {
         setIsDeleteOpen(false);
+    };
+
+    const [isUpdateDesignationFormOpen, setIsUpdateDesignationFormOpen] = useState(false);
+    // opens delete modal
+    const openUpdateDesignationForm = () => {
+        setIsUpdateDesignationFormOpen(true);
+    };
+
+    // close delete modal
+    const closeUpdateDesignationForm = () => {
+        setIsUpdateDesignationFormOpen(false);
     };
 
     return (
@@ -38,7 +50,9 @@ const DesignationTableRowActions = ({ designation }: DesignationTableRowActionsP
                 </span>
 
                 <span
-
+                    onClick={() => {
+                        openUpdateDesignationForm();
+                    }}
                     className="cursor-pointer p-1 hover:bg-gray-600 rounded-md text-gray-600"
                 >
                     <Image src={EditIcon} alt={"edit Icon"} />
@@ -52,6 +66,7 @@ const DesignationTableRowActions = ({ designation }: DesignationTableRowActionsP
                 onOpen={setDeleteOpen}
                 designation={designation}
             />
+            <UpdateDesignationModalForm onClose={closeUpdateDesignationForm} isOpen={isUpdateDesignationFormOpen} designation={designation} />
         </div>
     );
 };
