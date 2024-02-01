@@ -1,10 +1,20 @@
 import { z } from "zod";
 
-const OfficeTypeSchema = z.object({
-  id: z.number(),
-  office_type: z.string(),
+interface OfficeType {
+  id: number;
+  office_type: string;
+}
+const OfficeTypeFormSchema = z.object({
+  office_type: z.string().min(1, { message: "office type is required" }),
 });
 
-export type OfficeType = z.infer<typeof OfficeTypeSchema>;
+interface PostOfficeTypeSuccessResponse {
+  status: number;
+  message: string;
+}
 
-export { OfficeTypeSchema };
+type OfficeTypeForm = z.infer<typeof OfficeTypeFormSchema>;
+
+export type { PostOfficeTypeSuccessResponse, OfficeType, OfficeTypeForm };
+
+export { OfficeTypeFormSchema };

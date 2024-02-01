@@ -53,12 +53,12 @@ const OfficeTypeDeleteModal = ({
               Cancel
             </Button>
             {/* SUBMIT BUTTON  */}
-            <Button
+            <button
               onClick={deleteHandler}
-              className="rounded-md bg-[#002147] text-[14px] font-medium border border-[#002147] text-white "
+              className="rounded-md bg-[#002147] px-8 py-3 border-[#002147] text-[14px] font-medium border text-white"
             >
               {deleteOfficeType.isPending ? "Deleting..." : "Delete"}
-            </Button>
+            </button>
           </div>
         </div>
       </Modal>
