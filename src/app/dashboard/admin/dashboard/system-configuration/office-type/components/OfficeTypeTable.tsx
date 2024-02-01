@@ -18,7 +18,6 @@ const OfficeTypeTable = () => {
   return (
     <DataTable
       dataTableToolBar={(table) => <OfficeTypeDataTableToolBar table={table} />}
-      dataTablePagination={(table => <DataTablePagination table={table} />)}
       columns={officeTypeTableColumns}
       data={officeTypes}
     />
