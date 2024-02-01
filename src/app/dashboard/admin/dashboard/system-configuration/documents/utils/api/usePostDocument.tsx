@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 import authHttpClient from "@/lib/utils/HttpClient/axiosPrivate";
 import { DocumentFormType, PostDocumentSuccessResponse } from "../../types";
+import { UseFormReset } from "react-hook-form";
 
 
 // delete query function
@@ -17,9 +18,10 @@ const postDocument = async ({ doc_name }: DocumentFormType) => {
 
 // delete office custom hook
 const usePostDocument = ({
-    onClose,
+    onClose, reset,
 }: {
     onClose: () => void;
+    reset: UseFormReset<DocumentFormType>
 }) => {
     // for invalidating fetch offices query
     const queryClient = useQueryClient();
@@ -35,7 +37,8 @@ const usePostDocument = ({
         // invalidates fetch offices query
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["fetch", "documents"] });
-            // onClose();
+            onClose();
+            reset();
             toast.success("Successfully added document!", {
                 position: toast.POSITION.TOP_CENTER,
             });
@@ -53,7 +56,7 @@ const usePostDocument = ({
         // runs of both success and error response
         // closes the modal
         onSettled(data, error, variables, context) {
-            onClose();
+            // onClose();
         },
     });
 };
