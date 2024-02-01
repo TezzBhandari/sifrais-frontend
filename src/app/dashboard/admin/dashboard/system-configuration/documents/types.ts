@@ -33,6 +33,8 @@ interface PostDocumentErrorResponse {
   //commin soon
 }
 
+interface EditDocumentSuccessResponse extends PostDocumentSuccessResponse {}
+
 // interface DeleteDocumentsErrorResponse {
 //   status: number;
 //   message: string;
@@ -62,6 +64,7 @@ export type {
   DocumentDeleteModalProps,
   DocumentFormType,
   //   DeleteDocumentsErrorResponse,
+  EditDocumentSuccessResponse,
   PostDocumentErrorResponse,
   PostDocumentSuccessResponse,
   DeleteDocumentSuccessResponse,

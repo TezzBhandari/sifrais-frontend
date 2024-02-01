@@ -7,6 +7,7 @@ import DeleteIcon from "@/../public/assets/logo/DeleteIcon.svg"
 import ViewIcon from "@/../public/assets/logo/ViewIcon.svg"
 import { DocumentsTableRowActionsProps } from "../types";
 import DocumentDeleteModal from "./DocumentDeleteModal";
+import EditDocumentModalForm from "./EditDocumentModalForm";
 
 
 
@@ -20,6 +21,18 @@ const DocumentTableRowActions = ({ document }: DocumentsTableRowActionsProps) =>
     // close delete modal
     const setDeleteClose = () => {
         setIsDeleteOpen(false);
+    };
+
+    // state for edit modal form
+    const [isEditDocumentFormOpen, setIsEditDocumentFormOpen] = useState(false);
+    // opens delete modal
+    const openEditDocumentForm = () => {
+        setIsEditDocumentFormOpen(true);
+    };
+
+    // close delete modal
+    const closeEditDocumentForm = () => {
+        setIsEditDocumentFormOpen(false);
     };
 
     return (
@@ -38,7 +51,9 @@ const DocumentTableRowActions = ({ document }: DocumentsTableRowActionsProps) =>
                 </span>
 
                 <span
-
+                    onClick={() => {
+                        openEditDocumentForm()
+                    }}
                     className="cursor-pointer p-1 hover:bg-gray-600 rounded-md text-gray-600"
                 >
                     <Image src={EditIcon} alt={"edit Icon"} />
@@ -52,6 +67,7 @@ const DocumentTableRowActions = ({ document }: DocumentsTableRowActionsProps) =>
                 onOpen={setDeleteOpen}
                 document={document}
             />
+            <EditDocumentModalForm isOpen={isEditDocumentFormOpen} onClose={closeEditDocumentForm} document={document} />
         </div>
     );
 };

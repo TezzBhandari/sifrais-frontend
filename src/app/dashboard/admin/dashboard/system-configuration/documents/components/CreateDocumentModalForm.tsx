@@ -33,7 +33,7 @@ const CreateDocumentModalForm = ({
   });
 
   // use mutation
-  const postDocument = usePostDocument({ onClose: onClose })
+  const postDocument = usePostDocument({ onClose: onClose, reset: reset })
 
   return (
     <>

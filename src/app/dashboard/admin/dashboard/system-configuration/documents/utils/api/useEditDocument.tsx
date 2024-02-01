@@ -3,13 +3,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 import authHttpClient from "@/lib/utils/HttpClient/axiosPrivate";
-import { DocumentFormType, PostDocumentSuccessResponse } from "../../types";
+import { DocumentFormType, PostDocumentSuccessResponse, Document, EditDocumentSuccessResponse } from "../../types";
+import { UseFormReset } from "react-hook-form";
 
 
 // delete query function
-const postDocument = async ({ doc_name }: DocumentFormType) => {
-    const response = await authHttpClient.post<PostDocumentSuccessResponse>(
-        `/api/documents/`, { doc_name: doc_name }
+const editDocument = async ({ id, doc_name }: Document) => {
+    const response = await authHttpClient.put<EditDocumentSuccessResponse>(
+        `/api/documents/${id}`, { doc_name: doc_name }
     );
     return response.data;
 };
@@ -17,26 +18,27 @@ const postDocument = async ({ doc_name }: DocumentFormType) => {
 
 // delete office custom hook
 const useEditDocument = ({
-    onClose,
+    onClose, reset,
 }: {
     onClose: () => void;
+    reset: UseFormReset<DocumentFormType>
 }) => {
     // for invalidating fetch offices query
     const queryClient = useQueryClient();
 
     return useMutation({
         // mutation key 
-        mutationKey: ["post", "document"],
+        mutationKey: ["update", "document"],
         // mutation function
-        mutationFn: postDocument,
-        // mutationFn: async () =>
-        //     deleteOffice({ id: documentId }),
-        // on delete success callback
+        mutationFn: editDocument,
+
+        // on edit success callback
         // invalidates fetch offices query
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["fetch", "documents"] });
-            // onClose();
-            toast.success("Successfully added document!", {
+            onClose();
+            reset();
+            toast.success("Successfully updated document!", {
                 position: toast.POSITION.TOP_CENTER,
             });
         },
@@ -45,7 +47,7 @@ const useEditDocument = ({
         // shows error messsage
         onError(error, variables, context) {
             // onClose();
-            toast.error("Failed to add document", {
+            toast.error("Failed to update document", {
                 position: toast.POSITION.TOP_CENTER,
             });
         },
