@@ -40,6 +40,21 @@ interface DesignationDeleteModalProps {
   designation: Designation;
 }
 
+interface PostDesignationSuccessResponse {
+  status: number;
+  data: Designation;
+  message: string;
+}
+
+interface PostDesignationErrorResponse {}
+
+// edit responses
+
+interface UpdateDesignationSuccessResponse
+  extends PostDesignationSuccessResponse {}
+
+interface UpdateDesignationErrorResponse {}
+
 // Designations form schema
 const DesignationFormSchema = z.object({
   designation: z.string().min(1, { message: "designation is required" }),
@@ -56,6 +71,10 @@ export type {
   DesignationTableRowActionsProps,
   QueryDesignationsSuccessResponse,
   QueryDesignationsErrorResponse,
+  PostDesignationSuccessResponse,
+  PostDesignationErrorResponse,
+  UpdateDesignationSuccessResponse,
+  UpdateDesignationErrorResponse,
 };
 
 // schemas

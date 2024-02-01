@@ -46,12 +46,17 @@ function DesignationTableToolbar<TData>({
                 </div>
                 {/* button  */}
                 <div className="add-button-container overflow-hidden">
-                    <Link href={"/dashboard/admin/dashboard/system-configuration/Designation/add"}
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            openDesignationForm();
+
+                        }}
                         className="bg-[#002147] flex items-center py-3 px-5 capitalize font-medium text-sm gap-2 rounded-xl text-white"
                     >
                         <Image src={AddIcon} alt={"add-icons"} />
-                        <span>add new Designation</span>
-                    </Link>
+                        <span>add designation</span>
+                    </button>
                 </div>
             </div>
             {/* modal form for creating new Designation  */}

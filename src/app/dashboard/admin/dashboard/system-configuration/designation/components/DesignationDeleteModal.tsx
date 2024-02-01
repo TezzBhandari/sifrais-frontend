@@ -50,13 +50,13 @@ const DesignationDeleteModal = ({
                             Cancel
                         </Button>
                         {/* delete confirm BUTTON  */}
-                        <Button
+                        <button
                             aria-disabled={deleteDesignation.isPending ? true : false}
                             onClick={deleteHandler}
-                            className="rounded-md bg-[#002147] text-[14px] font-medium border border-[#002147] text-white "
+                            className="rounded-md px-8 py-3 bg-[#002147] text-[14px] font-medium border border-[#002147] text-white "
                         >
                             {deleteDesignation.isPending ? "Deleting..." : "Delete"}
-                        </Button>
+                        </button>
                     </div>
                 </div>
             </Modal>
