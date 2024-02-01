@@ -20,7 +20,7 @@ export default function RootLayout({
       <Navbar />
       <Sidebar />
       <SidebarProvider>
-        <main className='p-8 min-h-[calc(100vh-90px)] overflow-hidden overflow-y-scroll bg-[#dde4ee]'>{children}</main>
+        <main className='p-8 min-h-[calc(100vh-90px)] overflow-hidden overflow-y-auto bg-[#dde4ee]'>{children}</main>
       </SidebarProvider>
     </>
   );

@@ -3,10 +3,8 @@
 import DataTable from "@/components/Table/DataTable";
 import DataTableSkeleton from "@/components/Table/DataTableSkeleton";
 
-import DataTablePagination from "@/components/Table/DataTablePagination";
 import useQueryDocuments from "../utils/api/useQueryDocuments";
 import { DocumentTableColumns } from "./DocumentTableColumns";
-import DocumentTableRowActions from "./DocumentTableRowActions";
 import DocumentTableToolbar from "./DocumentTableToolbar";
 
 const DocumentTable = () => {
@@ -40,8 +38,5 @@ const DocumentTable = () => {
     );
 };
 
-export default DocumentTable;
-function useQuerydocument() {
-    throw new Error("Function not implemented.");
-}
 
+export default DocumentTable;

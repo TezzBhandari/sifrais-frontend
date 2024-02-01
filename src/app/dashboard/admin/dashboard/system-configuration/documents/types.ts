@@ -23,6 +23,16 @@ interface DeleteDocumentSuccessResponse {
   message: string;
 }
 
+interface PostDocumentSuccessResponse {
+  status: number;
+  data: Document;
+  message: string;
+}
+
+interface PostDocumentErrorResponse {
+  //commin soon
+}
+
 // interface DeleteDocumentsErrorResponse {
 //   status: number;
 //   message: string;
@@ -45,13 +55,15 @@ const DocumentsFormSchema = z.object({
   doc_name: z.string().min(1, { message: "document name required" }),
 });
 
-type DocumentsFormType = z.infer<typeof DocumentsFormSchema>;
+type DocumentFormType = z.infer<typeof DocumentsFormSchema>;
 
 export type {
   Document,
   DocumentDeleteModalProps,
-  DocumentsFormType,
+  DocumentFormType,
   //   DeleteDocumentsErrorResponse,
+  PostDocumentErrorResponse,
+  PostDocumentSuccessResponse,
   DeleteDocumentSuccessResponse,
   DocumentsTableRowActionsProps,
   QueryDocumentsSuccessResponse,

@@ -36,22 +36,26 @@ function DocumentTableToolbar<TData>({
                 <div className="flex-1 flex justify-center">
                     <FilterInput
                         value={
-                            (table.getColumn("Document_name")?.getFilterValue() as string) ?? ""
+                            (table.getColumn("doc_name")?.getFilterValue() as string) ?? ""
                         }
                         onChange={(e) =>
-                            table.getColumn("Document_name")?.setFilterValue(e.target.value)
+                            table.getColumn("doc_name")?.setFilterValue(e.target.value)
                         }
                         placeholder="search by Document name"
                     />
                 </div>
                 {/* button  */}
                 <div className="add-button-container overflow-hidden">
-                    <Link href={"/dashboard/admin/dashboard/system-configuration/Document/add"}
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            openDocumentForm();
+                        }}
                         className="bg-[#002147] flex items-center py-3 px-5 capitalize font-medium text-sm gap-2 rounded-xl text-white"
                     >
                         <Image src={AddIcon} alt={"add-icons"} />
                         <span>add new Document</span>
-                    </Link>
+                    </button>
                 </div>
             </div>
             {/* modal form for creating new Document  */}
