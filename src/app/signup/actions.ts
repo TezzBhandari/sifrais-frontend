@@ -4,8 +4,11 @@ import { z } from "zod";
 import { UserSignupSchema } from "./types";
 import { axiosInstance } from "../lib/axios/axiosApi";
 import axios, { isAxiosError } from "axios";
-import verifyOtp from "./otp/utils/verifyOtp";
+import verifyOtp, { VerifyOtpErrorResponse } from "./otp/utils/verifyOtp";
 import { HttpMethod } from "@/lib/utils/requestHandler";
+import { cookies } from "next/headers";
+
+import jwt from "jsonwebtoken";
 
 // Infering type from zod schema for user register fields;
 type UserSignupType = z.infer<typeof UserSignupSchema>;
@@ -207,7 +210,26 @@ export const signUpUser = async (
 // };
 
 export const OtpVerification = async (data: { otp: string; uid: string }) => {
-  console.log("from otp verification", data);
+  try {
+    const response = await verifyOtp({
+      url: "/api/signup/complete",
+      httpMethod: HttpMethod.POST,
+      body: data,
+    });
+
+    if (response.code === "success" && response.statusCode === 200) {
+      console.log(jwt.decode(response.data.access_token, { complete: true }));
+      console.log("jwt token");
+      cookies().set("name", response.data.access_token, {
+        httpOnly: true,
+        maxAge: 86400,
+        sameSite: "strict",
+      });
+    }
+    return response;
+  } catch (error) {
+    return error as VerifyOtpErrorResponse;
+  }
   return await verifyOtp({
     url: "/api/signup/complete",
     httpMethod: HttpMethod.POST,

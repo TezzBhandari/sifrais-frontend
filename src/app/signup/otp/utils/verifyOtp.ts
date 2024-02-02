@@ -9,7 +9,7 @@ export type VerifyOtpSuccessResponse = {
   message: string;
 };
 
-interface VerifyOtpErrorResponse {
+export interface VerifyOtpErrorResponse {
   status: number;
   message: string;
 }
