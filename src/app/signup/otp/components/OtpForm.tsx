@@ -61,11 +61,11 @@ const OtpForm = () => {
 
   // not a permanent solution
   // figure out the case where user is already verified and logged in redirect him to dashboard or previos route
-  useEffect(() => {
-    if (uid === "") {
-      router.push("/signup");
-    }
-  }, [router, uid]);
+  // useEffect(() => {
+  //   if (uid === "") {
+  //     router.push("/signup");
+  //   }
+  // }, [router, uid]);
 
   // OTP FORM'S SUBMIT HANDLER
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -109,7 +109,7 @@ const OtpForm = () => {
       revokeUserId();
       // redirecting user to dashboard page
       // todo: hard push so that user can't return back to otp page
-      router.push("/admin/dashboard");
+      router.push("/dashboard");
       return;
     }
 

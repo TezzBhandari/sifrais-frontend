@@ -4,8 +4,18 @@ import { z } from "zod";
 import { UserSignupSchema } from "./types";
 import { axiosInstance } from "../lib/axios/axiosApi";
 import axios, { isAxiosError } from "axios";
-import verifyOtp from "./otp/utils/verifyOtp";
-import { HttpMethod } from "@/lib/utils/requestHandler";
+import verifyOtp, {
+  VerifyOtpErrorResponse,
+  VerifyOtpSuccessResponse,
+} from "./otp/utils/verifyOtp";
+import {
+  ErrorResponse,
+  HttpMethod,
+  SuccessResponse,
+} from "@/lib/utils/requestHandler";
+import { cookies } from "next/headers";
+
+import jwt from "jsonwebtoken";
 
 // Infering type from zod schema for user register fields;
 type UserSignupType = z.infer<typeof UserSignupSchema>;
@@ -207,7 +217,31 @@ export const signUpUser = async (
 // };
 
 export const OtpVerification = async (data: { otp: string; uid: string }) => {
-  console.log("from otp verification", data);
+  try {
+    const response = await verifyOtp({
+      url: "/api/signup/complete",
+      httpMethod: HttpMethod.POST,
+      body: data,
+    });
+
+    if (response.code === "success" && response.statusCode === 200) {
+      console.log(jwt.decode(response.data.access_token, { complete: true }));
+      console.log("jwt token");
+      cookies().set("token", response.data.access_token, {
+        httpOnly: true,
+        maxAge: 86400,
+        sameSite: "strict",
+      });
+      cookies().set("isAuthenticated", "true", {
+        httpOnly: true,
+        maxAge: 86400,
+        sameSite: "strict",
+      });
+    }
+    return response as SuccessResponse<VerifyOtpSuccessResponse>;
+  } catch (error) {
+    return error as ErrorResponse<VerifyOtpErrorResponse>;
+  }
   return await verifyOtp({
     url: "/api/signup/complete",
     httpMethod: HttpMethod.POST,

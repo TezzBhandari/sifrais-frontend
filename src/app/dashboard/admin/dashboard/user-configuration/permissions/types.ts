@@ -8,7 +8,6 @@ interface Permission {
   parent_id: number;
   permission_name: string;
   guard_name: string;
-  
 }
 
 // fetch office response type
@@ -19,6 +18,16 @@ interface QueryPermissionSuccessResponse {
 }
 
 interface QueryPermissionErrorResponse {
+  status: number;
+  message: string;
+}
+
+interface PostPermissionSuccessResponse {
+  status: number;
+  message: string;
+}
+
+interface PostPermissionErrorResponse {
   status: number;
   message: string;
 }
@@ -48,19 +57,25 @@ interface PermissionDeleteModalProps {
 
 // office form schema
 const PermissionFormSchema = z.object({
-  
+  parent_id: z.number(),
+  permission_name: z
+    .string()
+    .min(1, { message: "permission name is required" }),
+  guard_name: z.string().min(1, { message: "guard name is required" }),
 });
 
-type OfficeFormType = z.infer<typeof PermissionFormSchema>;
+type PermissionFormType = z.infer<typeof PermissionFormSchema>;
 
 export type {
   Permission,
   PermissionDeleteModalProps,
-  OfficeFormType,
+  PermissionFormType,
   //   DeleteOfficeErrorResponse,
   DeletePermissionSuccessResponse,
   PermissionTableRowActionsProps,
   QueryPermissionSuccessResponse,
+  PostPermissionErrorResponse,
+  PostPermissionSuccessResponse,
   QueryPermissionErrorResponse,
 };
 
