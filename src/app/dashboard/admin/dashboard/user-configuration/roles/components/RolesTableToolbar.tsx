@@ -7,62 +7,62 @@ import FilterInput from "@/components/Table/FilterInput";
 import { Table } from "@tanstack/react-table";
 
 import AddIcon from "@/../public/assets/Add_Icon.svg";
-import CreateOfficeModalForm from "./CreateRolesModalForm";
+import CreateRoleModalForm from "./CreateRoleModalForm";
 
 interface RolesTableToolbarProps<TData> {
-    table: Table<TData>;
+  table: Table<TData>;
 }
 
 function RolesTableToolbar<TData>({
-    table,
+  table,
 }: RolesTableToolbarProps<TData>) {
 
-    const [isOfficeFormOpen, setOfficeFormOpen] = useState(false)
+  const [isCreateRoleModalFormOpen, setIsCreateRoleModalFormOpen] = useState(false)
 
-    const closeOfficeForm = () => {
-        setOfficeFormOpen(false)
-    }
+  const closeCreateRoleModalForm = () => {
+    setIsCreateRoleModalFormOpen(false)
+  }
 
-    const openOfficeForm = () => {
-        setOfficeFormOpen(true)
-    }
+  const openCreateRoleModalForm = () => {
+    setIsCreateRoleModalFormOpen(true)
+  }
 
-    return (
-        <>
-            <div className="flex items-center ">
-                {/* header  */}
-                <DynamicRouteHeader pageHeader={"Permission"} showBreadCrumb={false} />
-                {/* input filter  */}
-                <div className="flex-1 flex justify-center">
-                    <FilterInput
-                        value={
-                            (table.getColumn("office_name")?.getFilterValue() as string) ?? ""
-                        }
-                        onChange={(e) =>
-                            table.getColumn("office_name")?.setFilterValue(e.target.value)
-                        }
-                        placeholder="search by permission name"
-                    />
-                </div>
-                {/* button  */}
-                <div className="add-button-container overflow-hidden">
-                    <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            openOfficeForm()
-                        }}
-                        className="bg-[#002147] flex items-center py-3 px-5 capitalize font-medium text-sm gap-2 rounded-xl text-white"
-                    >
-                        <Image src={AddIcon} alt={"add-icons"} />
-                        <span>add new permission</span>
-                    </button>
-                </div>
-            </div>
-            {/* modal form for creating new office  */}
-            {/* <CreateOfficeModalForm isOpen={isOfficeFormOpen} onClose={closeOfficeForm} /> */}
+  return (
+    <>
+      <div className="flex items-center ">
+        {/* header  */}
+        <DynamicRouteHeader pageHeader={"Permission"} showBreadCrumb={false} />
+        {/* input filter  */}
+        <div className="flex-1 flex justify-center">
+          <FilterInput
+            value={
+              (table.getColumn("role")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(e) =>
+              table.getColumn("role")?.setFilterValue(e.target.value)
+            }
+            placeholder="search by role name"
+          />
+        </div>
+        {/* button  */}
+        <div className="add-button-container overflow-hidden">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              openCreateRoleModalForm()
+            }}
+            className="bg-[#002147] flex items-center py-3 px-5 capitalize font-medium text-sm gap-2 rounded-xl text-white"
+          >
+            <Image src={AddIcon} alt={"add-icons"} />
+            <span>add role</span>
+          </button>
+        </div>
+      </div>
+      {/* modal form for creating new office  */}
+      <CreateRoleModalForm isOpen={isCreateRoleModalFormOpen} onClose={closeCreateRoleModalForm} />
 
-        </>
-    );
+    </>
+  );
 }
 
 export default RolesTableToolbar;
