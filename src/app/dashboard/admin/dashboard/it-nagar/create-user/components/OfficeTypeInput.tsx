@@ -3,12 +3,16 @@ import { InputLabel } from "@/components/InputLabel";
 import ListBox from "@/components/ListBox";
 import { Controller, useFormContext } from "react-hook-form";
 import QueryOfficeType, { OfficeType } from "../utils/api/QueryOfficeType";
+import { Skeleton } from "@/components/Skeleton";
 
 const OfficeTypeInput = () => {
   const { control } = useFormContext();
   const { data: officeTypes, error, isError, isLoading } = QueryOfficeType();
   if (isLoading) {
-    return <div>fetching office type for the input</div>;
+    return <div >
+      <Skeleton className="h-3 mb-1 rounded-[0.25rem] w-16 bg-gray-400" />
+      <Skeleton className="h-11 bg-gray-400" />
+    </div>;;
   }
 
   if (isError) {

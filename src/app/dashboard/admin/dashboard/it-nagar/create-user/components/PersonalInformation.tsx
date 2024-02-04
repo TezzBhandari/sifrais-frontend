@@ -20,7 +20,7 @@ interface PersonalInformationProps {
 const PersonalInformation: React.FC<PersonalInformationProps> = ({
   gender,
 }) => {
-  const { register, control } = useFormContext();
+  const { register, control, formState: { errors } } = useFormContext<AdminUserMutationType>();
   return (
     <>
       <div className="personal-Information-Input-Section px-7 py-10">
@@ -34,73 +34,80 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
             {/* fullname in english  */}
             <div>
               <InputLabel htmlFor="" labelName={"Fullname (En)"} />
-              <InputField
-                {...register("personalInformation.fullnameEnglish")}
-                className="h-11"
-              />
+              <div>
+                <InputField
+                  {...register("personalInformation.fullnameEnglish")}
+                  className="h-11"
+                />
+                <span className="text-red-500 text-xs tracking-wide">
+                  {errors.personalInformation?.fullnameEnglish !== undefined
+                    ? errors.personalInformation.fullnameEnglish.message
+                    : null}
+                </span>
+              </div>
             </div>
             {/* EMAIL  */}
             <div>
               <InputLabel htmlFor="" labelName={"Email"} />
-              <InputField
-                {...register("personalInformation.email")}
-                className="h-11"
-              />
+              <div>
+                <InputField
+                  {...register("personalInformation.email")}
+                  className="h-11"
+                />
+                <span className="text-red-500 text-xs tracking-wide">
+                  {errors.personalInformation?.email !== undefined
+                    ? errors.personalInformation.email.message
+                    : null}
+                </span>
+              </div>
             </div>
-            {/* GROUP/CASTE  */}
+            {/* PASSWORD  */}
             <div>
-              <InputLabel htmlFor="" labelName={"Group / Caste"} />
-              <InputField
-                {...register("personalInformation.casteGroup")}
-                className="h-11"
-              />
+              <InputLabel fieldRequired={true} htmlFor="" labelName={"password"} />
+              <div>
+                <InputField
+                  type="password"
+                  {...register("personalInformation.password")}
+                  className="h-11"
+                />
+                <span className="text-red-500 text-xs tracking-wide">
+                  {errors.personalInformation?.password !== undefined
+                    ? errors.personalInformation.password.message
+                    : null}
+                </span>
+              </div>
             </div>
+            {/* RIGHT SECTION  */}
           </div>
           <div className="Personal-Info-Right-Section flex flex-col gap-3 flex-1">
             {/* FULLNAME in NEPALI  */}
             <div>
               <InputLabel htmlFor="" labelName={"Fullname (Np)"} />
-              <InputField
-                {...register("personalInformation.fullnameNepali")}
-                className="h-11"
-              />
+              <div>
+                <InputField
+                  {...register("personalInformation.fullnameNepali")}
+                  className="h-11"
+                />
+                <span className="text-red-500 text-xs tracking-wide">
+                  {errors.personalInformation?.fullnameNepali !== undefined
+                    ? errors.personalInformation.fullnameNepali.message
+                    : null}
+                </span>
+              </div>
             </div>
             {/* MOBILE NUMBER */}
             <div>
               <InputLabel htmlFor="" labelName={"Moblie Number"} />
-
-              <InputField
-                {...register("personalInformation.phoneNumber")}
-                className="h-11"
-              />
-            </div>
-            {/* GENDER */}
-
-            <div>
-              <InputLabel htmlFor="" labelName={"Gender"} />
-              <Controller
-                control={control}
-                render={({ field: { name, value, onBlur, onChange } }) => {
-                  return (
-                    <>
-                      <ListBox<Gender>
-                        options={gender}
-                        className="h-11 shadow-none"
-                        valueExtractor={(item) => item.id.toString()}
-                        labelExtractor={(item) => item.gender_np}
-                        value={value}
-                        labelExtractorByValue={(value, options) =>
-                          options.find(
-                            (option) => option.id.toString() === value
-                          )?.gender_np || "select a gender"
-                        }
-                        onChange={onChange}
-                      />
-                    </>
-                  );
-                }}
-                name={"personalInformation.gender"}
-              />
+              <div>
+                <InputField
+                  {...register("personalInformation.phoneNumber")}
+                  className="h-11"
+                /><span className="text-red-500 text-xs tracking-wide">
+                  {errors.personalInformation?.phoneNumber !== undefined
+                    ? errors.personalInformation.phoneNumber.message
+                    : null}
+                </span>
+              </div>
             </div>
           </div>
         </div>

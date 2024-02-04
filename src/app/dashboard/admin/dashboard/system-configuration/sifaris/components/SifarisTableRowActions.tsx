@@ -29,7 +29,7 @@ const SifarisTableRowActions = ({ sifaris }: SifarisTableRowActionsProps) => {
         <span className="cursor-pointer p-1 hover:bg-gray-300 rounded-md text-gray-600">
           <Image src={ViewIcon} alt={"view Icon"} />
         </span>
-        <Link href={"/dashboard/admin/dashboard/system-configuration/sifaris/add"} className="cursor-pointer p-1 hover:bg-gray-300 rounded-md text-black bg-red-300">
+        <Link href={`/dashboard/admin/dashboard/system-configuration/sifaris/add/${sifaris.id}`} className="cursor-pointer p-1 hover:bg-gray-300 rounded-md text-black bg-red-300">
           <Image src={AddIcon} alt={"Add Icon"} />
         </Link>
         <span

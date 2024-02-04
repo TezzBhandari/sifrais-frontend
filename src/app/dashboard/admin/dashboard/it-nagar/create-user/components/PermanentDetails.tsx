@@ -20,7 +20,7 @@ const PermanentDetails: React.FC<PermanentDetailsProps> = ({
   provinces,
   localLevels,
 }) => {
-  const { register, control, setValue, watch } =
+  const { register, control, setValue, formState: { errors }, watch } =
     useFormContext<AdminUserMutationType>();
   const [districtsState, setDistrictsState] = useState(districts);
   const [localLevelState, setLocalLevelState] = useState(localLevels);
@@ -66,7 +66,7 @@ const PermanentDetails: React.FC<PermanentDetailsProps> = ({
   }, [watchDisitrict, setValue]);
 
   return (
-    <>
+    <div>
       <div className="Permanent-Details-Input-Section px-7 py-10">
         <div className="form-sub-heading-section">
           <h2 className="text-xl font-bold leading-5 capitalize text-[#1D1C2B]">
@@ -78,59 +78,65 @@ const PermanentDetails: React.FC<PermanentDetailsProps> = ({
             {/* PROVINCE  */}
             <div>
               <InputLabel htmlFor="" labelName="province" />
-              <Controller
-                control={control}
-                render={({ field: { name, onChange, value } }) => (
-                  <ListBox<Province>
-                    className="shadow-none h-11"
-                    labelExtractor={(item) => item.province_np}
-                    valueExtractor={(item) => item.id.toString()}
-                    labelExtractorByValue={(value, options) =>
-                      options.find((option) => option.id.toString() === value)
-                        ?.province_np || "select a province"
-                    }
-                    options={provinces}
-                    value={value}
-                    onChange={onChange}
-                    name={name}
-                  />
-                )}
-                name={"permanentDetails.province"}
-              />
+              <div>
+                <Controller
+                  control={control}
+                  render={({ field: { name, onChange, value } }) => (
+                    <ListBox<Province>
+                      className="shadow-none h-11"
+                      labelExtractor={(item) => item.province_np}
+                      valueExtractor={(item) => item.id.toString()}
+                      labelExtractorByValue={(value, options) =>
+                        options.find((option) => option.id.toString() === value)
+                          ?.province_np || "select a province"
+                      }
+                      options={provinces}
+                      value={value}
+                      onChange={onChange}
+                      name={name}
+                    />
+                  )}
+                  name={"permanentDetails.province"}
+                />
+                <span className="text-red-500 text-xs tracking-wide">
+                  {errors.permanentDetails?.province !== undefined
+                    ? errors.permanentDetails.province.message
+                    : null}
+                </span>
+              </div>
             </div>
             {/* LOCAL LEVEL   */}
 
             <div>
               <InputLabel htmlFor="" labelName="local level" />
-              <Controller
-                control={control}
-                render={({ field: { name, onChange, value } }) => (
-                  <ListBox<LocalLevel>
-                    className="shadow-none h-11"
-                    labelExtractor={(item) => item.lgname_np}
-                    valueExtractor={(item) => item.id.toString()}
-                    labelExtractorByValue={(value, options) =>
-                      options.find((option) => option.id.toString() === value)
-                        ?.lgname_np || "selct a local level"
-                    }
-                    options={localLevelState}
-                    value={value}
-                    onChange={onChange}
-                    name={name}
-                  />
-                )}
-                name={"permanentDetails.localLevel"}
-              />
+              <div>
+                <Controller
+                  control={control}
+                  render={({ field: { name, onChange, value } }) => (
+                    <ListBox<LocalLevel>
+                      className="shadow-none h-11"
+                      labelExtractor={(item) => item.lgname_np}
+                      valueExtractor={(item) => item.id.toString()}
+                      labelExtractorByValue={(value, options) =>
+                        options.find((option) => option.id.toString() === value)
+                          ?.lgname_np || "selct a local level"
+                      }
+                      options={localLevelState}
+                      value={value}
+                      onChange={onChange}
+                      name={name}
+                    />
+                  )}
+                  name={"permanentDetails.localLevel"}
+                />
+                <span className="text-red-500 text-xs tracking-wide">
+                  {errors.permanentDetails?.localLevel !== undefined
+                    ? errors.permanentDetails.localLevel.message
+                    : null}
+                </span>
+              </div>
             </div>
-            {/* TOLE */}
-            <div>
-              <InputLabel htmlFor="" labelName={"Tole"} />
 
-              <InputField
-                {...register("permanentDetails.tole")}
-                className="h-11"
-              />
-            </div>
           </div>
           <div className="Permanent-Details-Right-Section flex flex-col gap-3 flex-1">
             {/* DISTRICTS  */}
@@ -155,19 +161,25 @@ const PermanentDetails: React.FC<PermanentDetailsProps> = ({
                 )}
                 name={"permanentDetails.district"}
               />
+              <span className="text-red-500 text-xs tracking-wide">
+                {errors.permanentDetails?.district !== undefined
+                  ? errors.permanentDetails.district.message
+                  : null}
+              </span>
             </div>
-            {/* WARD NUMBER */}
-            <div>
-              <InputLabel htmlFor="" labelName={"Ward Number"} />
-              <InputField
-                {...register("permanentDetails.wardNumber")}
-                className="h-11"
-              />
-            </div>
+          </div>
+          {/* Tole */}
+          <div>
+            <InputLabel htmlFor="" labelName={"Tole"} />
+
+            <InputField
+              {...register("permanentDetails.tole")}
+              className="h-11"
+            />
           </div>
         </div>
       </div>
-    </>
+    </div >
   );
 };
 

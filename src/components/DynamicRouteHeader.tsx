@@ -14,7 +14,7 @@ const DynamicRouteHeader = ({
 }: DynamicRouteHeaderProps) => {
   return (
     <div className="flex justify-center flex-col">
-      <h2 className="text-[1.75rem] leading-[2rem] text-[#1D1C2B] font-bold">
+      <h2 className="text-[1.75rem] leading-[2rem] capitalize text-[#1D1C2B] font-bold">
         {pageHeader}
       </h2>
       {showBreadCrumb ? (

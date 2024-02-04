@@ -7,10 +7,22 @@ import { Controller, useFormContext } from "react-hook-form";
 import { type Gender } from "../utils/api/QueryGenders";
 import OfficeTypeInput from "./OfficeTypeInput";
 import OfficeInput from "./OfficeNameInput";
+import DesignationInput from "./DesignationInput";
+import { InputField } from "@/components/InputField";
+import { ActiveStatus } from "../types";
 
 interface OfficeDetailsProps {
   genders: Array<Gender>;
 }
+
+const activeSatus: Array<ActiveStatus> = [
+  {
+    label: "active", value: true
+  }
+  , {
+    label: "inactive", value: false
+  }
+]
 
 const OfficeDetails: React.FC<OfficeDetailsProps> = ({ genders }) => {
   const { register, control } = useFormContext();
@@ -24,29 +36,33 @@ const OfficeDetails: React.FC<OfficeDetailsProps> = ({ genders }) => {
         </div>
         <div className="flex gap-10 mt-7">
           <div className="Office-Detail-Left-Section flex flex-col gap-3 flex-1">
-            {/* STAFF CATEGORY  */}
+            {/* Active status  */}
             <div>
-              <InputLabel htmlFor="" labelName="staff category" />
+              <InputLabel htmlFor="" labelName="status" />
               <Controller
                 control={control}
                 render={({ field: { name, onChange, value } }) => (
-                  <ListBox<Gender>
+                  <ListBox<ActiveStatus, boolean>
                     className="shadow-none h-11"
-                    labelExtractor={(item) => item.gender_en}
-                    valueExtractor={(item) => item.id.toString()}
+                    labelExtractor={(item) => item.label}
+                    valueExtractor={(item) => item.value}
                     labelExtractorByValue={(value, options) =>
-                      options.find((option) => option.id.toString() === value)
-                        ?.gender_en || "select staff category"
+                      options.find((option) => option.value === value)
+                        ?.label || "select status"
                     }
-                    options={genders}
+                    options={activeSatus}
                     value={value}
                     onChange={onChange}
                     name={name}
                   />
                 )}
-                name={"officeDetails.staffCateogry"}
+                name={"officeDetails.active_status"}
               />
             </div>
+
+
+
+
             {/* OFFICE TYPE  */}
             <OfficeTypeInput />
           </div>
@@ -54,28 +70,8 @@ const OfficeDetails: React.FC<OfficeDetailsProps> = ({ genders }) => {
             {/* OFFICE NAME */}
             <OfficeInput />
             {/* DESIGNATION */}
-            <div>
-              <InputLabel htmlFor="" labelName="designation" />
-              <Controller
-                control={control}
-                render={({ field: { name, onChange, value } }) => (
-                  <ListBox<(typeof genders)[0]>
-                    className="shadow-none h-11"
-                    labelExtractor={(item) => item.gender_en}
-                    valueExtractor={(item) => item.id.toString()}
-                    labelExtractorByValue={(value, options) =>
-                      options.find((option) => option.id.toString() === value)
-                        ?.gender_en || "select designation"
-                    }
-                    options={genders}
-                    value={value}
-                    onChange={onChange}
-                    name={name}
-                  />
-                )}
-                name={"officeDetails.designation"}
-              />
-            </div>
+            <DesignationInput />
+
           </div>
         </div>
       </div>

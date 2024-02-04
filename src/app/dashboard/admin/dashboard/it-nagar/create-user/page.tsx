@@ -78,14 +78,14 @@ const page = async () => {
   return (
     <div className="bg-[#fff] rounded-[20px] p-6 container">
       <DynamicRouteHeader pageHeader={"User"} delimeter={">"} />
-      <AdminFormProvider>
-        <AdminUserForm
-          genders={genderResponse.data.data}
-          provinces={provincesResponse.data.data}
-          districts={districtsResponse.data.data}
-          localLevels={localLevelResponse.data.data}
-        />
-      </AdminFormProvider>
+      {/* <AdminFormProvider> */}
+      <AdminUserForm
+        genders={genderResponse.data.data}
+        provinces={provincesResponse.data.data}
+        districts={districtsResponse.data.data}
+        localLevels={localLevelResponse.data.data}
+      />
+      {/* </AdminFormProvider> */}
     </div>
   );
 };

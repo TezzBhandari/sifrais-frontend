@@ -4,8 +4,9 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import type { CreateSifarisForm } from "../types";
 import InputRowList from "./InputRowList";
 import FormPreviewModal from "./FormPreviewModal";
+import useCreateFormTemplate from '../../utils/api/useCreateFormTemplate';
 
-const SifarisForm = () => {
+const SifarisForm = ({ sifarisId }: { sifarisId: number }) => {
   const [previewModal, setPreviewModal] = React.useState(false);
 
   const openPreviewModal = () => {
@@ -15,6 +16,9 @@ const SifarisForm = () => {
   const closePreviewModal = () => {
     setPreviewModal(false)
   }
+
+  // post sifaris from template custom hooks
+  const createSifarisFormTemplate = useCreateFormTemplate()
 
   const sifarisFormCreator = useForm<CreateSifarisForm>({
     defaultValues: {
@@ -48,6 +52,8 @@ const SifarisForm = () => {
       <form
         onSubmit={sifarisFormCreator.handleSubmit((data) => {
           alert(JSON.stringify(data))
+          alert(sifarisId)
+          createSifarisFormTemplate.mutate({ sifarisId: sifarisId, formTemplate: data })
         }
         )}
       >

@@ -1,11 +1,10 @@
+import { url } from "inspector";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
-  console.log("middlware:  ", request.url);
-  console.log("middleare next: ", request.nextUrl);
-  console.log("clone in middleware: ", request.nextUrl.clone());
+  console.log(request.nextUrl);
 
   const isAuth = request.cookies.get("isAuthenticated")?.value;
 
@@ -15,10 +14,13 @@ export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/signup/otp") {
   } else {
     if (publicRoutesNoAuth.includes(request.nextUrl.pathname)) {
-      console.log("public route");
+      console.log("public route", request.url);
     } else if (publicRouteAndAuth.includes(request.nextUrl.pathname)) {
-      console.log("public route and auth");
+      console.log("public route and auth", request.url);
     } else {
+      if (isAuth === undefined) {
+        return NextResponse.redirect(new URL("/", request.url));
+      }
       if (!(isAuth === "true")) {
         return NextResponse.redirect(new URL("/", request.url));
       }

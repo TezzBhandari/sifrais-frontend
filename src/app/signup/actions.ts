@@ -235,6 +235,7 @@ export const OtpVerification = async (data: { otp: string; uid: string }) => {
       cookies().set("isAuthenticated", "true", {
         httpOnly: true,
         maxAge: 86400,
+        expires: 86400,
         sameSite: "strict",
       });
     }

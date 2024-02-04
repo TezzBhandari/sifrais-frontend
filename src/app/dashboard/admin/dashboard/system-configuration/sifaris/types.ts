@@ -19,6 +19,16 @@ const SifarisSchema = z.object({
     .array(),
 });
 
+interface SifarisFormTemplateSuccessResponse {
+  status: number;
+  message: string;
+}
+
+interface SifarisFormTemplateErrorResponse {
+  status: number;
+  message: string;
+}
+
 interface SifarisSuccessResponse {
   status: number;
   data: Array<z.infer<typeof SifarisSchema>>;
@@ -49,6 +59,8 @@ export type {
   SifarisSuccessResponse,
   SifarisErrorResponse,
   SifarisTableRowActionsProps,
+  SifarisFormTemplateErrorResponse,
+  SifarisFormTemplateSuccessResponse,
 };
 
 export type Sifaris = z.infer<typeof SifarisSchema>;

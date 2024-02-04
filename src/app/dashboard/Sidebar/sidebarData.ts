@@ -24,7 +24,7 @@ export const sidebarSifaris = [
     id: 1,
     // label: "ढाचा सिर्जना",
     label: "add new",
-    href: "/",
+    href: "/dashboard/admin/dashboard/sifaris/add-new",
     disabled: false,
   },
   {

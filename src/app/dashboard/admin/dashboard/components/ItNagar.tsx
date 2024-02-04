@@ -10,7 +10,6 @@ import FilterInputField from "../it-nagar/components/FilterInputField";
 import UserList from "../it-nagar/components/UserList";
 import { User } from "../it-nagar/types";
 import UserColumns from "../it-nagar/components/UserColumn";
-import UserDeleteConfirmationModal from "../it-nagar/components/UserDeleteConfirmationModal";
 import { useUsersQuery } from "../it-nagar/utils/api/Users/queries";
 import Link from "next/link";
 import DataTableSkeleton from "@/components/Table/DataTableSkeleton";

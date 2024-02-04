@@ -30,15 +30,15 @@ function PermissionTableToolbar<TData>({
     <>
       <div className="flex items-center ">
         {/* header  */}
-        <DynamicRouteHeader pageHeader={"Permission"} showBreadCrumb={false} />
+        <DynamicRouteHeader pageHeader={"permission name"} showBreadCrumb={false} />
         {/* input filter  */}
         <div className="flex-1 flex justify-center">
           <FilterInput
             value={
-              (table.getColumn("permission")?.getFilterValue() as string) ?? ""
+              (table.getColumn("permission_name")?.getFilterValue() as string) ?? ""
             }
             onChange={(e) =>
-              table.getColumn("permission")?.setFilterValue(e.target.value)
+              table.getColumn("permission_name")?.setFilterValue(e.target.value)
             }
             placeholder="search by permission name"
           />

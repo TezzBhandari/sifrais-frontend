@@ -4,12 +4,16 @@ import ListBox from "@/components/ListBox";
 import { Controller, useFormContext } from "react-hook-form";
 import QueryOffices, { Office } from "../utils/api/QueryOffices";
 import { AdminUserMutationType } from "../types";
+import { Skeleton } from "@/components/Skeleton";
 
 const OfficeInput = () => {
   const { control } = useFormContext<AdminUserMutationType>();
   const { data: offices, error, isError, isLoading } = QueryOffices();
   if (isLoading) {
-    return <div>fetching offices for the input</div>;
+    return <div >
+      <Skeleton className="h-3 mb-1 rounded-[0.25rem] w-16 bg-gray-400" />
+      <Skeleton className="h-11 bg-gray-400" />
+    </div>;
   }
 
   if (isError) {
