@@ -14,14 +14,12 @@ interface NumberFieldProps {
 }
 
 const NumberField = ({ fieldAttribute, name, className }: NumberFieldProps) => {
-  // const { register } = useFormContext();
-  const { id, label, type, ...rest } = fieldAttribute;
+  const { id, label, type, required, ...rest } = fieldAttribute;
   return (
     <>
       <div className={cn("", className)}>
         <InputLabel htmlFor={id} labelName={label} />
         <InputField type="number" {...rest}
-        // {...register(name)} 
         />
       </div>
     </>

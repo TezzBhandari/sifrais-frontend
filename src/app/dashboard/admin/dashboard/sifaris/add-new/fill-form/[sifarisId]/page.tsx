@@ -1,8 +1,9 @@
 import React from 'react'
+import SifarisForm from './components/SifarisForm'
 
-const page = ({ params }: { params: { sifarisId: number } }) => {
+const page = ({ params }: { params: { sifarisId: string } }) => {
     return (
-        <><SifarisForm sifarisId /></>
+        <><SifarisForm sifarisId={params.sifarisId} /></>
     )
 }
 
