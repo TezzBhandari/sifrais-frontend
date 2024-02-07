@@ -26,7 +26,6 @@ const DateField = ({ fieldAttribute, name, className }: DateFieldProps) => {
           className="bg-white"
           type="date"
           {...rest}
-        // {...register(name, { required: required })}
         />
       </div>
     </>

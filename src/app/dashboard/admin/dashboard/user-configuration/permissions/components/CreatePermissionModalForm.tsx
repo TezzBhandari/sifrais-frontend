@@ -61,7 +61,7 @@ const CreatePermissionModalForm = ({
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} className="rounded-2xl px-6 overflow-hidden ">
+      <Modal isOpen={isOpen} onClose={onClose} className="rounded-2xl px-6">
 
         <form
           onSubmit={handleSubmit((data) => {

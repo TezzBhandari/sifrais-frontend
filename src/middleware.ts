@@ -11,6 +11,13 @@ export function middleware(request: NextRequest) {
   const publicRoutesNoAuth = ["/signup", "/login"];
   const publicRouteAndAuth = ["/"];
 
+  if (publicRoutesNoAuth.includes(request.nextUrl.pathname)) {
+    if (isAuth === "true") {
+      console.log("yo you already login ", request.nextUrl);
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+  }
+
   if (request.nextUrl.pathname === "/signup/otp") {
   } else {
     if (publicRoutesNoAuth.includes(request.nextUrl.pathname)) {

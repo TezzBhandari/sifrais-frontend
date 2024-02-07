@@ -243,9 +243,9 @@ export const OtpVerification = async (data: { otp: string; uid: string }) => {
   } catch (error) {
     return error as ErrorResponse<VerifyOtpErrorResponse>;
   }
-  return await verifyOtp({
-    url: "/api/signup/complete",
-    httpMethod: HttpMethod.POST,
-    body: data,
-  });
+  // return await verifyOtp({
+  //   url: "/api/signup/complete",
+  //   httpMethod: HttpMethod.POST,
+  //   body: data,
+  // });
 };

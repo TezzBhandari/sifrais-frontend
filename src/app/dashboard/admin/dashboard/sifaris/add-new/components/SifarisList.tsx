@@ -33,7 +33,7 @@ const SifarisList = () => {
 
     <div className="container mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(3,1fr)] xl:grid-cols-[repeat(4,1fr)] pt-6 gap-8">
       {sifarisTypes.data.map(sifaris => {
-        return <>
+        return <React.Fragment key={sifaris.id}>
           {/* <!-- Remove className [ h-24 ] when adding a card block -->
             <!-- Remove className [ border-gray-300  dark:border-gray-700 border-dashed border-2 ] to remove dotted border --> */}
           {/* <div className="rounded border-gray-300 dark:border-gray-700 border-dashed border-2 h-24"></div> */}
@@ -45,7 +45,7 @@ const SifarisList = () => {
           <Link href={`/dashboard/admin/dashboard/sifaris/add-new/${sifaris.id}`} key={sifaris.id} className="rounded flex items-center justify-center cursor-pointer border-gray-300 dark:border-gray-700 border-dashed border-2 h-24">
             <h1>{sifaris.name}</h1>
           </Link>
-        </>
+        </React.Fragment>
       })
       }
     </div>
