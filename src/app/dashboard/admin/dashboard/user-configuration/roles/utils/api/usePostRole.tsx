@@ -5,8 +5,11 @@ import { toast } from 'react-toastify'
 import { UseFormReset } from 'react-hook-form'
 
 const postRole = async ({ role, permissions }: RoleFormType) => {
+    const permissionsBody = permissions.map((permission) => {
+        return permission.id
+    })
     const response = await authHttpClient.post<PostRoleSuccessResponse>("/api/roles", {
-        role: role, permissions: permissions
+        role: role, permissions: permissionsBody
     })
 
     return response.data

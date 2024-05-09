@@ -31,7 +31,7 @@ function RolesTableToolbar<TData>({
     <>
       <div className="flex items-center ">
         {/* header  */}
-        <DynamicRouteHeader pageHeader={"Permission"} showBreadCrumb={false} />
+        <DynamicRouteHeader pageHeader={"Roles"} showBreadCrumb={false} />
         {/* input filter  */}
         <div className="flex-1 flex justify-center">
           <FilterInput

@@ -74,7 +74,7 @@ const CreatePermissionModalForm = ({
           {/* FORM HEADING  */}
           <div className="">
             <h1 className="not-italic text-2xl font-bold leading-6 mb-4 mt-1">
-              Add Designation
+              Add Permission
             </h1>
           </div>
 
@@ -145,6 +145,7 @@ const CreatePermissionModalForm = ({
                           options.find((option) => option.id === value)?.permission_name ||
                           "select parent"
                         }
+                        dropDownContainerStyle="bottom-0"
                         onChange={onChange}
                       />
                     </>

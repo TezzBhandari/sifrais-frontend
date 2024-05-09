@@ -28,24 +28,31 @@ const AdminUserForm: React.FC<AdminUserFormProps> = ({
 
   const adminUserForm = useForm<AdminUserMutationType>({
     resolver: zodResolver(AdminUserMutationSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      phoneNumber: ""
+    }
   });
 
   return (
     <FormProvider {...adminUserForm}>
       <form onSubmit={adminUserForm.handleSubmit((data) => {
+        alert('hello')
         alert(JSON.stringify(data))
       })}>
 
         {/* PERSONAL INFORMATION FORM SECTION  */}
         <PersonalInformation gender={genders} />
         {/* PERMANENT DETAILS FORM SECTION  */}
-        <PermanentDetails
+        {/* <PermanentDetails
           districts={districts}
           localLevels={localLevels}
           provinces={provinces}
-        />
+        /> */}
         {/* OFFICE DETAILS DETAILS FORM SECTION  */}
-        <OfficeDetails genders={genders} />
+        <OfficeDetails />
 
         {/* SUBMIT AND CANCEL BUTTON SECTION  */}
         <div className="Form-Button-Section flex items-center space-x-3 mb-6 justify-end">
@@ -56,7 +63,7 @@ const AdminUserForm: React.FC<AdminUserFormProps> = ({
           {/* SUBMIT BUTTON  */}
           <button
             type="submit"
-            className="bg-[#002147] text-white rounded-md border border-slate-300 hover:border-blue-300 hover:bg-blue-300 px-8 py-3"
+            className="bg-[#002147] text-white rounded-md border border-slate-300 hover:border-blue-300 hover:bg-blue-900 px-8 py-3"
           // aria-disabled={isSubmitting ? true : false}
           >
             Save

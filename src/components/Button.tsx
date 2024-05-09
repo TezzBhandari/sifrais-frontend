@@ -31,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   //Default styles for the button
   let defaultStyles =
-    "text-white px-8 py-3";
+    "px-8 py-3";
 
   // This switch case applies css styles based on the specified variant
   switch (variant) {

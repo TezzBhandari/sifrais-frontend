@@ -25,12 +25,12 @@ const PermanentDetails: React.FC<PermanentDetailsProps> = ({
   const [districtsState, setDistrictsState] = useState(districts);
   const [localLevelState, setLocalLevelState] = useState(localLevels);
 
-  const watchProvince = watch("permanentDetails.province");
-  const watchDisitrict = watch("permanentDetails.district");
+  const watchProvince = watch("province");
+  const watchDisitrict = watch("district");
 
   // filtering districts based on province selection
   useEffect(() => {
-    setValue("permanentDetails.district", "");
+    setValue("district", "");
     setDistrictsState(() => {
       const newDistrictState = districts.filter(
         (district) => district.province.id.toString() === watchProvince
@@ -41,7 +41,7 @@ const PermanentDetails: React.FC<PermanentDetailsProps> = ({
 
   // local level based on province
   useEffect(() => {
-    setValue("permanentDetails.localLevel", "");
+    setValue("localLevel", "");
     setLocalLevelState(() => {
       const newLocalLevelsState = localLevels.filter(
         (localLevel) => localLevel.province.id.toString() === watchProvince
@@ -54,7 +54,7 @@ const PermanentDetails: React.FC<PermanentDetailsProps> = ({
 
   // local level based on districts
   useEffect(() => {
-    setValue("permanentDetails.localLevel", "");
+    setValue("localLevel", "");
     setLocalLevelState((prevLocalLevels) => {
       const newLocalLevelsState: Array<LocalLevel> = prevLocalLevels.filter(
         (localLevel) => localLevel.district.id.toString() === watchDisitrict
@@ -96,11 +96,11 @@ const PermanentDetails: React.FC<PermanentDetailsProps> = ({
                       name={name}
                     />
                   )}
-                  name={"permanentDetails.province"}
+                  name={"province"}
                 />
                 <span className="text-red-500 text-xs tracking-wide">
-                  {errors.permanentDetails?.province !== undefined
-                    ? errors.permanentDetails.province.message
+                  {errors.province !== undefined
+                    ? errors.province.message
                     : null}
                 </span>
               </div>
@@ -127,11 +127,11 @@ const PermanentDetails: React.FC<PermanentDetailsProps> = ({
                       name={name}
                     />
                   )}
-                  name={"permanentDetails.localLevel"}
+                  name={"localLevel"}
                 />
                 <span className="text-red-500 text-xs tracking-wide">
-                  {errors.permanentDetails?.localLevel !== undefined
-                    ? errors.permanentDetails.localLevel.message
+                  {errors.localLevel !== undefined
+                    ? errors.localLevel.message
                     : null}
                 </span>
               </div>
@@ -159,24 +159,24 @@ const PermanentDetails: React.FC<PermanentDetailsProps> = ({
                     name={name}
                   />
                 )}
-                name={"permanentDetails.district"}
+                name={"district"}
               />
               <span className="text-red-500 text-xs tracking-wide">
-                {errors.permanentDetails?.district !== undefined
-                  ? errors.permanentDetails.district.message
+                {errors.district !== undefined
+                  ? errors.district.message
                   : null}
               </span>
             </div>
           </div>
           {/* Tole */}
-          <div>
+          {/* <div>
             <InputLabel htmlFor="" labelName={"Tole"} />
 
             <InputField
-              {...register("permanentDetails.tole")}
+              {...register("")}
               className="h-11"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </div >

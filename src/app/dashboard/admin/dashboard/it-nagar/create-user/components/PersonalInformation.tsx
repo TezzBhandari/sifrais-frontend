@@ -1,15 +1,11 @@
 "use client";
 import React from "react";
 import {
-  Control,
-  Controller,
-  UseFormRegister,
   useFormContext,
 } from "react-hook-form";
 
 import { InputField } from "@/components/InputField";
 import { InputLabel } from "@/components/InputLabel";
-import ListBox from "@/components/ListBox";
 import { AdminUserMutationType } from "../types";
 import { Gender } from "../utils/api/QueryGenders";
 
@@ -33,30 +29,30 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
           <div className="Personal-Info-Left-Section flex flex-col gap-3 flex-1">
             {/* fullname in english  */}
             <div>
-              <InputLabel htmlFor="" labelName={"Fullname (En)"} />
+              <InputLabel htmlFor="" fieldRequired={true} labelName={"Fullname (En)"} />
               <div>
                 <InputField
-                  {...register("personalInformation.fullnameEnglish")}
+                  {...register("name")}
                   className="h-11"
                 />
                 <span className="text-red-500 text-xs tracking-wide">
-                  {errors.personalInformation?.fullnameEnglish !== undefined
-                    ? errors.personalInformation.fullnameEnglish.message
+                  {errors.name !== undefined
+                    ? errors.name.message
                     : null}
                 </span>
               </div>
             </div>
             {/* EMAIL  */}
             <div>
-              <InputLabel htmlFor="" labelName={"Email"} />
+              <InputLabel htmlFor="" fieldRequired={true} labelName={"Email"} />
               <div>
                 <InputField
-                  {...register("personalInformation.email")}
+                  {...register("email")}
                   className="h-11"
                 />
                 <span className="text-red-500 text-xs tracking-wide">
-                  {errors.personalInformation?.email !== undefined
-                    ? errors.personalInformation.email.message
+                  {errors.email !== undefined
+                    ? errors.email.message
                     : null}
                 </span>
               </div>
@@ -67,12 +63,12 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
               <div>
                 <InputField
                   type="password"
-                  {...register("personalInformation.password")}
+                  {...register("password")}
                   className="h-11"
                 />
                 <span className="text-red-500 text-xs tracking-wide">
-                  {errors.personalInformation?.password !== undefined
-                    ? errors.personalInformation.password.message
+                  {errors.password !== undefined
+                    ? errors.password.message
                     : null}
                 </span>
               </div>
@@ -82,33 +78,49 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
           <div className="Personal-Info-Right-Section flex flex-col gap-3 flex-1">
             {/* FULLNAME in NEPALI  */}
             <div>
-              <InputLabel htmlFor="" labelName={"Fullname (Np)"} />
+              <InputLabel htmlFor="" fieldRequired={true} labelName={"Fullname (Np)"} />
               <div>
                 <InputField
-                  {...register("personalInformation.fullnameNepali")}
+                  // {...register("personalInformation.fullnameNepali")}
                   className="h-11"
                 />
-                <span className="text-red-500 text-xs tracking-wide">
+                {/* <span className="text-red-500 text-xs tracking-wide">
                   {errors.personalInformation?.fullnameNepali !== undefined
                     ? errors.personalInformation.fullnameNepali.message
                     : null}
-                </span>
+                </span> */}
               </div>
             </div>
             {/* MOBILE NUMBER */}
             <div>
-              <InputLabel htmlFor="" labelName={"Moblie Number"} />
+              <InputLabel htmlFor="" fieldRequired={true} labelName={"MobiLe Number"} />
               <div>
                 <InputField
-                  {...register("personalInformation.phoneNumber")}
+                  {...register("phoneNumber")}
                   className="h-11"
                 /><span className="text-red-500 text-xs tracking-wide">
-                  {errors.personalInformation?.phoneNumber !== undefined
-                    ? errors.personalInformation.phoneNumber.message
+                  {errors.phoneNumber !== undefined
+                    ? errors.phoneNumber.message
                     : null}
                 </span>
               </div>
             </div>
+
+            {/* ADDRESS FIELD  */}
+            <div>
+              <InputLabel htmlFor="" fieldRequired={true} labelName={"Address"} />
+              <div>
+                <InputField
+                  {...register("address")}
+                  className="h-11"
+                /><span className="text-red-500 text-xs tracking-wide">
+                  {errors.address !== undefined
+                    ? errors.address.message
+                    : null}
+                </span>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

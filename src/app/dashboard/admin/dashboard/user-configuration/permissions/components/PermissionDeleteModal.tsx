@@ -12,17 +12,17 @@ import type { PermissionDeleteModalProps } from "../types";
 const PermissionDeleteModal = ({
     isOpen,
     onClose,
-    office,
+    permission,
 }: PermissionDeleteModalProps) => {
 
-    const deleteOffice = useDeletePermission({
-        officeId: office.id,
+    const deletePermission = useDeletePermission({
+        permissionId: permission.id,
         onClose,
     });
 
     // delete handler
     const deleteHandler = () => {
-        deleteOffice.mutate();
+        deletePermission.mutate();
     };
 
     return (
@@ -35,7 +35,7 @@ const PermissionDeleteModal = ({
                     <div className="description-container flex flex-col items-center">
                         <h1 className="capitalize text-3xl font-semibold">Are you Sure?</h1>
                         <p className="capitalize text-sm font-semibold">
-                            Do you really want to delete Office
+                            Do you really want to delete permission
                         </p>
                     </div>
                     <div className="flex items-center gap-32 justify-center ">
@@ -44,18 +44,18 @@ const PermissionDeleteModal = ({
                             onClick={() => {
                                 onClose()
                             }}
-                            aria-disabled={deleteOffice.isPending ? true : false}
+                            aria-disabled={deletePermission.isPending ? true : false}
                             className=" rounded-md text-[#002147] text-[14px] font-medium border border-[#002147]"
                         >
                             Cancel
                         </Button>
                         {/* delete confirm BUTTON  */}
                         <Button
-                            aria-disabled={deleteOffice.isPending ? true : false}
+                            aria-disabled={deletePermission.isPending ? true : false}
                             onClick={deleteHandler}
                             className="rounded-md bg-[#002147] text-[14px] font-medium border border-[#002147] text-white "
                         >
-                            {deleteOffice.isPending ? "Deleting..." : "Delete"}
+                            {deletePermission.isPending ? "Deleting..." : "Delete"}
                         </Button>
                     </div>
                 </div>

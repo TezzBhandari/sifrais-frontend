@@ -8,11 +8,10 @@ import { type Gender } from "../utils/api/QueryGenders";
 import OfficeTypeInput from "./OfficeTypeInput";
 import OfficeInput from "./OfficeNameInput";
 import DesignationInput from "./DesignationInput";
-import { InputField } from "@/components/InputField";
-import { ActiveStatus } from "../types";
+import { ActiveStatus, AdminUserMutationType } from "../types";
+import UserRoleInput from "./UserRoleInput";
 
 interface OfficeDetailsProps {
-  genders: Array<Gender>;
 }
 
 const activeSatus: Array<ActiveStatus> = [
@@ -24,8 +23,8 @@ const activeSatus: Array<ActiveStatus> = [
   }
 ]
 
-const OfficeDetails: React.FC<OfficeDetailsProps> = ({ genders }) => {
-  const { register, control } = useFormContext();
+const OfficeDetails: React.FC<OfficeDetailsProps> = ({ }) => {
+  const { control, formState: { errors } } = useFormContext<AdminUserMutationType>();
   return (
     <>
       <div className="Office-Detail-Input-Section px-7 py-10">
@@ -39,32 +38,40 @@ const OfficeDetails: React.FC<OfficeDetailsProps> = ({ genders }) => {
             {/* Active status  */}
             <div>
               <InputLabel htmlFor="" labelName="status" />
-              <Controller
-                control={control}
-                render={({ field: { name, onChange, value } }) => (
-                  <ListBox<ActiveStatus, boolean>
-                    className="shadow-none h-11"
-                    labelExtractor={(item) => item.label}
-                    valueExtractor={(item) => item.value}
-                    labelExtractorByValue={(value, options) =>
-                      options.find((option) => option.value === value)
-                        ?.label || "select status"
-                    }
-                    options={activeSatus}
-                    value={value}
-                    onChange={onChange}
-                    name={name}
-                  />
-                )}
-                name={"officeDetails.active_status"}
-              />
+              <div>
+                <Controller
+                  control={control}
+                  render={({ field: { name, onChange, value } }) => (
+                    <ListBox<ActiveStatus, boolean>
+                      className="shadow-none h-11"
+                      labelExtractor={(item) => item.label}
+                      valueExtractor={(item) => item.value}
+                      labelExtractorByValue={(value, options) =>
+                        options.find((option) => option.value === value)
+                          ?.label || "select status"
+                      }
+                      options={activeSatus}
+                      value={value}
+                      onChange={onChange}
+                      name={name}
+                    />
+                  )}
+                  name={"active_status"}
+                />
+                <span className="text-red-500 text-xs tracking-wide">
+                  {errors.active_status !== undefined
+                    ? errors.active_status.message
+                    : null}
+                </span>
+              </div>
             </div>
 
 
 
 
-            {/* OFFICE TYPE  */}
-            <OfficeTypeInput />
+            {/* role  */}
+            {/* <OfficeTypeInput /> */}
+            <UserRoleInput />
           </div>
           <div className="Office-Detail-Right-Section flex flex-col gap-3 flex-1">
             {/* OFFICE NAME */}

@@ -4,9 +4,10 @@ import ListBox from "@/components/ListBox";
 import { Controller, useFormContext } from "react-hook-form";
 import QueryOfficeType, { OfficeType } from "../utils/api/QueryOfficeType";
 import { Skeleton } from "@/components/Skeleton";
+import { AdminUserMutationType } from "../types";
 
 const OfficeTypeInput = () => {
-  const { control } = useFormContext();
+  const { control, formState: { errors } } = useFormContext<AdminUserMutationType>();
   const { data: officeTypes, error, isError, isLoading } = QueryOfficeType();
   if (isLoading) {
     return <div >
@@ -23,25 +24,31 @@ const OfficeTypeInput = () => {
     <>
       <div>
         <InputLabel htmlFor="" labelName="office type" />
-        <Controller
-          control={control}
-          render={({ field: { name, onChange, value } }) => (
-            <ListBox<OfficeType>
-              className="shadow-none h-11"
-              labelExtractor={(item) => item.office_type}
-              valueExtractor={(item) => item.id.toString()}
-              labelExtractorByValue={(value, options) =>
-                options.find((option) => option.id.toString() === value)
-                  ?.office_type || "select office type"
-              }
-              options={officeTypes !== undefined ? officeTypes : []}
-              value={value}
-              onChange={onChange}
-              name={name}
-            />
-          )}
-          name={"officeDetails.officeType"}
-        />
+        <div>
+          <Controller
+            control={control}
+            render={({ field: { name, onChange, value } }) => (
+              <ListBox<OfficeType, number>
+                className="shadow-none h-11"
+                labelExtractor={(item) => item.office_type}
+                valueExtractor={(item) => item.id}
+                labelExtractorByValue={(value, options) =>
+                  options.find((option) => option.id === value)
+                    ?.office_type || "select office type"
+                }
+                options={officeTypes !== undefined ? officeTypes : []}
+                value={value}
+                onChange={onChange}
+                name={name}
+              />
+            )}
+            name={"office_id"}
+          />
+          <span className="text-red-500 text-xs tracking-wide">
+            {errors.office_id !== undefined
+              ? errors.office_id.message
+              : null}
+          </span></div>
       </div>
     </>
   );

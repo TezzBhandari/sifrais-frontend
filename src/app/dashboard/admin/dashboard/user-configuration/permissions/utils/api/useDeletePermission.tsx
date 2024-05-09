@@ -9,7 +9,7 @@ import { DeletePermissionSuccessResponse } from "../../types";
 // delete query function
 const deleteOffice = async ({ id }: { id: number }) => {
     const response = await authHttpClient.delete<DeletePermissionSuccessResponse>(
-        `/api/office/${id}`
+        `/api/permissions/${id}`
     );
     return response.data;
 };
@@ -17,10 +17,10 @@ const deleteOffice = async ({ id }: { id: number }) => {
 
 // delete office custom hook
 const useDeletePermission = ({
-    officeId,
+    permissionId,
     onClose,
 }: {
-    officeId: number;
+    permissionId: number;
     onClose: () => void;
 }) => {
     // for invalidating fetch offices query
@@ -28,16 +28,16 @@ const useDeletePermission = ({
 
     return useMutation({
         // mutation key 
-        mutationKey: ["delete", "office"],
+        mutationKey: ["delete", "permission"],
         // mutation function
         mutationFn: async () =>
-            deleteOffice({ id: officeId }),
+            deleteOffice({ id: permissionId }),
         // on delete success callback
         // invalidates fetch offices query
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["fetch", "offices"] });
+            queryClient.invalidateQueries({ queryKey: ["fetch", "permissions"] });
             // onClose();
-            toast.success("Successfully deleted Office!", {
+            toast.success("Successfully deleted permission!", {
                 position: toast.POSITION.TOP_CENTER,
             });
         },
@@ -46,7 +46,7 @@ const useDeletePermission = ({
         // shows error messsage
         onError(error, variables, context) {
             // onClose();
-            toast.error("Failed to delete office", {
+            toast.error("Failed to delete permission", {
                 position: toast.POSITION.TOP_CENTER,
             });
         },

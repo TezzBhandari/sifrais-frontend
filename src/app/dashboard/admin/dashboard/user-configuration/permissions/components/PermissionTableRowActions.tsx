@@ -47,7 +47,7 @@ const PermissionTableRowActions = ({ permission }: PermissionTableRowActionsProp
                 isOpen={IsDeleteOpen}
                 onClose={setDeleteClose}
                 onOpen={setDeleteOpen}
-                office={permission}
+                permission={permission}
             />
         </div>
     );

@@ -63,7 +63,7 @@ interface RolesDeleteModalProps {
 // office form schema
 const RolesFormSchema = z.object({
   role: z.string().min(1, { message: "role name is required" }),
-  permissions: z.number().array(),
+  permissions: z.object({ id: z.number() }).array(),
 });
 
 type RoleFormType = z.infer<typeof RolesFormSchema>;

@@ -1,13 +1,16 @@
 
 'use client';
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
 import { InputLabel } from "@/components/InputLabel";
 import { Modal } from "@/components/Modal";
 import { RoleFormType, RolesFormSchema } from "../types";
 import { InputField } from "@/components/InputField";
-import ListBox from "@/components/ListBox";
+import useQueryPermission from "../../permissions/utils/api/useQueryPermission";
+import { Skeleton } from "@/components/Skeleton";
+import Select from "react-select";
+import usePostRole from "../utils/api/usePostRole";
 
 // COMPONENT
 const CreateRoleModalForm = ({
@@ -17,6 +20,8 @@ const CreateRoleModalForm = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
+
+
 
   const {
     register,
@@ -32,13 +37,48 @@ const CreateRoleModalForm = ({
     resolver: zodResolver(RolesFormSchema),
   });
 
+  const postRole = usePostRole({ onClose, reset })
+
+
+  const permissionArray = useFieldArray({
+    control: control,
+    name: "permissions"
+  })
+
+  const PermissionRes = useQueryPermission();
+
+  if (PermissionRes.isPending) {
+    return <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <Skeleton className="h-[180px] w-[32rem] bg-slate-300" />
+    </div>;
+  }
+
+  if (PermissionRes.isError) {
+    const error = PermissionRes.error;
+    if (error.response) {
+      return (
+        <div>error message from the server: {error.response.data.message}</div>
+      );
+    } else if (error.request) {
+      return <div>something went wrong try again</div>;
+    } else {
+      return <div>something went wrong try again</div>;
+    }
+  }
+
+  const selectPermissionList = PermissionRes.data.map((permission) => {
+    return { label: permission.permission_name, value: permission.id }
+  })
+
+
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} className="rounded-2xl px-6">
+      <Modal isOpen={isOpen} onClose={onClose} className="rounded-2xl px-6 min-w">
         <form
           onSubmit={handleSubmit((data) => {
             // TODO: IMPLEMENT POST FUNCTION
             alert(JSON.stringify(data))
+            postRole.mutate(data)
           })}
           className="form"
         >
@@ -74,30 +114,16 @@ const CreateRoleModalForm = ({
 
 
 
-            {/* <div>
-              <InputLabel htmlFor="" labelName="province" />
-              <Controller
-                control={control}
-                render={({ field: { name, onChange, value } }) => (
-                  <ListBox<Province, number>
-                    className="shadow-none h-11"
-                    labelExtractor={(item) => item.province_np}
-                    valueExtractor={(item) => item.id}
-                    labelExtractorByValue={(value, options) =>
-                      options.find((option) => option.id === value)
-                        ?.province_np || "select a province"
-                    }
-                    options={provinces}
-                    value={value}
-                    onChange={onChange}
-                    name={name}
-                  />
-                )}
-                name={"province_id"}
-              />
-            </div> */}
+            <div>
+              <InputLabel htmlFor="" labelName="permissions" />
+              <Select options={selectPermissionList} onChange={(selectOption) => {
 
-
+                const selectedPermissions = selectOption.map(option => {
+                  return { id: option.value }
+                })
+                permissionArray.replace(selectedPermissions)
+              }} isMulti />
+            </div>
 
             {/* FORM SUBMIT OR CANCEL BUTTONS  */}
             <div className="flex  gap-5">

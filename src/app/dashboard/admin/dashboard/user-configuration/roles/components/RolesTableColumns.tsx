@@ -14,7 +14,7 @@ const idColumnn = columnHelper.accessor((row) => row.id, {
 
 // role name column
 const RolesNameColumn = columnHelper.accessor((row) => row.role, {
-    id: "role_name",
+    id: "role",
     header: () => <span>Role Name</span>,
     cell: (props) => <span>{props.getValue()}</span>,
 });
@@ -32,4 +32,4 @@ const RolesTableColumns: ColumnDef<Roles>[] = [
     ActionColumn,
 ] as ColumnDef<Roles>[]; // you need to type cast because column return different type: Tvalue is for the type return by the column cell. There is a typescript limitation. see the github issue in tanstack table repo
 
-export { RolesTableColumns}
+export { RolesTableColumns }

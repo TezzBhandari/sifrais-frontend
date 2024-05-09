@@ -7,7 +7,7 @@ import { AdminUserMutationType } from "../types";
 import { Skeleton } from "@/components/Skeleton";
 
 const OfficeInput = () => {
-  const { control } = useFormContext<AdminUserMutationType>();
+  const { control, formState: { errors } } = useFormContext<AdminUserMutationType>();
   const { data: offices, error, isError, isLoading } = QueryOffices();
   if (isLoading) {
     return <div >
@@ -24,25 +24,32 @@ const OfficeInput = () => {
     <>
       <div>
         <InputLabel htmlFor="" labelName="office Name" />
-        <Controller
-          control={control}
-          render={({ field: { name, onChange, value } }) => (
-            <ListBox<Office>
-              className="shadow-none h-11"
-              labelExtractor={(item) => item.office_name}
-              valueExtractor={(item) => item.id.toString()}
-              labelExtractorByValue={(value, options) =>
-                options.find((option) => option.id.toString() === value)
-                  ?.office_name || "select office name"
-              }
-              options={offices !== undefined ? offices : []}
-              value={value}
-              onChange={onChange}
-              name={name}
-            />
-          )}
-          name={"officeDetails.officeName"}
-        />
+        <div>
+          <Controller
+            control={control}
+            render={({ field: { name, onChange, value } }) => (
+              <ListBox<Office, number>
+                className="shadow-none h-11"
+                labelExtractor={(item) => item.office_name}
+                valueExtractor={(item) => item.id}
+                labelExtractorByValue={(value, options) =>
+                  options.find((option) => option.id === value)
+                    ?.office_name || "select office name"
+                }
+                options={offices !== undefined ? offices : []}
+                value={value}
+                onChange={onChange}
+                name={name}
+              />
+            )}
+            name={"office_id"}
+          />
+          <span className="text-red-500 text-xs tracking-wide">
+            {errors.office_id !== undefined
+              ? errors.office_id.message
+              : null}
+          </span>
+        </div>
       </div>
     </>
   );

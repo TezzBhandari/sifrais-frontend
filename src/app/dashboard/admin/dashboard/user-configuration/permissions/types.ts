@@ -52,7 +52,7 @@ interface PermissionDeleteModalProps {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
-  office: Permission;
+  permission: Permission;
 }
 
 // office form schema
