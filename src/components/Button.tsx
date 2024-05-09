@@ -1,7 +1,7 @@
 "use client";
 
+import { cn } from "@/lib/utils/classnames";
 import React, { HTMLAttributes } from "react";
-import classNames from "classnames";
 
 //Component props for custom button
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
@@ -31,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   //Default styles for the button
   let defaultStyles =
-    "text-black px-8 py-3";
+    "px-8 py-3";
 
   // This switch case applies css styles based on the specified variant
   switch (variant) {
@@ -100,7 +100,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       {...rest}
       type={type}
-      className={classNames(className, defaultStyles)}
+      className={cn(className, defaultStyles)}
     >
       {children}
     </button>

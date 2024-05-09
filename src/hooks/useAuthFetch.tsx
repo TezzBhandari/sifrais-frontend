@@ -1,5 +1,4 @@
 "use client";
-
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 interface RefreshTokenSuccessResponseType {
@@ -90,5 +89,7 @@ const useAuthFetch = () => {
 
   return authHttpClient;
 };
+
+
 
 export default useAuthFetch;

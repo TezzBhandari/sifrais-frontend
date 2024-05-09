@@ -5,27 +5,31 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 // Returns Bearer Token; also solve the srr issues that localstorage is not defined
 const setBearerToken = () => {
   let accessToken = "";
-  if (typeof window !== undefined) {
-    accessToken = localStorage.getItem("accessToken") as string;
-  }
+  // if (typeof window !== undefined) {
+  accessToken = global?.localStorage?.getItem("accessToken") as string || "";
+  // }
   return `Bearer ${accessToken}`;
 };
 
 const setRefreshToken = () => {
   let refreshToken = "";
 
-  if (typeof window !== undefined) {
-    refreshToken = localStorage.getItem("refreshToken") as string;
-  }
+  // if (typeof window !== undefined) {
+  refreshToken = global?.localStorage?.getItem("refreshToken") as string || "";
+  // }
   return refreshToken;
 };
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL as string
+
 const authHttpClient = axios.create({
-  baseURL: "https://sifaris.ktmserver.com/backend",
+  baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
+
     Accept: "application/json",
     Authorization: setBearerToken(),
+
   },
 });
 
@@ -75,7 +79,7 @@ authHttpClient.interceptors.response.use(
 
         try {
           const res = await axios.post<RefreshTokenSuccessResponseType>(
-            "https://sifaris.ktmserver.com/backend/api/refreshtoken",
+            `${BASE_URL}/api/refreshtoken`,
             {},
             {
               headers: {

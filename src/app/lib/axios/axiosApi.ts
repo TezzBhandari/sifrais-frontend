@@ -5,5 +5,7 @@ import axios from "axios";
 // This instance, axiosInstance, is configured to make HTTP requests to the base URL
 // defined in the NEXT_PUBLIC_BASE_URL environment variable.
 export const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL:
+    process.env.NEXT_PUBLIC_BASE_URL ||
+    "https://sifarisold.ktmserver.com/backend",
 });

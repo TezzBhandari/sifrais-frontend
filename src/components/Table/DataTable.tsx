@@ -7,6 +7,7 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -19,8 +20,9 @@ import {
   TableRow,
 } from "./Table";
 
-import ProvinceFilter from "@/app/admin/dashboard/it-nagar/components/ProvinceFilter";
+import ProvinceFilter from "@/app/dashboard/admin/dashboard/it-nagar/components/ProvinceFilter";
 import React from "react";
+import DataTablePagination from "./DataTablePagination";
 
 interface DataTableProps<TData, TValue> {
   columns: Array<ColumnDef<TData, TValue>>;
@@ -51,6 +53,8 @@ function DataTable<TData, TValue>({
     //   // filtering input synchornization with the tanstack table
     //   globalFilter: filtering,
     // },
+    // added for enabling pagination features
+    getPaginationRowModel: getPaginationRowModel(),
 
     getFilteredRowModel: getFilteredRowModel(),
 
@@ -119,9 +123,9 @@ function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}
@@ -161,7 +165,7 @@ function DataTable<TData, TValue>({
           </TableBody>
         </Table>
         {/* TABLE PAGINATION  */}
-        {dataTablePagination === undefined ? null : dataTablePagination(table)}
+        {dataTablePagination === undefined ? <DataTablePagination table={table} /> : dataTablePagination(table)}
       </div>
     </div>
   );

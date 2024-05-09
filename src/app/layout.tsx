@@ -30,9 +30,6 @@ export default function RootLayout({
         <QueryProvider>{children}</QueryProvider>
         {/* container for showing toast  */}
         <ToastContainer />
-
-        {/* it is used for modal, dialog, popup, etc  */}
-        <div id="portal"></div>
       </body>
     </html>
   );

@@ -13,8 +13,9 @@ import {
 import { toast } from "react-toastify";
 import { GoArrowRight } from "react-icons/go";
 import { IFormData } from "./types";
+import { Login } from "./action";
 
-const BASE_URL = "https://sifaris.ktmserver.com/backend";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL as string;
 
 const page = () => {
   const router = useRouter();
@@ -44,7 +45,6 @@ const page = () => {
           toast.error("Username doesn't exist.");
         }
         const data = await response.json();
-        console.log(data);
 
         //Check the Login Status
         if (data.email && data.status == 200) {
@@ -63,39 +63,95 @@ const page = () => {
     }
   };
 
-  const handleLogin = () => {
-    const fetchLoginReq = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/api/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: formData.username,
-            password: formData.password,
-          }),
-        });
+  // OTP FORM'S SUBMIT HANDLER
+  const handleLogin = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault()
 
-        if (!response.ok) {
-          toast.error("Username or Password didn't match.");
-        }
 
-        const data = await response.json();
-        //Passing the loggedIN data received from the server to userLogin function to loginAuth.ts file to store in Zustand.
-        if (data.message == "Success" && data.status == 200) {
-          userLogin(data);
-          localStorage.setItem("access_token", data.access_token);
-          router.push("/dashboard");
-          console.log(data);
-        }
-      } catch (error) {
-        // Handle network errors or other exceptions
-        toast.error("Username or Password didn't match.");
-      }
-    };
-    fetchLoginReq();
+    // calling server actions
+    const response = await Login({ username: formData.username as string, password: formData.password as string });
+    // just for debugging
+    alert(JSON.stringify(response));
+
+    if (response.code === "success" && response.statusCode === 200) {
+      // SAVING ACCESS TOKEN IN MEMORY; (Zustand)
+      // setAccessToken(response.data.access_token);
+
+      // STORING REFRESH TOKEN IN LOCAL STORAGE FOR REFRESHING ACCESS TOKEN
+      // parsing refresh token in json format to store in local storage
+      // const refreshTokenInJsonFormat = JSON.stringify(
+      //   response.data.refresh_token
+      // );
+      // const accessTokenInJsonFormat = JSON.stringify(
+      //   response.data.access_token
+      // );
+      localStorage.setItem("accessToken", response.data.access_token);
+      localStorage.setItem("refreshToken", response.data.refresh_token);
+      // toast.success("login Successful", {
+      //   position: toast.POSITION.TOP_CENTER,
+      // });
+
+      // revoking user_id which is just needed for verifying otp
+      // removes it from in memory store; (Zustand)
+      // revokeUserId();
+      // redirecting user to dashboard page
+      // todo: hard push so that user can't return back to otp page
+      router.push("/dashboard");
+      return;
+    }
+
+    // handling errors
+    if (response.code === "error") {
+      // Case: User not authorized; could be invalid otp
+      toast.error("invalid credentials", { position: toast.POSITION.TOP_CENTER })
+
+      // if (response.statusCode && response.statusCode === 401) {
+      //   const errorMessage = response.error?.message
+      //     ? response.error.message
+      //     : response.errorMessage;
+      //   toast.error(errorMessage, { position: toast.POSITION.TOP_CENTER });
+      // } else {
+      //   toast.error(response.errorMessage, {
+      //     position: toast.POSITION.TOP_CENTER,
+      //   });
+      // }
+    }
   };
+
+
+  // const handleLogin = () => {
+  //   const fetchLoginReq = async () => {
+  //     try {
+  //       const response = await fetch(`${BASE_URL}/api/login`, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           username: formData.username,
+  //           password: formData.password,
+  //         }),
+  //       });
+
+  //       if (!response.ok) {
+  //         toast.error("Username or Password didn't match.");
+  //       }
+
+  //       const data = await response.json();
+  //       //Passing the loggedIN data received from the server to userLogin function to loginAuth.ts file to store in Zustand.
+  //       if (data.message == "Success" && data.status == 200) {
+  //         userLogin(data);
+  //         localStorage.setItem("accessToken", data?.access_token);
+  //         localStorage.setItem("refreshToken", data?.refresh_token)
+  //         router.push("/dashboard");
+  //       }
+  //     } catch (error) {
+  //       // Handle network errors or other exceptions
+  //       toast.error("Username or Password didn't match.");
+  //     }
+  //   };
+  //   fetchLoginReq();
+  // };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -178,11 +234,11 @@ const page = () => {
                     >
                       नया खाता खोल्नुहोस
                     </Link>
-                    <Button
+                    <button
+                      className="py-2 px-3 rounded-md text-white  bg-blue-950"
+                      type="submit"
                       onClick={handleLogin}
-                      buttonName="साइन इन"
-                      className="btn"
-                    />
+                    >साइन इन</button>
                   </div>
                 </>
               )}

@@ -64,7 +64,7 @@ function DataTableToolbar<TData>({
   return (
     <div className="flex items-center border border-red-400">
       {/* header  */}
-      <DynamicRouteHeader pageHeader={toolBarHeader} show={false} />
+      <DynamicRouteHeader pageHeader={toolBarHeader} showBreadCrumb={false} />
       {/* input filter  */}
       <div className=" flex-1 flex justify-center">
         <InputField className="max-w-lg w-full" placeholder="Search..." />

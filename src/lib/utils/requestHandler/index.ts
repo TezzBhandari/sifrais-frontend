@@ -37,14 +37,14 @@ type BaseRequest<TData, THeaders = {}, TBody = {}, TParams = {}> = (
 ) => Promise<AxiosResponse<TData>>;
 
 // SUCCESS RESPONSE TYPE
-type SuccessResponse<TData> = {
+export type SuccessResponse<TData> = {
   code: "success";
   statusCode: number;
   data: TData;
 };
 
 // ERROR RESPONSE TYPE
-type ErrorResponse<TError = AxiosError> = {
+export type ErrorResponse<TError = AxiosError> = {
   code: "error";
   errorName: string;
   errorMessage: string;
